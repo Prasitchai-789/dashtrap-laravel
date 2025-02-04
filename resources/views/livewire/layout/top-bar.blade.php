@@ -14,7 +14,7 @@
 
              <!-- Topbar Brand Logo -->
              <a href="" class="flex md:hidden">
-                 <img src="/images/logo-sm.png" class="h-8" alt="Small logo">
+                 <img src="" class="h-8" alt="Small logo">
              </a>
 
              <!-- Topbar Search -->
@@ -159,13 +159,13 @@
                          class="hs-dropdown-menu duration mt-2 min-w-48 rounded-lg border border-default-200 bg-white p-2 opacity-0 shadow-md transition-[opacity,margin] hs-dropdown-open:opacity-100 hidden">
                          <a class="flex items-center px-3 py-2 text-sm rounded-md text-default-800 hover:bg-default-100"
                              href="#">
-                             Profile
-                         </a>
-                         <a class="flex items-center px-3 py-2 text-sm rounded-md text-default-800 hover:bg-default-100"
-                             href="#">
                              {{ Auth::user()->email }}
                          </a>
                          <a class="flex items-center px-3 py-2 text-sm rounded-md text-default-800 hover:bg-default-100"
+                             href="{{url('profile')}}">
+                             Profile
+                         </a>
+                         {{-- <a class="flex items-center px-3 py-2 text-sm rounded-md text-default-800 hover:bg-default-100"
                              href="#">
                              Analytics
                          </a>
@@ -176,7 +176,7 @@
                          <a class="flex items-center px-3 py-2 text-sm rounded-md text-default-800 hover:bg-default-100"
                              href="#">
                              Support
-                         </a>
+                         </a> --}}
                          <hr class="my-2">
                          <a class="flex items-center px-3 py-2 text-sm rounded-md text-default-800 hover:bg-default-100"
                              href="" wire:click.prevent="logout">

@@ -14,4 +14,9 @@ class Controller extends BaseController
     {
         return view('test-index');
     }
+
+    public function starterPage()
+    {
+        return view('starter-page');
+    }
 }

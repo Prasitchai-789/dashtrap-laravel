@@ -5,7 +5,7 @@
 
 <div class="">
     <div class="page-header">
-        <div class="p-6 mb-0 bg-white rounded-lg shadow-lg page-block">
+        <div class="p-6 mb-0 rounded-lg shadow-lg bg-white page-block">
             <div class="flex flex-col">
                 @if (session('status'))
                 <div class="p-4 mb-4 text-green-700 bg-green-100 rounded-lg">
@@ -22,7 +22,7 @@
                 <div class="mt-4 overflow-x-auto">
                     <table class="w-full bg-white border-collapse rounded-lg shadow-md font-anuphan">
                         <thead>
-                            <tr class="bg-gray-100 border-b">
+                            <tr class="bg-gray-200 border-b">
                                 <th class="p-4 text-center border">ID</th>
                                 <th class="p-4 text-center border">Name</th>
                                 <th class="p-4 text-center border">Email</th>
@@ -47,11 +47,13 @@
                                 <td class="px-4 py-2 border font-anuphan">{{$user->emp->EmpName ?? 'N/A'}}</td>
                                 <td class="px-4 py-2 text-center border">
                                     <a href="{{ url('users/'.$user->id.'/edit') }}" class="text-yellow-500 hover:text-yellow-600">
-                                        <i class="i-tabler-brand-blender" style="font-size: 18px;"></i>
+                                        <i class="text-xl material-symbols-rounded">edit_square</i>
                                     </a>
                                     @can('delete permission')
                                         <a href="#" onclick="confirmDeletePermission('{{ url('users/'.$user->id.'/delete') }}')" class="ml-3 text-red-500 hover:text-red-600">
-                                            <i class="i-tabler-brand-blender" style="font-size: 18px;"></i>
+                                            <span class="text-xl material-symbols-rounded">
+                                                delete
+                                            </span>
                                         </a>
                                     @endcan
                                 </td>

@@ -6,7 +6,7 @@
 
 @section('content')
 
-<livewire:starter-page/>
+<livewire:rpo.product-sale-live/>
 
 @endsection
 

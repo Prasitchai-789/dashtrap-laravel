@@ -6,7 +6,7 @@
 
     <div>
         <div class="page-header">
-            <div class="p-6 bg-white rounded-lg shadow-md">
+            <div class="p-6 rounded-lg shadow-md bg-gray-50">
                 <div class="pb-4">
                     <h4 class="text-xl font-semibold">
                         <a href="{{ url('users') }}" class="float-right px-3 py-1 text-white bg-red-500 rounded-md">Back</a>
@@ -31,7 +31,7 @@
                             Role
                         </label>
                         <select name="roles[]" id="example-multiselect" multiple class="border rounded-md form-input focus:ring focus:ring-blue-100">
-                            <option value="">Select Role</option>
+                            
                             @foreach ($roles as $role)
                                 <option value="{{ $role }}">{{ $role }}</option>
                             @endforeach

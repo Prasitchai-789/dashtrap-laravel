@@ -2319,7 +2319,7 @@ select{
   padding-right: 1.5rem;
 }
 .card .card-body{
-  padding: 1.25rem;
+  padding: 0.8rem;
 }
 .card-title{
   font-size: 1rem;
@@ -6818,9 +6818,7 @@ Template Name: SAY
 .bg-darkwhite {
     @apply bg-gradient-to-br from-[#f1f0f0] to-[#eeecec];
 }
-.bg-white {
-    @apply bg-gradient-to-br from-[#f6f6f6] to-[#ffffff];
-}
+
 .bg-brown {
     @apply bg-gradient-to-br from-[#7978b1] to-[#928dcc];
 }

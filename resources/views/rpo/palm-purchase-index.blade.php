@@ -6,11 +6,14 @@
 
 @section('content')
 
-<livewire:starter-page/>
+<livewire:rpo.palm-purchase-live />
 
 @endsection
 
 
 @section('script')
-@vite(['resources/js/pages/dashboard.js'])
+
+{{-- @vite(['resources/js/pages/dashboard.js']) --}}
+
+
 @endsection

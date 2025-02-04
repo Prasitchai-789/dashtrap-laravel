@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HRE\Employee;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RPO\PalmPurchase;
+use App\Http\Controllers\RPO\ProductSale;
 use App\Http\Controllers\UserController;
 
 /*
@@ -19,6 +22,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/test', [Controller::class, 'testLive'])->name('test');
+Route::get('/starter', [Controller::class, 'starterPage'])->name('starter');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -28,13 +32,6 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-// Route::group(['prefix' => '/'], function () {
-//     Route::get('', [RoutingController::class, 'index'])->name('root');
-//     Route::get('/home', fn() => view('index'))->name('home');
-//     Route::get('{first}/{second}/{third}', [RoutingController::class, 'thirdLevel'])->name('third');
-//     Route::get('{first}/{second}', [RoutingController::class, 'secondLevel'])->name('second');
-//     Route::get('{any}', [RoutingController::class, 'root'])->name('any');
-// });
 
 Route::group(['middleware' => ['auth','role:developer|admin']], function () {
     Route::resource('permissions', PermissionController::class);
@@ -47,6 +44,15 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 
     Route::resource('users', UserController::class);
     Route::get('users/{userId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
+});
+
+Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+    Route::get('/palm-purchase', [PalmPurchase::class, 'palmPurchase'])->name('palm-purchase');
+    Route::get('/product-sale', [ProductSale::class, 'productSale'])->name('product-sale');
+});
+
+Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+    Route::get('/employee', [Employee::class, 'employee'])->name('employee');
 });
 
 

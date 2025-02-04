@@ -32,16 +32,18 @@
                             <tr class="border-b hover:bg-gray-50">
                                 <td class="p-4">{{ $role->id }}</td>
                                 <td class="p-4 text-center">{{ $role->name }}</td>
-                                <td class="p-4 space-x-2 text-center">
+                                <td class="flex items-center justify-center p-4 space-x-2 text-center">
                                     <a href="{{ url('roles/'.$role->id.'/give-permissions') }}" class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-success text-white">Add / Edit Role Permission</a>
                                     @can('update role')
                                     <a href="{{ url('roles/'.$role->id.'/edit') }}" class="text-yellow-600 hover:text-yellow-700">
-                                        <i class="text-xl material-symbols-rounded">toggle_on</i>
+                                        <i class="text-xl material-symbols-rounded">edit_square</i>
                                     </a>
                                     @endcan
                                     @can('delete role')
                                     <a href="#" onclick="confirmDeleteRole('{{ url('roles/'.$role->id.'/delete') }}')" class="text-red-600 hover:text-red-700">
-                                        <i class="text-xl bi bi-trash">1</i>
+                                        <span class="text-xl material-symbols-rounded">
+                                            delete
+                                        </span>
                                     </a>
                                     @endcan
                                 </td>

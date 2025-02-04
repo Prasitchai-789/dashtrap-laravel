@@ -6,11 +6,14 @@
 
 @section('content')
 
-<livewire:starter-page/>
+<livewire:hre.employee-live/>
 
 @endsection
 
 
 @section('script')
-@vite(['resources/js/pages/dashboard.js'])
+
+{{-- @vite(['resources/js/pages/dashboard.js']) --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endsection
+

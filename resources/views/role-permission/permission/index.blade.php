@@ -38,11 +38,11 @@
                                 <td class="px-4 py-2 border">{{ $permission->name }}</td>
                                 <td class="px-4 py-2 text-center border">
                                     <a href="{{ url('permissions/'.$permission->id.'/edit') }}" class="text-yellow-500 hover:text-yellow-600">
-                                        <i class="text-2xl material-symbols-rounded">toggle_on</i>
+                                        <i class="text-xl material-symbols-rounded">edit_square</i>
                                     </a>
                                     @can('delete permission')
                                         <a href="#" onclick="confirmDeletePermission('{{ url('permissions/'.$permission->id.'/delete') }}')" class="ml-3 text-red-500 hover:text-red-600">
-                                            <i class="text-2xl material-symbols-rounded">delete</i>
+                                            <i class="text-xl material-symbols-rounded">delete</i>
                                         </a>
                                     @endcan
                                 </td>
