@@ -2,11 +2,14 @@
 
 namespace App\Livewire\RPO;
 
+use Carbon\Carbon;
 use Livewire\Component;
+use App\Models\RPO\PalmPlan;
 use App\Models\WIN\EMVendor;
 use Livewire\WithPagination;
 use App\Models\WIN\POInvDTCar;
 use App\Models\WIN\WebappPOInv;
+use App\Models\RPO\SetPriceScaler;
 
 class PalmPurchaseLive extends Component
 {
@@ -18,7 +21,10 @@ class PalmPurchaseLive extends Component
     ];
     public $edit = false;
     public WebappPOInv $webappPOInv;
+    public SetPriceScaler $setPriceScaler;
     public $showModal = false;
+    public $showModalSet = false;
+    public $showModalTableSet = false;
     public $deleteId;
     public $updateId;
 
@@ -43,6 +49,18 @@ class PalmPurchaseLive extends Component
         $Scaler,
         $DocuType;
     public $vendors;
+    public $set_price;
+    public $set_scaler;
+    public $selectedDate;
+    public $totalPalmOfDate;
+    public $totalItemOfDate;
+    public $sumRamOfDate;
+    public $sumAgrOfDate;
+    public $countRamOfDate;
+    public $progressItem = 0;
+    public $progressRam = 0;
+    public $progressAgr = 0;
+    public $progressFFB = 0;
 
 
     public bool $isLoading = false;
@@ -51,9 +69,35 @@ class PalmPurchaseLive extends Component
     {
         $this->isLoading = true;
     }
-    public function openModal() {
+    public function openModal()
+    {
         $this->showModal = true;
         $this->mount();
+    }
+    public function closeModal()
+    {
+        $this->resetInputFields();
+        $this->showModal = false;
+    }
+    public function openModalSet()
+    {
+        $this->showModalSet = true;
+        $this->edit = false;
+    }
+
+    public function closeModalSet()
+    {
+        $this->resetInputFields();
+        $this->showModalSet = false;
+    }
+    public function openModalTableSet()
+    {
+        $this->showModalTableSet = true;
+    }
+
+    public function closeModalTableSet()
+    {
+        $this->showModalTableSet = false;
     }
     public function addEmployee()
     {
@@ -66,9 +110,11 @@ class PalmPurchaseLive extends Component
     public function mount()
     {
         $this->DocuDate = now()->format('Y-m-d');
+        $this->selectedDate = now()->format('Y-m-d');
         $this->vendors = EMVendor::orderBy('VendorName', 'asc')->get();
-        $this->Price1 = (float) 7.6;
-        $this->Scaler = 'A';
+        $setPrices = SetPriceScaler::orderBy('id', 'desc')->first();
+        $this->Price1 = optional($setPrices)->set_price;
+        $this->Scaler = optional($setPrices)->set_scaler;
     }
 
     // เมื่อเลือก VendorCode ให้หาชื่อ VendorName อัตโนมัติ
@@ -85,24 +131,58 @@ class PalmPurchaseLive extends Component
         $vendor = EMVendor::where('VendorName', $this->VendorName)->first();
         $this->VendorCode = $vendor ? $vendor->VendorCode : null;
     }
+    public function setDate()
+    {
+        if (Carbon::parse($this->selectedDate)->greaterThan(Carbon::today())) {
+            $this->selectedDate = Carbon::today()->toDateString(); // รีเซ็ตเป็นวันนี้
+            $this->dispatch(
+                'alertDate',
+                position: "center",
+                icon: "error",
+                title: "ไม่พบข้อมูล",
+                text: "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
+                showConfirmButton: false,
+                timer: 2500
+            );
+        }
+    }
     public function render()
     {
-        // $webappPOInvs = WebappPOInv::orderBy('DocuDate', 'desc')->paginate(10);
         $latestDate = WebappPOInv::max('DocuDate'); // ค้นหาวันที่ล่าสุด
-        $webappPOInvs = WebappPOInv::where('DocuDate', $latestDate)
+        $webappPOInvs = WebappPOInv::where('DocuDate', $this->selectedDate)
             ->orderBy('POInvID', 'desc')
             ->paginate(10);
         $POInvDTCars = POInvDTCar::all();
+        $setPriceScalers = SetPriceScaler::orderBy('id', 'desc')->paginate(5);
+
+        $this->totalPalmOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
+            ->sum('GoodNet');
+        $this->totalItemOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
+            ->count('GoodNet');
+        $this->sumRamOfDate =  WebappPOInv::whereDate('DocuDate', $this->selectedDate)
+            ->where('VendorCode', 'like', '97%')
+            ->sum('GoodNet');
+        $this->countRamOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
+            ->whereIn('TypeCarID', ['10Wheels', '6Wheels', 'Trailer'])
+            ->count();
+
+        $palmPlan = PalmPlan::whereDate('created_at', $this->selectedDate)->sum('palm_plan') ?? 0;
+        $listPlan = PalmPlan::whereDate('created_at', $this->selectedDate)->value('list_plan') ?? 0;
+
+        $this->sumAgrOfDate = $this->totalPalmOfDate - $this->sumRamOfDate;
+
+        $this->progressFFB = $palmPlan > 0 ? ($this->totalPalmOfDate / $palmPlan) * 100 : 0;
+        $this->progressRam = ($this->sumRamOfDate / $this->totalPalmOfDate) * 100;
+        $this->progressAgr = 100 - $this->progressRam;
+        $this->progressItem = $listPlan > 0 ? ($this->countRamOfDate / $listPlan) * 100 : 0;
+
         return view('livewire.rpo.palm-purchase-live', [
             'webappPOInvs' => $webappPOInvs,
             'POInvDTCars' => $POInvDTCars,
+            'setPriceScalers' => $setPriceScalers,
         ]);
     }
-    public function closeModal()
-    {
-        $this->resetInputFields();
-        $this->showModal = false;
-    }
+
     public function resetInputFields()
     {
         $this->POInvID = '';
@@ -124,6 +204,8 @@ class PalmPurchaseLive extends Component
         $this->Impurity = '';
         $this->Scaler = '';
         $this->DocuType = '';
+        $this->set_price = '';
+        $this->set_scaler = '';
     }
 
     public function savePalmPurchase()
@@ -147,6 +229,7 @@ class PalmPurchaseLive extends Component
         $lastId = WebappPOInv::max('POInvID'); // หาค่าล่าสุด
         $newId = $lastId ? $lastId + 1 : 1;
         $validatedData['POInvID'] = $newId;
+        $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
         $validatedData['GoodNet'] = max(0, (float) $this->GoodIB - (float) $this->GoodOB);
         $validatedData['Amnt1'] = max(0, (float) $this->GoodNet * (float) $this->Price1);
 
@@ -202,12 +285,12 @@ class PalmPurchaseLive extends Component
                 'TypeCarID' => 'required',
                 'GoodIB' => 'required|integer|regex:/^\d+$/',
                 'GoodOB' => 'required|integer|regex:/^\d+$/',
-                'Price1' => 'required',
                 'Grade' => 'required',
                 'Impurity' => 'required',
                 'Scaler' => 'required',
             ]
         );
+        $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
         $validatedData['GoodNet'] = max(0, (float) $this->GoodIB - (float) $this->GoodOB);
         $validatedData['Amnt1'] = max(0, (float) $this->GoodNet * (float) $this->Price1);
 
@@ -263,5 +346,65 @@ class PalmPurchaseLive extends Component
         } else {
             session()->flash('error', 'Computer not found.');
         }
+    }
+
+    public function saveSetPrice()
+    {
+        $validatedData = $this->validate(
+            [
+                'set_price' => 'required|numeric|min:0|max:1000000',
+                'set_scaler' => 'required',
+            ]
+        );
+        $validatedData['set_price'] = max(0, (float) $this->set_price);
+        setPriceScaler::create($validatedData);
+        $this->dispatch(
+            'alert',
+            position: "center",
+            icon: "success",
+            title: "บันทึกข้อมูลสำเร็จ",
+            showConfirmButton: false,
+            timer: 1500
+        );
+        $this->closeModalSet();
+    }
+    public function confirmEditSetPrice($id)
+    {
+        $this->showModalSet = true;
+        $this->edit = true;
+        $this->updateId = $id;
+        $setPriceScaler = SetPriceScaler::find($id);
+        $this->set_price = $setPriceScaler->set_price;
+        $this->set_scaler = $setPriceScaler->set_scaler;
+        $this->closeModalTableSet();
+    }
+    public function updateSetPrice()
+    {
+        $validatedData = $this->validate(
+            [
+                'set_price' => 'required|numeric|min:0|max:1000000',
+                'set_scaler' => 'required',
+            ]
+        );
+        $setPriceScaler = SetPriceScaler::find($this->updateId);
+        $validatedData['set_price'] = max(0, (float) $this->set_price);
+
+        if ($setPriceScaler) {
+            $setPriceScaler->update($validatedData);
+        } else {
+            // สร้างใหม่ถ้าไม่มีข้อมูล
+            SetPriceScaler::create($validatedData);
+        }
+
+        $this->dispatch(
+            'alert',
+            position: "center",
+            icon: "success",
+            title: "แก้ไขข้อมูลสำเร็จ",
+            showConfirmButton: false,
+            timer: 1500
+        );
+
+        $this->closeModalSet();
     }
 }

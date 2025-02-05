@@ -11,4 +11,8 @@ class PalmPurchase extends Controller
     {
         return view('rpo.palm-purchase-index');
     }
+    public function palmPlan()
+    {
+        return view('rpo.palm-plan-index');
+    }
 }

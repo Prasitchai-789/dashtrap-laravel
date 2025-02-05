@@ -86,7 +86,7 @@
         </div>
 
         <!-- Model ADD Employee -->
-        <x-modal title="ข้อมูลการผลิต" wire:model="showModal" maxWidth="6xl" zIndex="20">
+        <x-modal title="ข้อมูลการผลิต" wire:model="showModal" maxWidth="6xl" zIndex="20" closeModal="closeModal">
             <form class="form " wire:submit.prevent="{{ $edit ? 'updateEmployee' : 'saveEmployee' }}" id="myForm">
                 <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-4 font-anuphan">
                     <div class="">

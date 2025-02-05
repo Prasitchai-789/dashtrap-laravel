@@ -6801,6 +6801,9 @@ Template Name: SAY
     @apply bg-gradient-to-br from-[#4099ff] to-[#73b4ff];
 }
 .bg-skyline {
+    @apply bg-gradient-to-br from-[#2b32b2] to-[#1488cc];
+}
+.bg-skyline2 {
     @apply bg-gradient-to-br from-[#1488cc] to-[#2b32b2];
 }
 .bg-pink {

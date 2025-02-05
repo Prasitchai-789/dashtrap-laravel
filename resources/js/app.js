@@ -173,8 +173,8 @@ window.addEventListener("alert", (event) => {
         showConfirmButton: false,
         timer: data.timer,
         customClass: {
-            title: 'font-anuphan',  // เพิ่มคลาสสำหรับ title
-        }
+            title: "font-anuphan", // เพิ่มคลาสสำหรับ title
+        },
     });
 });
 
@@ -183,7 +183,8 @@ window.addEventListener("alertConfirmDelete", (event) => {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             cancelButton: "bg-danger me-2 p-3 rounded text-white font-anuphan",
-            confirmButton: "bg-success me-2 p-3 rounded text-white font-anuphan",
+            confirmButton:
+                "bg-success me-2 p-3 rounded text-white font-anuphan",
             title: "font-prompt text-2xl",
             htmlContainer: "font-prompt text-lg",
         },
@@ -206,4 +207,28 @@ window.addEventListener("alertConfirmDelete", (event) => {
                 //
             }
         });
+});
+
+// window.addEventListener("swal:alertDate", (event) => {
+//     Swal.fire({
+//         icon: event.detail.type,
+//         title: event.detail.title,
+//         text: event.detail.text,
+//     });
+// });
+
+window.addEventListener("alertDate", (event) => {
+    let data = event.detail;
+    Swal.fire({
+        position: data.position,
+        icon: data.icon,
+        title: data.title,
+        text: data.text,
+        showConfirmButton: false,
+        timer: data.timer,
+        customClass: {
+            title: "font-anuphan", // เพิ่มคลาสสำหรับ title
+            htmlContainer: "font-anuphan text-md",
+        },
+    });
 });

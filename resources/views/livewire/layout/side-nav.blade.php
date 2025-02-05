@@ -1,7 +1,7 @@
 
     <!-- Start Sidebar -->
 <aside id="app-menu"
-class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg-primary-900 overflow-y-auto -translate-x-full transform transition-all duration-200 hs-overlay-open:translate-x-0 lg:bottom-0 lg:end-auto lg:z-30 lg:block lg:translate-x-0 rtl:translate-x-full rtl:hs-overlay-open:translate-x-0 rtl:lg:translate-x-0 print:hidden [--body-scroll:true] [--overlay-backdrop:true] lg:[--overlay-backdrop:false]">
+class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg-skyline overflow-y-auto -translate-x-full transform transition-all duration-200 hs-overlay-open:translate-x-0 lg:bottom-0 lg:end-auto lg:z-30 lg:block lg:translate-x-0 rtl:translate-x-full rtl:hs-overlay-open:translate-x-0 rtl:lg:translate-x-0 print:hidden [--body-scroll:true] [--overlay-backdrop:true] lg:[--overlay-backdrop:false]">
 
 <div class="flex flex-col h-full">
     <!-- Sidenav Logo -->
@@ -34,13 +34,13 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                 </a>
             </li>
 
-            <li class="menu-item">
+            {{-- <li class="menu-item">
                 <a class="group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5"
                     href="{{ route('dashboard') }}">
                     <i class="text-2xl i-ph-calendar-duotone"></i>
                     Dashboard
                 </a>
-            </li>
+            </li> --}}
 
 
 
@@ -71,6 +71,13 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                                 <span class="menu-text">รายการขายสินค้า</span>
                             </a>
                         </li>
+                        <li class="menu-item">
+                            <a href="{{ route('palm-plan') }}"
+                                class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
+                                <i class="menu-dot"></i>
+                                <span class="menu-text">แผนการรับซื้อ</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -96,7 +103,7 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                     </ul>
                 </div>
             </li>
-
+{{--
             <li class="menu-item hs-accordion font-prompt">
                 <a href="javascript:void(0)"
                     class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
@@ -117,7 +124,7 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
 
 
             <li class="menu-item">
