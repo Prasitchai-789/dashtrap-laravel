@@ -6,6 +6,8 @@ use Telegram\Bot\Api;
 use Livewire\Component;
 use App\Models\RPO\PalmPlan;
 use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\Notify\Discord;
+use App\Http\Controllers\Notify\Telegram;
 
 class PalmPlanLive extends Component
 {
@@ -46,30 +48,7 @@ class PalmPlanLive extends Component
     {
         //
     }
-    public function sendToDiscord($message)
-    {
-        $webhookUrl = config('services.discord.webhook_url'); // ดึง Webhook URL จากไฟล์ config
 
-        // ส่งข้อความไปยัง Discord
-        Http::post($webhookUrl, [
-            'content' => $message, // เนื้อหาของข้อความ
-        ]);
-    }
-    public function sendToTelegram($message)
-{
-    $telegram = new Api(config('services.telegram.bot_token'));
-    $chatId = env('TELEGRAM_CHAT_ID');
-
-    $telegram->sendMessage([
-        'chat_id' => $chatId,
-        'text' => $message,
-    ]);
-}
-    public function notify()
-    {
-        $this->sendToDiscord('ข้อความที่ต้องการส่งไปยัง Discord');
-        $this->sendToTelegram("ทดสอบส่งข้อความจาก Laravel ไปยัง Telegram!");
-    }
     public function render()
     {
         $palmPlans = PalmPlan::all();
@@ -93,9 +72,17 @@ class PalmPlanLive extends Component
         );
         $validatedData['per_plan'] = number_format(($this->actual_plan / $this->palm_plan) * 100, 2, '.', '');
         PalmPlan::create($validatedData);
+
+
         $message ="แจ้งแผน" .
         "\n" . ' 🌴 แผนรับเข้า'." : ".$this->palm_plan;
-        $this->sendToTelegram($message);
+
+        $Discord = new Discord();
+        $Discord->sendToDiscord($message);
+
+        $Telegram = new Telegram();
+        $Telegram->sendToTelegram($message);
+        
         $this->dispatch(
             'alert',
             position: "center",
