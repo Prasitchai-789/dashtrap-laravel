@@ -17,11 +17,9 @@ $zIndex = $zIndex ?? 999;
 @endphp
 
 <div x-data="{ show: @entangle($attributes->wire('model')) }"
-    x-init="$watch('show', value => { if (value) { setTimeout(() => show = true, 30); } })"
-    x-show="show"
-    x-cloak
-    x-on:close.stop="show = false"
-    x-on:keydown.escape.window="show = false" x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
+    x-init="$watch('show', value => { if (value) { setTimeout(() => show = true, 30); } })" x-show="show" x-cloak
+    x-on:close.stop="show = false" x-on:keydown.escape.window="show = false"
+    x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
     x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
     class="fixed inset-0 z-50 px-4 py-6 overflow-y-auto sm:px-0">
 
@@ -36,10 +34,8 @@ $zIndex = $zIndex ?? 999;
     <!-- Modal Content -->
     <div class="w-full {{ $maxWidth }} mb-6 transition-transform transform bg-white rounded-lg shadow-xl md:mx-auto"
         :class="{'w-full': show, 'md:w-auto': !show}" x-show="show" x-trap.inert.noscroll="show"
-        x-transition:enter="ease-out duration-200"
-        x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-        x-transition:leave="ease-in duration-75"
+        x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+        x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-75"
         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
         x-transition:leave-end="opacity-0 translate-y-2 scale-95">
         <!-- Content Here -->
@@ -51,7 +47,7 @@ $zIndex = $zIndex ?? 999;
                     <h3 class="text-xl font-semibold text-white font-prompt">
                         {{ $title }}
                     </h3>
-                    <button type="button" x-on:click="show = false wire:model" wire:click="{{$closeModal}}"
+                    <button type="button" x-on:click="show = false" wire:click="closeModal"
                         class="inline-flex items-center justify-center w-8 h-8 text-sm text-red-600 bg-transparent rounded-lg hover:bg-red-500 hover:text-white ms-auto dark:hover:bg-gray-600 dark:hover:text-white">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">

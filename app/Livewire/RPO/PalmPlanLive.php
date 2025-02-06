@@ -5,6 +5,7 @@ namespace App\Livewire\RPO;
 use Telegram\Bot\Api;
 use Livewire\Component;
 use App\Models\RPO\PalmPlan;
+use App\Events\NotifyProcessed;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Notify\Discord;
 use App\Http\Controllers\Notify\Telegram;
@@ -48,6 +49,17 @@ class PalmPlanLive extends Component
     {
         //
     }
+    public function notify()
+    {
+        event(new NotifyProcessed([
+                'position' => "center",
+                'icon' => "error",
+                'title' => "ไม่พบข้อมูล",
+                'text' => "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
+                'showConfirmButton' => false,
+                'timer' => 2500
+        ]));
+    }
 
     public function render()
     {
@@ -82,7 +94,7 @@ class PalmPlanLive extends Component
 
         $Telegram = new Telegram();
         $Telegram->sendToTelegram($message);
-        
+
         $this->dispatch(
             'alert',
             position: "center",

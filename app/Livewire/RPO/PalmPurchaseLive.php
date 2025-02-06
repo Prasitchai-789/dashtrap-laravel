@@ -152,7 +152,7 @@ class PalmPurchaseLive extends Component
         $webappPOInvs = WebappPOInv::where('DocuDate', $this->selectedDate)
             ->orderBy('POInvID', 'desc')
             ->paginate(10);
-        $POInvDTCars = POInvDTCar::all();
+        $POInvDTCars = POInvDTCar::limit(10)->get();
         $setPriceScalers = SetPriceScaler::orderBy('id', 'desc')->paginate(5);
 
         $this->totalPalmOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
@@ -169,12 +169,14 @@ class PalmPurchaseLive extends Component
         $palmPlan = PalmPlan::whereDate('created_at', $this->selectedDate)->sum('palm_plan') ?? 0;
         $listPlan = PalmPlan::whereDate('created_at', $this->selectedDate)->value('list_plan') ?? 0;
 
+        // dd($this->selectedDate, $this->totalPalmOfDate, $palmPlan);
+
         $this->sumAgrOfDate = $this->totalPalmOfDate - $this->sumRamOfDate;
 
-        $this->progressFFB = $palmPlan > 0 ? ($this->totalPalmOfDate / $palmPlan) * 100 : 0;
-        $this->progressRam = ($this->sumRamOfDate / $this->totalPalmOfDate) * 100;
-        $this->progressAgr = 100 - $this->progressRam;
-        $this->progressItem = $listPlan > 0 ? ($this->countRamOfDate / $listPlan) * 100 : 0;
+        $this->progressFFB = ($palmPlan > 0) ? ($this->totalPalmOfDate / $palmPlan) * 100 : 0;
+        $this->progressRam = ($this->totalPalmOfDate > 0) ? ($this->sumRamOfDate / $this->totalPalmOfDate) * 100 : 0;
+        $this->progressAgr = ($this->progressRam > 0) ? (100 - $this->progressRam) : 0;;
+        $this->progressItem = ($listPlan > 0) ? ($this->countRamOfDate / $listPlan) * 100 : 0;
 
         return view('livewire.rpo.palm-purchase-live', [
             'webappPOInvs' => $webappPOInvs,
