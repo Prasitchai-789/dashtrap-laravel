@@ -14,8 +14,8 @@
 
             <!-- Table -->
             <div class="">
-                <div class="overflow-x-auto font-anuphan">
-                    <table class="w-full border border-collapse">
+                <div class="overflow-x-auto rounded-lg font-anuphan">
+                    <table class="w-full border border-collapse ">
                         <thead class="text-center bg-gray-200">
                             <tr class="border">
                                 <th class="p-3 border">รหัสพนักงาน</th>
@@ -43,34 +43,26 @@
                                     }}</td>
                                 <td class="p-3 border">{{$employee->education->EduName}}</td>
                                 <td class="p-3 text-center border">
-                                    <div class="relative text-center " x-data="{ open: false }">
-                                        <a href="#" class="text-gray-500 hover:text-gray-900 focus:outline-none"
-                                            @click="open = !open">
-                                            <div class="flex items-center justify-center ">
-                                                <p
-                                                    class="text-lg font-medium text-gray-900 dark:text-white hover:text-xl">
-                                                    ...</p>
-                                            </div>
-                                        </a>
-                                        <!-- Dropdown menu -->
-                                        <ul class="absolute right-0 z-10 w-48 mt-2 bg-white border border-gray-200 rounded-md shadow-lg"
-                                            x-show="open" @click.away="open = false" x-transition>
-                                            <li>
-                                                <a href="#" wire:click='confirmEdit({{ $employee->EmpID }})'
-                                                    data-bs-toggle="modal" data-hs-overlay="#modal-employee"
-                                                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-start">
-                                                    <i class="fa-solid fa-pen-to-square me-2"></i> Edit
-                                                </a>
-                                            </li>
-                                            @can('delete user')
-                                            <li>
-                                                <a href="#" wire:click='confirmDelete({{ $employee->EmpID }})'
-                                                    class="block px-4 py-2 text-red-500 hover:bg-gray-100 text-start">
-                                                    <i class="fa-solid fa-trash me-2"></i> Delete
-                                                </a>
-                                            </li>
-                                            @endcan
-                                        </ul>
+                                    <div class="relative hs-dropdown">
+                                        <button id="hs-dropdown-default" type="button" class="inline-flex items-center justify-center px-5 py-2 text-lg font-semibold tracking-wide text-center text-gray-900 align-middle duration-500 rounded-md hs-dropdown-toggle hover:text-blue-500">
+                                            ...
+                                        </button>
+
+                                        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 min-w-48 transition-[opacity,margin] mt-4 opacity-0 z-10 bg-white shadow-lg rounded-lg border border-default-100 p-1.5 hidden">
+                                            <ul class="flex flex-col gap-1">
+                                                <li>
+                                                    <a class="flex items-center px-3 py-2 font-normal transition-all rounded text-default-600 hover:text-blue-400 hover:bg-default-400/10"
+                                                    href="#" wire:click='confirmEdit({{ $employee->EmpID }})'>
+                                                    <i class="fa-solid fa-pen-to-square me-2"></i> Edit</a>
+                                                </li>
+                                                @can('delete user')
+                                                <li>
+                                                    <a class="flex items-center px-3 py-2 font-normal text-red-500 transition-all rounded hover:text-red-600 hover:bg-default-400/10"
+                                                    href="#" wire:click='confirmDelete({{ $employee->EmpID }})'> <i class="fa-solid fa-trash me-2"></i> Delete</a>
+                                                </li>
+                                                @endcan
+                                            </ul>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -90,7 +82,7 @@
             <form class="form " wire:submit.prevent="{{ $edit ? 'updateEmployee' : 'saveEmployee' }}" id="myForm">
                 <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-4 font-anuphan">
                     <div class="">
-                        <label for="Quantity"
+                        <label for="EmpCode"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             รหัสพนักงาน
                         </label>
@@ -105,7 +97,7 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="Quantity"
+                        <label for="EmpTitle"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             คำนำหน้า
                         </label>
@@ -129,7 +121,7 @@
 
                     </div>
                     <div class="sm:col-span-1 md:col-span-2">
-                        <label for="Quantity"
+                        <label for="EmpName"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             ชื่อ-นามสกุล
                         </label>
@@ -146,7 +138,7 @@
                 </div>
                 <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-4 font-anuphan">
                     <div class="">
-                        <label for="Quantity"
+                        <label for="IDCardNumber"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             เลขที่บัตรประชาชน
                         </label>
@@ -161,7 +153,7 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="Quantity"
+                        <label for="BirthDay"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             วันเกิด
                         </label>
@@ -176,7 +168,7 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="Quantity"
+                        <label for="EduID"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             วุฒิการศึกษา
                         </label>
@@ -199,7 +191,7 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="Quantity"
+                        <label for="ReligionID"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             ศาสนา
                         </label>
@@ -227,7 +219,7 @@
 
                 <div class="grid grid-cols-1 gap-4 m-4 mt-0 mb-2 md:grid-cols-2 font-anuphan">
                     <div class="">
-                        <label for="Quantity"
+                        <label for="Company"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             บริษัทที่สังกัด
                         </label>
@@ -245,7 +237,7 @@
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-2 md:grid-cols-3 font-anuphan">
                     <div class="">
-                        <label for="Quantity"
+                        <label for="Position"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             ตำแหน่ง
                         </label>
@@ -260,7 +252,7 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="Quantity"
+                        <label for="DeptID"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             ฝ่าย
                         </label>
@@ -283,7 +275,7 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="Quantity"
+                        <label for="BeginWorkDate"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             วันที่เริ่มงาน
                         </label>
@@ -301,7 +293,7 @@
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-2 md:grid-cols-1 font-anuphan">
                     <div class="">
-                        <label for="Quantity"
+                        <label for="Address"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             ที่อยู่
                         </label>
@@ -319,7 +311,7 @@
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-2 md:grid-cols-3 font-anuphan">
                     <div class="">
-                        <label for="Quantity"
+                        <label for="ProvinceID"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             จังหวัด
                         </label>
@@ -343,7 +335,7 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="Quantity"
+                        <label for="DistID"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             อำเภอ
                         </label>
@@ -394,7 +386,7 @@
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-2 md:grid-cols-3 font-anuphan">
                     <div class="">
-                        <label for="Quantity"
+                        <label for="ZipCode"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             รหัสไปรษณีย์
                         </label>
@@ -409,7 +401,7 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="Quantity"
+                        <label for="Email"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             Email
                         </label>
@@ -424,7 +416,7 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="Quantity"
+                        <label for="Tel"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             เบอร์โทรศัพท์
                         </label>

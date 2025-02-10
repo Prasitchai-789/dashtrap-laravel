@@ -8,13 +8,8 @@
                     <!-- ส่วนของปุ่มต่างๆ -->
                         <button type="button"
                             class="px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500"
-                            wire:click=openModal @click="show = true">
+                            wire:click='openModal'>
                             CREATE
-                        </button>
-                        <button type="button"
-                            class="px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500"
-                            wire:click=notify ">
-                            send
                         </button>
                 </div>
 
@@ -36,48 +31,41 @@
                             <tbody>
                                 @foreach ($palmPlans as $palmPlans)
                                 <tr class="text-gray-800 hover:bg-gray-100 hover:text-primary">
-                                    <td class="p-3 text-center border">{{
+                                    <td class="p-1 font-bold text-center border">{{
                                         \Carbon\Carbon::parse($palmPlans->created_at)->locale('th')->translatedFormat('d/m/Y')
                                         }}</td>
-                                    <td class="p-3 text-center border">{{ number_format($palmPlans->list_plan, 0, '.', ',') }}
+                                    <td class="p-1 font-bold text-center border">{{ number_format($palmPlans->list_plan, 0, '.', ',') }}
                                     </td>
-                                    <td class="p-3 border text-end">{{ number_format($palmPlans->palm_plan, 0, '.', ',') }} kg.
+                                    <td class="p-1 font-bold border text-end">{{ number_format($palmPlans->palm_plan, 0, '.', ',') }} kg.
                                     </td>
-                                    <td class="p-3 font-bold border text-end">
+                                    <td class="p-1 font-bold border text-end">
                                         {{ isset($palmPlans->actual_plan) ? number_format($palmPlans->actual_plan, 0, '.', ',') : '' }} kg.
                                     </td>
-                                    <td class="p-3 font-bold border text-end">
+                                    <td class="p-1 font-bold border text-end">
                                         {{ isset($palmPlans->per_plan) ? number_format($palmPlans->per_plan, 2, '.', ',') : '' }} %
                                     </td>
 
-                                    <td class="p-3 text-center border">
-                                        <div class="relative text-center " x-data="{ open: false }">
-                                            <a href="#" class="text-gray-500 hover:text-gray-900 focus:outline-none"
-                                                @click="open = !open">
-                                                <div class="flex items-center justify-center ">
-                                                    <p
-                                                        class="text-lg font-medium text-gray-900 dark:text-white hover:text-xl">
-                                                        ...</p>
-                                                </div>
-                                            </a>
-                                            <!-- Dropdown menu -->
-                                            <ul class="absolute right-0 z-10 w-48 mt-2 bg-white border border-gray-200 rounded-md shadow-lg"
-                                                x-show="open" @click.away="open = false" x-transition>
-                                                <li>
-                                                    <a href="#" wire:click='confirmEdit({{ $palmPlans->id }})'
-                                                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-start">
-                                                        <i class="fa-solid fa-pen-to-square me-2"></i> Edit
-                                                    </a>
-                                                </li>
-                                                @can('delete user')
-                                                <li>
-                                                    <a href="#" wire:click='confirmDelete({{ $palmPlans->id }})'
-                                                        class="block px-4 py-2 text-red-500 hover:bg-gray-100 text-start">
-                                                        <i class="fa-solid fa-trash me-2"></i> Delete
-                                                    </a>
-                                                </li>
-                                                @endcan
-                                            </ul>
+                                    <td class="p-1 text-center border">
+                                        <div class="relative hs-dropdown">
+                                            <button id="hs-dropdown-default" type="button" class="inline-flex items-center justify-center px-5 py-2 text-lg font-semibold tracking-wide text-center text-gray-900 align-middle duration-500 rounded-md hs-dropdown-toggle hover:text-blue-500">
+                                                ...
+                                            </button>
+
+                                            <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 min-w-48 transition-[opacity,margin] mt-4 opacity-0 z-10 bg-white shadow-lg rounded-lg border border-default-100 p-1.5 hidden">
+                                                <ul class="flex flex-col gap-1">
+                                                    <li>
+                                                        <a class="flex items-center px-3 py-2 font-normal transition-all rounded text-default-600 hover:text-blue-400 hover:bg-default-400/10"
+                                                        href="#" wire:click='confirmEdit({{ $palmPlans->id }})'>
+                                                        <i class="fa-solid fa-pen-to-square me-2"></i> Edit</a>
+                                                    </li>
+                                                    @can('delete user')
+                                                    <li>
+                                                        <a class="flex items-center px-3 py-2 font-normal text-red-500 transition-all rounded hover:text-red-600 hover:bg-default-400/10"
+                                                        href="#" wire:click='confirmDelete({{ $palmPlans->id }})'> <i class="fa-solid fa-trash me-2"></i> Delete</a>
+                                                    </li>
+                                                    @endcan
+                                                </ul>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

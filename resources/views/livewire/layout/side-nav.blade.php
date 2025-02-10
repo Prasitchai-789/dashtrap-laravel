@@ -65,7 +65,7 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="{{ route('product-sale') }}"
+                            <a href="{{ route('sales-product') }}"
                                 class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
                                 <i class="menu-dot"></i>
                                 <span class="menu-text">รายการขายสินค้า</span>
@@ -76,6 +76,50 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                                 class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
                                 <i class="menu-dot"></i>
                                 <span class="menu-text">แผนการรับซื้อ</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="menu-item hs-accordion font-prompt">
+                <a href="javascript:void(0)"
+                    class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
+                    <span class="text-2xl i-ph-layout-duotone"></span>
+                    <span class="menu-text"> ฝ่ายขายและการตลาด </span>
+                    <span class="menu-arrow"></span>
+                </a>
+
+                <div id="sidenavLevel"
+                    class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+                    <ul class="mt-1 space-y-1">
+                        <li class="menu-item">
+                            <a href="{{ route('sales-plan') }}"
+                                class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
+                                <i class="menu-dot"></i>
+                                <span class="menu-text">แผนการโหลดสินค้า</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="menu-item hs-accordion font-prompt">
+                <a href="javascript:void(0)"
+                    class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
+                    <span class="text-2xl i-ph-layout-duotone"></span>
+                    <span class="menu-text"> ฝ่ายบัญชีและการเงิน </span>
+                    <span class="menu-arrow"></span>
+                </a>
+
+                <div id="sidenavLevel"
+                    class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+                    <ul class="mt-1 space-y-1">
+                        <li class="menu-item">
+                            <a href="{{ route('purchase-price') }}"
+                                class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
+                                <i class="menu-dot"></i>
+                                <span class="menu-text">บันทึกราคารับซื้อ</span>
                             </a>
                         </li>
                     </ul>

@@ -8,6 +8,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+
     @yield('css')
     <!-- Scripts -->
     @include('layouts.root/head-css')
@@ -39,6 +40,7 @@
 
     @yield('script')
 
+   
     @vite(['resources/js/app.js'])
 
 </body>

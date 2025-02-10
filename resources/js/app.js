@@ -13,6 +13,7 @@ import "jquery";
 import "simplebar";
 import Waves from "node-waves";
 
+
 import Swal from "sweetalert2";
 window.Swal = Swal;
 class App {
@@ -209,6 +210,37 @@ window.addEventListener("alertConfirmDelete", (event) => {
         });
 });
 
+
+window.addEventListener("alertConfirmCancel", (event) => {
+    let data = event.detail;
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            cancelButton: "bg-danger me-2 p-3 rounded text-white font-anuphan",
+            confirmButton:
+                "bg-success me-2 p-3 rounded text-white font-anuphan",
+            title: "font-prompt text-2xl",
+            htmlContainer: "font-prompt text-lg",
+        },
+        buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+        .fire({
+            title: "คุณต้องการยกเลิกใช่หรือไม่ ?",
+            // text: "เพราะไม่สามารถกู้คืนได้ !",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, ต้องการยกเลิก !",
+            // reverseButtons: true,
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                Livewire.dispatch("cancelConfirmed");
+            } else {
+                //
+            }
+        });
+});
 // window.addEventListener("swal:alertDate", (event) => {
 //     Swal.fire({
 //         icon: event.detail.type,
@@ -230,5 +262,48 @@ window.addEventListener("alertDate", (event) => {
             title: "font-anuphan", // เพิ่มคลาสสำหรับ title
             htmlContainer: "font-anuphan text-md",
         },
+    });
+});
+
+
+window.addEventListener('showSweetAlert', function () {
+    Swal.fire({
+        title: 'ยังไม่ได้ตั้งค่าราคา กรุณาตั้งค่า!',
+        // text: 'ยังไม่ได้ตั้งค่าราคา กรุณาตั้งค่า',
+        icon: 'warning',
+        confirmButtonText: 'ตกลง',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        customClass: {
+            title: "font-anuphan", // เพิ่มคลาสสำหรับ title
+            htmlContainer: "font-anuphan text-md",
+            confirmButton:
+                "bg-success p-4 rounded text-white font-anuphan font-bold",
+        },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Livewire.dispatch('openModalSet'); // เรียกฟังก์ชัน openModalSet
+        }
+    });
+});
+
+window.addEventListener('changeStatus', function () {
+    Swal.fire({
+        title: 'แจ้งเตือน รถเข้าโหลดสินค้า!',
+        // text: 'ยังไม่ได้ตั้งค่าราคา กรุณาตั้งค่า',
+        icon: 'warning',
+        confirmButtonText: 'ตกลง',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        customClass: {
+            title: "font-anuphan", // เพิ่มคลาสสำหรับ title
+            htmlContainer: "font-anuphan text-md",
+            confirmButton:
+                "bg-success p-4 rounded text-white font-anuphan font-bold",
+        },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Livewire.dispatch('statusConfirmed'); // เรียกฟังก์ชัน openModalSet
+        }
     });
 });

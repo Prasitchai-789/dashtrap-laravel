@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\ACC\PurchasePriceController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HRE\Employee;
+use App\Http\Controllers\HRE\UseCarController;
+use App\Http\Controllers\MAR\SalesPlanController;
+use App\Http\Controllers\RPO\SalesProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RPO\PalmPurchase;
-use App\Http\Controllers\RPO\ProductSale;
 use App\Http\Controllers\UserController;
 
 /*
@@ -32,7 +35,7 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-
+//-------- permissions ------//
 Route::group(['middleware' => ['auth','role:developer|admin']], function () {
     Route::resource('permissions', PermissionController::class);
     Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);
@@ -46,14 +49,27 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
     Route::get('users/{userId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
 });
 
+//-------- RPO ------//
 Route::group(['middleware' => ['auth','role:developer|admin']], function () {
     Route::get('/palm-purchase', [PalmPurchase::class, 'palmPurchase'])->name('palm-purchase');
     Route::get('/palm-plan', [PalmPurchase::class, 'palmPlan'])->name('palm-plan');
-    Route::get('/product-sale', [ProductSale::class, 'productSale'])->name('product-sale');
+    Route::get('/sales-product', [SalesProductController::class, 'salesProduct'])->name('sales-product');
 });
 
+//-------- HRE ------//
 Route::group(['middleware' => ['auth','role:developer|admin']], function () {
     Route::get('/employee', [Employee::class, 'employee'])->name('employee');
+    Route::get('/use-car', [UseCarController::class, 'useCar'])->name('use-car');
+});
+
+//-------- MAR ------//
+Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+    Route::get('/sales-plan', [SalesPlanController::class, 'salesPlan'])->name('sales-plan');
+});
+
+//-------- ACC ------//
+Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+    Route::get('/purchase-price', [PurchasePriceController::class, 'purchasePrice'])->name('purchase-price');
 });
 
 

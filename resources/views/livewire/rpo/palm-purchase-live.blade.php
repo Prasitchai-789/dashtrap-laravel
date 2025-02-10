@@ -141,7 +141,7 @@
                     <div class="md:col-span-3">
                         <input
                             class="font-semibold text-blue-900 rounded-lg form-input focus:ring-blue-500 focus:border-blue-500"
-                            type="date" wire:model="selectedDate" wire:change="setDate">
+                            type="date" id="selectedDate" wire:model="selectedDate" wire:change="setDate">
                     </div>
                 </div>
 
@@ -149,26 +149,24 @@
                 <div class="flex items-center ml-auto space-x-2 font-bold font-anuphan">
                     <button type="button"
                         class="px-4 py-2 text-sm text-white transition bg-orange-500 rounded-lg hover:bg-orange-400"
-                        wire:click=openModalTableSet @click="show = true">
+                        wire:click='openModalTableSet'>
                         ตารางราคา
                     </button>
                     <button type="button"
                         class="px-4 py-2 text-sm text-white transition rounded-lg bg-success hover:bg-green-500"
-                        wire:click=openModalSet @click="show = true">
+                        wire:click='openModalSet'>
                         กำหนดราคาและเครื่องชั่ง
                     </button>
                     <button type="button"
                         class="px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500"
-                        wire:click=openModal @click="show = true">
+                        wire:click='openModal'>
                         CREATE
                     </button>
                 </div>
             </div>
-
-
             <!-- Table -->
             <div class="">
-                <div class="overflow-x-auto font-anuphan">
+                <div class="overflow-auto font-anuphan">
                     <table class="w-full border border-collapse">
                         <thead class="text-center bg-gray-200">
                             <tr class="border">
@@ -212,37 +210,38 @@
                                 <td class="p-3 text-center border">{{$webappPOInv->Grade}}</td>
                                 <td class="p-3 text-center border">{{$webappPOInv->Impurity}}</td>
 
-                                <td class="p-3 text-center border">
-                                    <div class="relative text-center " x-data="{ open: false }">
+                                <td class="p-2 text-center border min-w-[30px] max-w-[40px] relative">
+                                    <div class="relative text-center" x-data="{ open: false }">
                                         <a href="#" class="text-gray-500 hover:text-gray-900 focus:outline-none"
                                             @click="open = !open">
-                                            <div class="flex items-center justify-center ">
-                                                <p
-                                                    class="text-lg font-medium text-gray-900 dark:text-white hover:text-xl">
-                                                    ...</p>
+                                            <div class="flex items-center justify-center">
+                                                <p class="text-lg font-medium text-gray-900 dark:text-white hover:text-xl">...</p>
                                             </div>
                                         </a>
                                         <!-- Dropdown menu -->
-                                        <ul class="absolute right-0 z-10 w-48 mt-2 bg-white border border-gray-200 rounded-md shadow-lg"
-                                            x-show="open" @click.away="open = false" x-transition>
-                                            <li>
-                                                <a href="#" wire:click='confirmEdit({{ $webappPOInv->POInvID }})'
-                                                    data-bs-toggle="modal" data-hs-overlay="#modal-palm-purchase"
-                                                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-start">
-                                                    <i class="fa-solid fa-pen-to-square me-2"></i> Edit
-                                                </a>
-                                            </li>
-                                            @can('delete user')
-                                            <li>
-                                                <a href="#" wire:click='confirmDelete({{ $webappPOInv->POInvID }})'
-                                                    class="block px-4 py-2 text-red-500 hover:bg-gray-100 text-start">
-                                                    <i class="fa-solid fa-trash me-2"></i> Delete
-                                                </a>
-                                            </li>
-                                            @endcan
-                                        </ul>
+                                        <div>
+                                            <ul class="absolute right-0 top-full z-[9999] w-48 bg-white border border-gray-200 rounded-md shadow-lg transition-[opacity,margin] mt-2 p-1.5"
+                                                x-show="open" @click.away="open = false" x-transition>
+                                                <li>
+                                                    <a href="#" wire:click='confirmEdit({{ $webappPOInv->POInvID }})'
+                                                        data-bs-toggle="modal" data-hs-overlay="#modal-palm-purchase"
+                                                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-start">
+                                                        <i class="fa-solid fa-pen-to-square me-2"></i> Edit
+                                                    </a>
+                                                </li>
+                                                @can('delete user')
+                                                <li>
+                                                    <a href="#" wire:click='confirmDelete({{ $webappPOInv->POInvID }})'
+                                                        class="block px-4 py-2 text-red-500 hover:bg-gray-100 text-start">
+                                                        <i class="fa-solid fa-trash me-2"></i> Delete
+                                                    </a>
+                                                </li>
+                                                @endcan
+                                            </ul>
+                                        </div>
                                     </div>
                                 </td>
+
                             </tr>
                             @endforeach
                         </tbody>
@@ -253,6 +252,7 @@
                 </div>
             </div>
             <!-- End Table -->
+
         </div>
 
         <!-- Model ADD Palm -->
@@ -292,8 +292,8 @@
                         </div>
                     </div>
                     <div class="Scaler">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
-                            ตาชั่ง
+                        <label for="Scaler" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                            เครื่องชั่ง
                         </label>
                         <div class="flex">
                             <div
@@ -309,14 +309,13 @@
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-2 md:grid-cols-2 font-anuphan">
 
+                    <!-- 🔹 รหัสลูกค้า (เลือกจาก datalist) -->
                     <div>
-                        <label for="VendorCode"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                        <label for="VendorCode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             รหัสลูกค้า
                         </label>
                         <div class="flex">
-                            <div
-                                class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
+                            <div class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
                                 <i class="fa-solid fa-hashtag"></i>
                             </div>
 
@@ -324,32 +323,33 @@
                                 list="vendorCodes" wire:change="getVendorName"
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
                                 required placeholder="เลือก...">
+
                             <datalist id="vendorCodes">
                                 @foreach ($vendors as $vendor)
-                                <option value="{{ $vendor->VendorCode }}">{{ $vendor->VendorName }}</option>
+                                    <option value="{{ $vendor->VendorCode }}">{{ $vendor->VendorName }}</option>
                                 @endforeach
                             </datalist>
                         </div>
                     </div>
 
+                    <!-- 🔹 ชื่อลูกค้า (อัปเดตอัตโนมัติ) -->
                     <div>
-                        <label for="VendorName"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                        <label for="VendorName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             ชื่อลูกค้า
                         </label>
                         <div class="flex">
-                            <div
-                                class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
+                            <div class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
                                 <i class="fa-solid fa-user"></i>
                             </div>
 
-                            <input type="text"
+                            <input type="text" id="VendorName" name="VendorName" wire:model="VendorName"
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="VendorName" name="VendorName" wire:model="VendorName" readonly />
+                                readonly />
                         </div>
                     </div>
 
                 </div>
+
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-2 md:grid-cols-2 font-anuphan">
 
@@ -365,8 +365,13 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="VendorCarID" name="VendorCarID" wire:model="VendorCarID" required />
-                        </div>
+                                id="VendorCarID" name="VendorCarID" wire:model="VendorCarID" required list="vendorCarIDList"/>
+                                <datalist id="vendorCarIDList">
+                                    @foreach($vendorCarIDs as $id)
+                                        <option value="{{ $id }}"></option>
+                                    @endforeach
+                                </datalist>
+                            </div>
                     </div>
 
                     <div>
@@ -477,7 +482,7 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <div>
                         <label for="Impurity"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
@@ -536,7 +541,7 @@
                         </div>
                     </div>
                     <div class="set_scaler">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                        <label for="set_scaler" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             เครื่องชั่ง
                         </label>
                         <div class="flex">
@@ -634,3 +639,4 @@
 
     </div>
 </div>
+

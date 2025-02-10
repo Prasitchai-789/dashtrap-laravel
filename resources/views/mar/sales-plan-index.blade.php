@@ -6,11 +6,11 @@
 
 @section('content')
 
-<livewire:rpo.product-sale-live/>
+<livewire:mar.sales-plan-live/>
 
 @endsection
 
 
 @section('script')
-@vite(['resources/js/pages/dashboard.js'])
+
 @endsection

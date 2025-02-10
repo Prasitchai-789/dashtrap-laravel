@@ -17,7 +17,8 @@ class PalmPurchaseLive extends Component
     protected $paginationTheme = 'tailwind';
     protected $listeners = [
         'deleteConfirmed' => 'deleteItem',
-        'refreshComponent' => 'render'
+        'refreshComponent' => 'render',
+        'openModalSet' => 'openModalSet',
     ];
     public $edit = false;
     public WebappPOInv $webappPOInv;
@@ -61,7 +62,7 @@ class PalmPurchaseLive extends Component
     public $progressRam = 0;
     public $progressAgr = 0;
     public $progressFFB = 0;
-
+    public $vendorCarID;
 
     public bool $isLoading = false;
 
@@ -81,6 +82,7 @@ class PalmPurchaseLive extends Component
     }
     public function openModalSet()
     {
+        $this->closeModal();
         $this->showModalSet = true;
         $this->edit = false;
     }
@@ -111,25 +113,25 @@ class PalmPurchaseLive extends Component
     {
         $this->DocuDate = now()->format('Y-m-d');
         $this->selectedDate = now()->format('Y-m-d');
-        $this->vendors = EMVendor::orderBy('VendorName', 'asc')->get();
-        $setPrices = SetPriceScaler::orderBy('id', 'desc')->first();
-        $this->Price1 = optional($setPrices)->set_price;
-        $this->Scaler = optional($setPrices)->set_scaler;
+        $this->vendors = EMVendor::select('VendorCode', 'VendorName')
+            ->orderBy('VendorName', 'asc')
+            ->distinct() // ป้องกันค่าซ้ำ
+            ->get();
+        $setPrices = SetPriceScaler::whereDate('created_at', $this->selectedDate)->first();
+        if (!$setPrices) {
+            $this->dispatch('showSweetAlert');
+        } else {
+            $this->Price1 = $setPrices->set_price;
+            $this->Scaler = $setPrices->set_scaler;
+        }
+        $this->setDate();
     }
 
-    // เมื่อเลือก VendorCode ให้หาชื่อ VendorName อัตโนมัติ
-    public function updatedVendorCode()
+
+    public function getVendorName()
     {
         $vendor = EMVendor::where('VendorCode', $this->VendorCode)->first();
         $this->VendorName = $vendor ? $vendor->VendorName : null;
-    }
-
-
-    // เมื่อเลือก VendorName ให้หาค่า VendorCode อัตโนมัติ
-    public function getVendorName()
-    {
-        $vendor = EMVendor::where('VendorName', $this->VendorName)->first();
-        $this->VendorCode = $vendor ? $vendor->VendorCode : null;
     }
     public function setDate()
     {
@@ -145,45 +147,50 @@ class PalmPurchaseLive extends Component
                 timer: 2500
             );
         }
+    
+        // โหลดข้อมูลที่ใช้ซ้ำหลายครั้ง
+        $webappPOInvQuery = WebappPOInv::whereDate('DocuDate', $this->selectedDate);
+    
+        // คำนวณค่าต่าง ๆ และเก็บเป็น property เพื่อลดการประมวลผลซ้ำ
+        $this->totalPalmOfDate = $webappPOInvQuery->sum('GoodNet');
+        $this->totalItemOfDate = $webappPOInvQuery->count();
+        $this->sumRamOfDate = $webappPOInvQuery->where('VendorCode', 'like', '97%')->sum('GoodNet');
+        $this->countRamOfDate = $webappPOInvQuery->whereIn('TypeCarID', ['10Wheels', '6Wheels', 'Trailer'])->count();
+    
+        // โหลดค่าแผนการผลิต
+        $palmPlanData = PalmPlan::whereDate('created_at', $this->selectedDate)->first();
+        $palmPlan = (int) ($palmPlanData->palm_plan ?? 0);
+        $listPlan = (int) ($palmPlanData->list_plan ?? 0);
+    
+        // คำนวณผลลัพธ์
+        $this->sumAgrOfDate = $this->totalPalmOfDate - $this->sumRamOfDate;
+        $this->progressFFB = ($palmPlan > 0) ? ($this->totalPalmOfDate / $palmPlan) * 100 : 0;
+        $this->progressRam = ($this->totalPalmOfDate > 0) ? ($this->sumRamOfDate / $this->totalPalmOfDate) * 100 : 0;
+        $this->progressAgr = ($this->progressRam > 0) ? (100 - $this->progressRam) : 0;
+        $this->progressItem = ($listPlan > 0) ? ($this->countRamOfDate / $listPlan) * 100 : 0;
     }
+    
     public function render()
     {
         $latestDate = WebappPOInv::max('DocuDate'); // ค้นหาวันที่ล่าสุด
-        $webappPOInvs = WebappPOInv::where('DocuDate', $this->selectedDate)
+    
+        // โหลดข้อมูลที่จำเป็น
+        $webappPOInvs = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
             ->orderBy('POInvID', 'desc')
             ->paginate(10);
+    
         $POInvDTCars = POInvDTCar::limit(10)->get();
         $setPriceScalers = SetPriceScaler::orderBy('id', 'desc')->paginate(5);
-
-        $this->totalPalmOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
-            ->sum('GoodNet');
-        $this->totalItemOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
-            ->count('GoodNet');
-        $this->sumRamOfDate =  WebappPOInv::whereDate('DocuDate', $this->selectedDate)
-            ->where('VendorCode', 'like', '97%')
-            ->sum('GoodNet');
-        $this->countRamOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
-            ->whereIn('TypeCarID', ['10Wheels', '6Wheels', 'Trailer'])
-            ->count();
-
-        $palmPlan = PalmPlan::whereDate('created_at', $this->selectedDate)->sum('palm_plan') ?? 0;
-        $listPlan = PalmPlan::whereDate('created_at', $this->selectedDate)->value('list_plan') ?? 0;
-
-        // dd($this->selectedDate, $this->totalPalmOfDate, $palmPlan);
-
-        $this->sumAgrOfDate = $this->totalPalmOfDate - $this->sumRamOfDate;
-
-        $this->progressFFB = ($palmPlan > 0) ? ($this->totalPalmOfDate / $palmPlan) * 100 : 0;
-        $this->progressRam = ($this->totalPalmOfDate > 0) ? ($this->sumRamOfDate / $this->totalPalmOfDate) * 100 : 0;
-        $this->progressAgr = ($this->progressRam > 0) ? (100 - $this->progressRam) : 0;;
-        $this->progressItem = ($listPlan > 0) ? ($this->countRamOfDate / $listPlan) * 100 : 0;
-
+        $vendorCarIDs = WebappPOInv::distinct()->pluck('VendorCarID');
+    
         return view('livewire.rpo.palm-purchase-live', [
             'webappPOInvs' => $webappPOInvs,
             'POInvDTCars' => $POInvDTCars,
             'setPriceScalers' => $setPriceScalers,
+            'vendorCarIDs' => $vendorCarIDs,
         ]);
     }
+    
 
     public function resetInputFields()
     {
@@ -212,41 +219,54 @@ class PalmPurchaseLive extends Component
 
     public function savePalmPurchase()
     {
-        $validatedData = $this->validate(
-            [
-                'DocuDate' => 'required',
-                'BillID' => 'required',
-                'VendorCode' => 'required',
-                'VendorName' => 'required',
-                'VendorCarID' => 'required',
-                'TypeCarID' => 'required',
-                'GoodIB' => 'required|integer|regex:/^\d+$/',
-                'GoodOB' => 'required|integer|regex:/^\d+$/',
-                'Price1' => 'required',
-                'Grade' => 'required',
-                'Impurity' => 'required',
-                'Scaler' => 'required',
-            ]
-        );
-        $lastId = WebappPOInv::max('POInvID'); // หาค่าล่าสุด
-        $newId = $lastId ? $lastId + 1 : 1;
-        $validatedData['POInvID'] = $newId;
-        $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
-        $validatedData['GoodNet'] = max(0, (float) $this->GoodIB - (float) $this->GoodOB);
-        $validatedData['Amnt1'] = max(0, (float) $this->GoodNet * (float) $this->Price1);
+        try {
+            $validatedData = $this->validate(
+                [
+                    'DocuDate' => 'required',
+                    'BillID' => 'required',
+                    'VendorName' => 'required',
+                    'VendorCarID' => 'required',
+                    'TypeCarID' => 'required',
+                    'GoodIB' => 'required|integer|regex:/^\d+$/',
+                    'GoodOB' => 'required|integer|regex:/^\d+$/',
+                    'Price1' => 'required',
+                    'Grade' => 'required',
+                    'Impurity' => 'required',
+                    'Scaler' => 'required',
+                ]
+            );
+            $lastId = WebappPOInv::max('POInvID'); // หาค่าล่าสุด
+            $newId = $lastId ? $lastId + 1 : 1;
+            $validatedData['POInvID'] = $newId;
+            $validatedData['VendorCode'] = $this->VendorCode;
 
-        webappPOInv::create($validatedData);
+            $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
+            $validatedData['GoodNet'] = max(0, (float) $this->GoodIB - (float) $this->GoodOB);
+            $validatedData['Amnt1'] = max(0, (float) $this->GoodNet * (float) $this->Price1);
+            webappPOInv::create($validatedData);
 
-        $this->dispatch(
-            'alert',
-            position: "center",
-            icon: "success",
-            title: "บันทึกข้อมูลสำเร็จ",
-            showConfirmButton: false,
-            timer: 1500
-        );
+            $this->dispatch(
+                'alert',
+                position: "center",
+                icon: "success",
+                title: "บันทึกข้อมูลสำเร็จ",
+                showConfirmButton: false,
+                timer: 1500
+            );
 
-        $this->closeModal();
+            $this->closeModal();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $this->dispatch(
+                'alert',
+                position: "center",
+                icon: "error",
+                title: "เกิดข้อผิดพลาด",
+                showConfirmButton: false,
+                timer: 1500
+            );
+
+            $this->closeModal();
+        }
     }
     protected $messages = [
         'GoodOB.integer' => 'กรุณากรอกตัวเลขจำนวนเต็มเท่านั้น',
@@ -313,12 +333,6 @@ class PalmPurchaseLive extends Component
     {
         $this->deleteId = $id;
         $webappPOInv = WebappPOInv::find($id);
-        $this->dispatch(
-            'alertConfirmDelete',
-            [
-                'deleteId' => $this->deleteId,
-            ]
-        );
         if ($webappPOInv) {
             $this->dispatch(
                 'alertConfirmDelete',
