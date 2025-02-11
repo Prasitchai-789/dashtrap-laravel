@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ACC\PurchasePriceController;
+use App\Http\Controllers\CAR\CarController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HRE\Employee;
 use App\Http\Controllers\HRE\UseCarController;
@@ -71,6 +72,12 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 Route::group(['middleware' => ['auth','role:developer|admin']], function () {
     Route::get('/purchase-price', [PurchasePriceController::class, 'purchasePrice'])->name('purchase-price');
 });
+
+//-------- CAR ------//
+Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+    Route::get('/car-request', [CarController::class, 'carRequest'])->name('car-request');
+});
+
 
 
 require __DIR__ . '/auth.php';

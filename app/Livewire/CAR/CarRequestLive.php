@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\HRE;
+namespace App\Livewire\CAR;
 
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Events\NotifyProcessed;
-use App\Models\HRE\UseCar;
+use App\Models\CAR\CarRequest;
 
-class UseCarLive extends Component
+class CarRequestLive extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'tailwind';
@@ -15,7 +15,7 @@ class UseCarLive extends Component
         'deleteConfirmed' => 'deleteItem',
     ];
     public $edit = false;
-    public UseCar $useCar;
+    public CarRequest $carRequest;
     public $showModal = false;
     public $deleteId;
     public $updateId;
@@ -61,9 +61,9 @@ class UseCarLive extends Component
     }
     public function render()
     {
-        $useCars = UseCar::all();
-        return view('livewire.hre.use-car-live', [
-            'useCars' => $useCars,
+        $carRequests = CarRequest::orderBy('id', 'desc')->paginate(10)->withQueryString();
+        return view('livewire.car.car-request-live', [
+            'carRequests' => $carRequests,
         ]);
     }
 }

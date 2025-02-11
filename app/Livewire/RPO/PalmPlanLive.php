@@ -5,6 +5,7 @@ namespace App\Livewire\RPO;
 use Telegram\Bot\Api;
 use Livewire\Component;
 use App\Models\RPO\PalmPlan;
+use Livewire\WithPagination;
 use App\Events\NotifyProcessed;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Notify\Discord;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Notify\Telegram;
 
 class PalmPlanLive extends Component
 {
+    use WithPagination;
     protected $paginationTheme = 'tailwind';
     protected $listeners = [
         'deleteConfirmed' => 'deleteItem',
@@ -41,10 +43,8 @@ class PalmPlanLive extends Component
         $this->resetInputFields();
         $this->showModal = false;
     }
-    public function addEmployee()
-    {
-        $this->edit = false;
-    }
+
+
     public function mount()
     {
         //
