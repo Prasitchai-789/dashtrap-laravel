@@ -4,7 +4,7 @@ use App\Http\Controllers\ACC\PurchasePriceController;
 use App\Http\Controllers\CAR\CarController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HRE\Employee;
-use App\Http\Controllers\HRE\UseCarController;
+use App\Http\Controllers\CAR\UseCarController;
 use App\Http\Controllers\MAR\SalesPlanController;
 use App\Http\Controllers\RPO\SalesProductController;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 //-------- CAR ------//
 Route::group(['middleware' => ['auth','role:developer|admin']], function () {
     Route::get('/car-request', [CarController::class, 'carRequest'])->name('car-request');
+    Route::get('/car-report', [CarController::class, 'carReport'])->name('car-report');
 });
 
 

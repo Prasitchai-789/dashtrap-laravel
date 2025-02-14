@@ -3,9 +3,15 @@
 namespace App\Livewire\CAR;
 
 use Livewire\Component;
+use App\Models\WIN\EMDept;
+use App\Models\HRE\Employee;
 use Livewire\WithPagination;
-use App\Events\NotifyProcessed;
+use App\Models\CAR\CarReport;
 use App\Models\CAR\CarRequest;
+use App\Events\NotifyProcessed;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Notify\Discord;
+use App\Http\Controllers\Notify\Telegram;
 
 class CarRequestLive extends Component
 {
@@ -13,6 +19,9 @@ class CarRequestLive extends Component
     protected $paginationTheme = 'tailwind';
     protected $listeners = [
         'deleteConfirmed' => 'deleteItem',
+        'approveCarRequest' => 'approveCarRequest',
+        'rejectCarRequest' => 'rejectCarRequest',
+        'stopSound' => 'stopSound'
     ];
     public $edit = false;
     public CarRequest $carRequest;
@@ -21,12 +30,16 @@ class CarRequestLive extends Component
     public $updateId;
     public $car_id;
     public $user_request;
-    public $use_job;
-    public $use_start;
-    public $use_end;
-    public $use_distance;
-    public $use_status;
-    public $additionalNotes;
+    public $job_request;
+    public $department_request;
+    public $status_request = 0;
+    public $car_request;
+    public $approver_request;
+    public $additionalNotes_request = 0;
+    public $depts = [];
+    public $employees = [];
+    public $carReports = [];
+    public $carRequestId;
     public bool $isLoading = false;
 
     public function initLoading()
@@ -44,13 +57,144 @@ class CarRequestLive extends Component
         $this->showModal = false;
     }
 
-    public function mount()
+    public function resetInputFields()
     {
         //
+    }
+    public function playSound()
+    {
+        $this->dispatch('playSound');
+    }
+    public function stopSound()
+    {
+        $this->dispatch('stopSound');
+        $this->closeModal();
+    }
+
+    public function mount()
+    {
+        $this->depts = EMDept::limit(20)->get();
+        $this->employees = Employee::orderBy('EmpName', 'asc')->get();
+        $this->carReports = CarReport::orderBy('car_number', 'asc')->get();
     }
     public function notify()
     {
         event(new NotifyProcessed([
+            'position' => "center",
+            'icon' => "error",
+            'title' => "ไม่พบข้อมูล",
+            'text' => "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
+            'showConfirmButton' => false,
+            'timer' => 2500
+        ]));
+    }
+    public function render()
+    {
+        $carRequests = CarRequest::orderBy('status_request', 'asc')
+                         ->orderBy('created_at', 'desc') // เรียงวันที่ใหม่ล่าสุดขึ้นก่อน
+                         ->paginate(10)
+                         ->withQueryString();
+
+        return view('livewire.car.car-request-live', [
+            'carRequests' => $carRequests,
+        ]);
+    }
+
+    public function saveCarRequest()
+    {
+        try {
+            $validatedData = $this->validate(
+                [
+                    'user_request' => 'required',
+                    'job_request' => 'required',
+                    'department_request' => 'required',
+                    'additionalNotes_request' => 'nullable',
+                    'status_request' => 'nullable',
+                ]
+            );
+            $validatedData['additionalNotes_request'] = $this->additionalNotes_request;
+            $validatedData['status_request'] = $this->status_request;
+            if ($this->additionalNotes_request == 0) {
+                $validatedData['car_request'] = 28;
+            } else {
+                $validatedData['car_request'] = $this->car_request;
+            }
+
+            if ($validatedData) {
+
+                CarRequest::create($validatedData);
+
+                $empName = Employee::where('EmpID', '=', $validatedData['user_request'])->get();
+            if (!$empName) {
+                throw new \Exception('ไม่พบข้อมูลพนักงาน');
+            }
+            $carReports = CarReport::with(['province'])->where('id', '=', $validatedData['car_request'])->get();
+            if (!$carReports) {
+                throw new \Exception('ไม่พบข้อมูลรถที่เลือก');
+            }
+
+                $message = "แจ้งขออนุญาต" .
+                    "\n" . "🙎‍♂️ :"  . $empName[0]->EmpName.
+                    "\n" . "💼 : "  . $this->job_request .
+                    "\n" . "🚘 : " . $carReports[0]->car_number . " " . $carReports[0]->province->ProvinceName ;
+
+                    event(new NotifyProcessed([
+                        'position' => "center",
+                        'icon' => "error",
+                        'title' => "ไม่พบข้อมูล",
+                        'text' => "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
+                        'showConfirmButton' => false,
+                        'timer' => 2500
+                ]));
+
+                $Telegram = new Telegram();
+                $Telegram->sendToTelegram($message);
+
+            // $this->dispatch('playSound');
+
+                $this->dispatch(
+                    'alert',
+                    position: "center",
+                    icon: "success",
+                    title: "บันทึกข้อมูลสำเร็จ",
+                    showConfirmButton: false,
+                    timer: 1500
+                );
+                $this->closeModal();
+
+            } else {
+                $this->dispatch(
+                    'alert',
+                    position: "center",
+                    icon: "error",
+                    title: "บันทึกไม่ได้",
+                    showConfirmButton: false,
+                    timer: 1500
+                );
+                $this->closeModal();
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $this->dispatch(
+                'alert',
+                position: "center",
+                icon: "error",
+                title: "เกิดข้อผิดพลาด",
+                showConfirmButton: false,
+                timer: 1500
+            );
+            $this->closeModal();
+        }
+    }
+
+    public function confirmApprove($id)
+    {
+        $this->carRequestId = $id;
+        $carRequest = CarRequest::find($id);
+        if ($carRequest) {
+            $this->dispatch('confirmApprove', [
+                'carRequestId' => $this->carRequestId,
+            ]);
+            event(new NotifyProcessed([
                 'position' => "center",
                 'icon' => "error",
                 'title' => "ไม่พบข้อมูล",
@@ -58,12 +202,87 @@ class CarRequestLive extends Component
                 'showConfirmButton' => false,
                 'timer' => 2500
         ]));
+        } else {
+            session()->flash('error', 'Car Request not found.');
+        }
     }
-    public function render()
+
+    public function approveCarRequest()
     {
-        $carRequests = CarRequest::orderBy('id', 'desc')->paginate(10)->withQueryString();
-        return view('livewire.car.car-request-live', [
-            'carRequests' => $carRequests,
-        ]);
+        $carRequest = CarRequest::find($this->carRequestId);
+        if ($carRequest) {
+            $carRequest->update([
+                'status_request' => 1,
+                'approver_request' => Auth::user()->name,
+            ]);
+            event(new NotifyProcessed([
+                'position' => "center",
+                'icon' => "error",
+                'title' => "ไม่พบข้อมูล",
+                'text' => "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
+                'showConfirmButton' => false,
+                'timer' => 2500
+        ]));
+
+            session()->flash('message', 'Car Request Approved Successfully.');
+        } else {
+            session()->flash('error', 'Car Request not found.');
+        }
+    }
+
+    public function rejectCarRequest()
+    {
+        $carRequest = CarRequest::find($this->carRequestId);
+        if ($carRequest) {
+            $carRequest->update([
+                'status_request' => 2,
+                'approver_request' => Auth::user()->name,
+            ]);
+
+            session()->flash('message', 'Car Request Rejected Successfully.');
+        } else {
+            session()->flash('error', 'Car Request not found.');
+        }
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->deleteId = $id;
+        $carRequest = CarRequest::find($id);
+        $this->dispatch(
+            'alertConfirmDelete',
+            [
+                'deleteId' => $this->deleteId,
+            ]
+        );
+        if ($carRequest) {
+            $this->dispatch(
+                'alertConfirmDelete',
+                [
+                    'deleteId' => $this->deleteId,
+                ]
+            );
+        } else {
+            // จัดการกรณีที่ไม่พบผู้ใช้
+            session()->flash('error', 'User not found.');
+        }
+    }
+
+    public function deleteItem()
+    {
+        $carRequest = CarRequest::find($this->deleteId);
+        if ($carRequest) {
+            $carRequest->delete();
+            $this->dispatch(
+                'alert',
+                position: "center",
+                icon: "success",
+                title: "ลบข้อมูลสำเร็จ",
+                showConfirmButton: false,
+                timer: 1600
+            );
+        } else {
+            session()->flash('error', 'Computer not found.');
+        }
     }
 }

@@ -11,4 +11,9 @@ class CarController extends Controller
     {
         return view('car.car-request-index');
     }
+
+    public function carReport()
+    {
+        return view('car.car-report-index');
+    }
 }

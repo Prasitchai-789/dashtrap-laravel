@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\HRE;
+namespace App\Http\Controllers\CAR;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,6 +9,6 @@ class UseCarController extends Controller
 {
     public function useCar()
     {
-        return view('hre.use-car-index');
+        return view('car.use-car-index');
     }
 }

@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 use App\Models\WIN\POInvDTCar;
 use App\Models\WIN\WebappPOInv;
 use App\Models\RPO\SetPriceScaler;
+use App\Http\Controllers\Notify\Telegram;
 
 class PalmPurchaseLive extends Component
 {
@@ -113,10 +114,7 @@ class PalmPurchaseLive extends Component
     {
         $this->DocuDate = now()->format('Y-m-d');
         $this->selectedDate = now()->format('Y-m-d');
-        $this->vendors = EMVendor::select('VendorCode', 'VendorName')
-            ->orderBy('VendorName', 'asc')
-            ->distinct() // ป้องกันค่าซ้ำ
-            ->get();
+
         $setPrices = SetPriceScaler::whereDate('created_at', $this->selectedDate)->first();
         if (!$setPrices) {
             $this->dispatch('showSweetAlert');
@@ -147,21 +145,21 @@ class PalmPurchaseLive extends Component
                 timer: 2500
             );
         }
-    
+
         // โหลดข้อมูลที่ใช้ซ้ำหลายครั้ง
         $webappPOInvQuery = WebappPOInv::whereDate('DocuDate', $this->selectedDate);
-    
+
         // คำนวณค่าต่าง ๆ และเก็บเป็น property เพื่อลดการประมวลผลซ้ำ
         $this->totalPalmOfDate = $webappPOInvQuery->sum('GoodNet');
         $this->totalItemOfDate = $webappPOInvQuery->count();
         $this->sumRamOfDate = $webappPOInvQuery->where('VendorCode', 'like', '97%')->sum('GoodNet');
         $this->countRamOfDate = $webappPOInvQuery->whereIn('TypeCarID', ['10Wheels', '6Wheels', 'Trailer'])->count();
-    
+
         // โหลดค่าแผนการผลิต
         $palmPlanData = PalmPlan::whereDate('created_at', $this->selectedDate)->first();
         $palmPlan = (int) ($palmPlanData->palm_plan ?? 0);
         $listPlan = (int) ($palmPlanData->list_plan ?? 0);
-    
+
         // คำนวณผลลัพธ์
         $this->sumAgrOfDate = $this->totalPalmOfDate - $this->sumRamOfDate;
         $this->progressFFB = ($palmPlan > 0) ? ($this->totalPalmOfDate / $palmPlan) * 100 : 0;
@@ -169,20 +167,24 @@ class PalmPurchaseLive extends Component
         $this->progressAgr = ($this->progressRam > 0) ? (100 - $this->progressRam) : 0;
         $this->progressItem = ($listPlan > 0) ? ($this->countRamOfDate / $listPlan) * 100 : 0;
     }
-    
+
     public function render()
     {
         $latestDate = WebappPOInv::max('DocuDate'); // ค้นหาวันที่ล่าสุด
-    
+
         // โหลดข้อมูลที่จำเป็น
         $webappPOInvs = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
             ->orderBy('POInvID', 'desc')
             ->paginate(10);
-    
+        $this->vendors = EMVendor::select('VendorCode', 'VendorName')
+            ->orderBy('VendorName', 'asc')
+            ->distinct() // ป้องกันค่าซ้ำ
+            ->get();
+
         $POInvDTCars = POInvDTCar::limit(10)->get();
         $setPriceScalers = SetPriceScaler::orderBy('id', 'desc')->paginate(5);
         $vendorCarIDs = WebappPOInv::distinct()->pluck('VendorCarID');
-    
+
         return view('livewire.rpo.palm-purchase-live', [
             'webappPOInvs' => $webappPOInvs,
             'POInvDTCars' => $POInvDTCars,
@@ -190,7 +192,7 @@ class PalmPurchaseLive extends Component
             'vendorCarIDs' => $vendorCarIDs,
         ]);
     }
-    
+
 
     public function resetInputFields()
     {
@@ -253,6 +255,18 @@ class PalmPurchaseLive extends Component
                 showConfirmButton: false,
                 timer: 1500
             );
+            $sumPalm = $this->totalPalmOfDate + $this->GoodNet;
+            $message = "FFB : " . number_format($sumPalm, 0, '.', ',') . " kg." .
+                "\n" . "📆 : "  . \Carbon\Carbon::parse($this->DocuDate)->locale('th')->translatedFormat('d F Y') .
+                "\n" . "📋 : "  . $this->BillID .
+                "\n" . "🙎‍♂️ : "  . $this->VendorName .
+                "\n" . "🛒 = "  . number_format($this->GoodNet, 0, '.', ',') . " kg." .
+                "\n" . "🌴 = "  . number_format($sumPalm, 0, '.', ',') . " kg.";
+
+
+
+            $Telegram = new Telegram();
+            $Telegram->sendToTelegram($message);
 
             $this->closeModal();
         } catch (\Illuminate\Validation\ValidationException $e) {

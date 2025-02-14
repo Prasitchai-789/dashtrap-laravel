@@ -10,6 +10,7 @@ class Province extends Model
     protected $connection = 'sqlsrv2';
     use HasFactory;
     protected $table = 'Webapp_Province';
+    protected $primaryKey = 'ProvinceID';
     protected $fillable =[
         'ProvinceID',
     ];

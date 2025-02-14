@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Models\HRE;
+namespace App\Models\CAR;
 
+use App\Models\HRE\Employee;
 use App\Models\CAR\CarReport;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\WIN\EMDept;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UseCar extends Model
 {
@@ -30,5 +32,10 @@ class UseCar extends Model
     public function carReport()
     {
         return $this->belongsTo(CarReport::class, 'car_id', 'id');
+    }
+
+    public function emDept()
+    {
+        return $this->belongsTo(EMDept::class, 'department_request', 'DeptID');
     }
 }

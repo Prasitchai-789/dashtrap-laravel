@@ -12,6 +12,9 @@ class CarRequest extends Model
     protected $connection = 'sqlsrv2';
     use HasFactory;
     protected $table = 'car_requests';
+    protected $primaryKey = 'id';
+    public $incrementing = true;  // ✅ ต้องเป็น true
+    protected $keyType = 'int';
     protected $fillable =[
         'user_request',
         'job_request',

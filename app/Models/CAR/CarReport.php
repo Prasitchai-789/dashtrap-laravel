@@ -2,9 +2,11 @@
 
 namespace App\Models\CAR;
 
+use App\Models\WIN\EMDept;
+use App\Models\CAR\CarBrand;
 use App\Models\Location\Province;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CarReport extends Model
 {
@@ -35,5 +37,23 @@ class CarReport extends Model
     public function province()
     {
         return $this->belongsTo(Province::class, 'car_county', 'ProvinceID');
+    }
+    public function brand()
+    {
+        return $this->belongsTo(CarBrand::class, 'car_brand', 'id');
+    }
+
+    public function character()
+    {
+        return $this->belongsTo(CarCharacter::class, 'car_character', 'id');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(CarType::class, 'car_type', 'id');
+    }
+    public function department()
+    {
+        return $this->belongsTo(EMDept::class, 'car_department', 'DeptID');
     }
 }
