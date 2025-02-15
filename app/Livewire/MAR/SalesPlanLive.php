@@ -341,12 +341,7 @@ class SalesPlanLive extends Component
             $good = EMGood::where('GoodID', $validatedData['GoodID'])->first();
             $validatedData['GoodName'] = $good ? $good->GoodName1 : null;
 
-            if ($salesPlan) {
-                $salesPlan->update($validatedData);
-            } else {
-                // สร้างใหม่ถ้าไม่มีข้อมูล
-                // SalesPlan::create($validatedData);
-            }
+            $salesPlan->update($validatedData);
 
             $this->dispatch(
                 'alert',

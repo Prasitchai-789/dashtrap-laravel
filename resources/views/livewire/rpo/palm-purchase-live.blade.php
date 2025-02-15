@@ -193,7 +193,7 @@
                                     \Carbon\Carbon::parse($webappPOInv->DocuDate)->locale('th')->translatedFormat('d/m/Y')
                                     }}</td>
                                 <td class="p-3 border">{{$webappPOInv->BillID}}</td>
-                                <td class="p-3 border">{{$webappPOInv->TypeCarID}}</td>
+                                <td class="p-3 border">{{$webappPOInv->poInvDTCar->TypeCarName}}</td>
                                 <td class="p-3 border">{{$webappPOInv->VendorCarID}}</td>
                                 <td class="p-3 border">
                                     {{ optional($webappPOInv->empVendor)->VendorTitle ?
@@ -413,7 +413,7 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="GoodIB" name="GoodIB" wire:model="GoodIB" wire:blur='calculateNet' required />
+                                id="GoodIB" name="GoodIB" wire:model="GoodIB" required />
 
 
                         </div>
@@ -434,7 +434,7 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="GoodOB" name="GoodOB" wire:model="GoodOB" wire:blur='calculateNet' required />
+                                id="GoodOB" name="GoodOB" wire:model="GoodOB" required />
 
                         </div>
                         @if ($errors->has('GoodOB'))

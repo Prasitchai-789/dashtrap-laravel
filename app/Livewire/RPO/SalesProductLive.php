@@ -70,6 +70,7 @@ class SalesProductLive extends Component
     {
         $this->resetInputFields();
         $this->showModal = false;
+        $this->edit = false;
     }
 
     public function resetInputFields()
@@ -115,6 +116,28 @@ class SalesProductLive extends Component
                 timer: 1500
             );
         }
+    }
+
+    public function updatedOBWei()
+    {
+        $this->OBWei = str_replace(',', '', $this->OBWei);
+    }
+
+    public function updatedIBWei()
+    {
+        $this->IBWei = str_replace(',', '', $this->IBWei);
+    }
+
+    public function calculateWeight()
+    {
+        $iBWei = (float) str_replace(',', '', $this->IBWei);
+        $oBWei = (float) str_replace(',', '', $this->OBWei);
+
+        // คำนวณน้ำหนักสุทธิ
+        $NetWei = $oBWei - $iBWei;
+
+        // ตรวจสอบไม่ให้ NetWei ติดลบ
+        return max(0, $NetWei);
     }
 
     public function mount()
@@ -237,9 +260,9 @@ class SalesProductLive extends Component
         $this->CustName = $this->salesPlan->emCust->CustName;
         $this->Recipient = $this->salesPlan->Recipient;
         $this->AmntLoad = number_format($this->salesPlan->AmntLoad, 0, '.', ',');
-        $this->OBWei = $this->salesPlan->OBWei;
-        $this->IBWei = $this->salesPlan->IBWei;
-        $this->NetWei = $this->salesPlan->NetWei;
+        $this->OBWei = number_format($this->salesPlan->OBWei, 0, '.', ',');
+        $this->IBWei = number_format($this->salesPlan->IBWei, 0, '.', ',');
+        $this->NetWei = number_format($this->salesPlan->NetWei, 0, '.', ',');
         $this->Remarks = $this->salesPlan->Remarks;
     }
     public function saveWeight()
@@ -254,17 +277,12 @@ class SalesProductLive extends Component
                 ]
             );
 
-            $validatedData['NetWei'] = max(0, (float) $this->OBWei - (float) $this->IBWei);
+            $validatedData['NetWei'] = $this->calculateWeight();
             $validatedData['Status'] = 'F';
 
             $salesPlan = SalesPlan::find($this->updateId);
-            if ($salesPlan) {
 
-                $salesPlan->update($validatedData);
-            } else {
-                // สร้างใหม่ถ้าไม่มีข้อมูล
-                // SalesPlan::create($validatedData);
-            }
+            $salesPlan->update($validatedData);
 
             $this->dispatch(
                 'alert',
@@ -303,17 +321,16 @@ class SalesProductLive extends Component
                 ]
             );
 
-            $validatedData['NetWei'] = max(0, (float) $this->OBWei - (float) $this->IBWei);
+            $iBWei = (float) str_replace(',', '', $this->IBWei);
+            $oBWei = (float) str_replace(',', '', $this->OBWei);
+
+            $validatedData['OBWei'] = max(0, (float) $oBWei);
+            $validatedData['IBWei'] = max(0, (float) $iBWei);
+            $validatedData['NetWei'] = max(0, (float) $oBWei - (float) $iBWei);
             $validatedData['Status'] = 'F';
 
             $salesPlan = SalesPlan::find($this->updateId);
-            if ($salesPlan) {
-
-                $salesPlan->update($validatedData);
-            } else {
-                // สร้างใหม่ถ้าไม่มีข้อมูล
-                // SalesPlan::create($validatedData);
-            }
+            $salesPlan->update($validatedData);
 
             $this->dispatch(
                 'alert',

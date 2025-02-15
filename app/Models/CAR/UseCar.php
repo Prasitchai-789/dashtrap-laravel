@@ -13,6 +13,8 @@ class UseCar extends Model
     protected $connection = 'sqlsrv2';
     use HasFactory;
     protected $table = 'car_uses';
+    protected $primaryKey = 'id';
+    public $incrementing = true; 
     protected $fillable =[
         'card_id',
         'car_id',

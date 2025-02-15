@@ -36,6 +36,7 @@ class CarRequestLive extends Component
     public $car_request;
     public $approver_request;
     public $additionalNotes_request = 0;
+    public $use_check = 0;
     public $depts = [];
     public $employees = [];
     public $carReports = [];
@@ -61,6 +62,10 @@ class CarRequestLive extends Component
     {
         //
     }
+    public function updatedUseCheck($value)
+    {
+        $this->use_check = $value ? 1 : 0;
+    }
     public function playSound()
     {
         $this->dispatch('playSound');
@@ -77,23 +82,13 @@ class CarRequestLive extends Component
         $this->employees = Employee::orderBy('EmpName', 'asc')->get();
         $this->carReports = CarReport::orderBy('car_number', 'asc')->get();
     }
-    public function notify()
-    {
-        event(new NotifyProcessed([
-            'position' => "center",
-            'icon' => "error",
-            'title' => "ไม่พบข้อมูล",
-            'text' => "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
-            'showConfirmButton' => false,
-            'timer' => 2500
-        ]));
-    }
+
     public function render()
     {
         $carRequests = CarRequest::orderBy('status_request', 'asc')
-                         ->orderBy('created_at', 'desc') // เรียงวันที่ใหม่ล่าสุดขึ้นก่อน
-                         ->paginate(10)
-                         ->withQueryString();
+            ->orderBy('created_at', 'desc') // เรียงวันที่ใหม่ล่าสุดขึ้นก่อน
+            ->paginate(10)
+            ->withQueryString();
 
         return view('livewire.car.car-request-live', [
             'carRequests' => $carRequests,
@@ -114,17 +109,16 @@ class CarRequestLive extends Component
             );
             $validatedData['additionalNotes_request'] = $this->additionalNotes_request;
             $validatedData['status_request'] = $this->status_request;
-            if ($this->additionalNotes_request == 0) {
+
+            if ($this->use_check == 0) {
                 $validatedData['car_request'] = 28;
             } else {
                 $validatedData['car_request'] = $this->car_request;
             }
 
-            if ($validatedData) {
+            CarRequest::create($validatedData);
 
-                CarRequest::create($validatedData);
-
-                $empName = Employee::where('EmpID', '=', $validatedData['user_request'])->get();
+            $empName = Employee::where('EmpID', '=', $validatedData['user_request'])->get();
             if (!$empName) {
                 throw new \Exception('ไม่พบข้อมูลพนักงาน');
             }
@@ -133,46 +127,32 @@ class CarRequestLive extends Component
                 throw new \Exception('ไม่พบข้อมูลรถที่เลือก');
             }
 
-                $message = "แจ้งขออนุญาต" .
-                    "\n" . "🙎‍♂️ :"  . $empName[0]->EmpName.
-                    "\n" . "💼 : "  . $this->job_request .
-                    "\n" . "🚘 : " . $carReports[0]->car_number . " " . $carReports[0]->province->ProvinceName ;
+            $message = "แจ้งขออนุญาต" .
+                "\n" . "🙎‍♂️ :"  . $empName[0]->EmpName .
+                "\n" . "💼 : "  . $this->job_request .
+                "\n" . "🚘 : " . $carReports[0]->car_number . " " . $carReports[0]->province->ProvinceName;
 
-                    event(new NotifyProcessed([
-                        'position' => "center",
-                        'icon' => "error",
-                        'title' => "ไม่พบข้อมูล",
-                        'text' => "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
-                        'showConfirmButton' => false,
-                        'timer' => 2500
-                ]));
+            event(new NotifyProcessed([
+                'position' => "center",
+                'icon' => "error",
+                'title' => "ไม่พบข้อมูล",
+                'text' => "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
+                'showConfirmButton' => false,
+                'timer' => 2500
+            ]));
 
-                $Telegram = new Telegram();
-                $Telegram->sendToTelegram($message);
+            $Telegram = new Telegram();
+            $Telegram->sendToTelegram($message);
 
-            // $this->dispatch('playSound');
-
-                $this->dispatch(
-                    'alert',
-                    position: "center",
-                    icon: "success",
-                    title: "บันทึกข้อมูลสำเร็จ",
-                    showConfirmButton: false,
-                    timer: 1500
-                );
-                $this->closeModal();
-
-            } else {
-                $this->dispatch(
-                    'alert',
-                    position: "center",
-                    icon: "error",
-                    title: "บันทึกไม่ได้",
-                    showConfirmButton: false,
-                    timer: 1500
-                );
-                $this->closeModal();
-            }
+            $this->dispatch(
+                'alert',
+                position: "center",
+                icon: "success",
+                title: "บันทึกข้อมูลสำเร็จ",
+                showConfirmButton: false,
+                timer: 1500
+            );
+            $this->closeModal();
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(
                 'alert',
@@ -194,14 +174,6 @@ class CarRequestLive extends Component
             $this->dispatch('confirmApprove', [
                 'carRequestId' => $this->carRequestId,
             ]);
-            event(new NotifyProcessed([
-                'position' => "center",
-                'icon' => "error",
-                'title' => "ไม่พบข้อมูล",
-                'text' => "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
-                'showConfirmButton' => false,
-                'timer' => 2500
-        ]));
         } else {
             session()->flash('error', 'Car Request not found.');
         }
@@ -222,7 +194,7 @@ class CarRequestLive extends Component
                 'text' => "ไม่สามารถเลือกวันที่มากกว่าวันปัจจุบันได้ !",
                 'showConfirmButton' => false,
                 'timer' => 2500
-        ]));
+            ]));
 
             session()->flash('message', 'Car Request Approved Successfully.');
         } else {

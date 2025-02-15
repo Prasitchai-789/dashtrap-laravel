@@ -48,9 +48,7 @@
                             @foreach ($carRequests as $carRequest)
                             <tr class="border font-anuphan hover:bg-gray-100 hover:text-blue-500">
                                 <td class="p-2.5 text-center min-w-[60px] max-w-[70px] truncate">
-                                    {{ \Carbon\Carbon::parse($carRequest->created_at)->locale('th')->translatedFormat('d
-                                    F
-                                    Y') }}</td>
+                                    {{ \Carbon\Carbon::parse($carRequest->created_at)->locale('th')->translatedFormat('d F Y') }}</td>
                                 <td class="min-w-[60px] max-w-[80px] truncate">{{ $carRequest->employee->EmpName ??
                                     'N/A' }}</td>
                                 <td class="min-w-[60px] max-w-[150px] truncate">{{ $carRequest->job_request }}</td>
@@ -158,7 +156,6 @@
                             @foreach ($depts as $dept )
                             <option value="{{ $dept->DeptID }}">{{ $dept->DeptName }}</option>
                             @endforeach
-
                         </select>
                     </div>
                 </div>
@@ -181,17 +178,18 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="grid grid-cols-1 m-4 mb-5 md:grid-cols-1 font-prompt">
                     <div class="flex items-center mt-2">
-                        <input class="form-switch" type="checkbox" role="switch" id="additionalNotes_request"
-                            wire:model="additionalNotes_request" wire:change="$set('additionalNotes_request', $event.target.checked ? 1 : 0)">
-                        <label class=" ms-1.5" for="additionalNotes_request">
+                        <input class="form-switch" type="checkbox" role="switch" id="use_check"
+                            wire:model.live="use_check">
+                        <label class=" ms-1.5" for="use_check">
                         ใช้รถ
                         </label>
                     </div>
                 </div>
 
-                @if ($additionalNotes_request)
+                @if($use_check == 1)
                 <div class="grid grid-cols-1 m-4 mb-6 md:grid-cols-1 font-prompt">
                     <label for="car_request"
                         class="inline-block mb-2 text-sm font-medium text-default-800">ทะเบียนรถ</label>
@@ -211,7 +209,6 @@
                     </div>
                 </div>
                 @endif
-
 
                 <div class="flex items-center justify-end px-4 py-3 mt-6 border-t gap-x-2 border-default-200">
                     <button type="submit" class="text-white btn bg-primary" href="#">

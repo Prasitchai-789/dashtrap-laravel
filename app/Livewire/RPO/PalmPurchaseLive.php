@@ -80,6 +80,7 @@ class PalmPurchaseLive extends Component
     {
         $this->resetInputFields();
         $this->showModal = false;
+        $this->edit = false;
     }
     public function openModalSet()
     {
@@ -106,10 +107,26 @@ class PalmPurchaseLive extends Component
     {
         $this->edit = false;
     }
-    public function calculateNet()
+
+    // ฟังก์ชันอัปเดตค่าและลบคอมม่า
+    public function updatedGoodOB()
     {
-        $this->GoodNet = max(0, (float) $this->GoodIB - (float) $this->GoodOB);
+        $this->GoodOB = str_replace(',', '', $this->GoodOB);
     }
+
+    public function updatedGoodIB()
+    {
+        $this->GoodIB = str_replace(',', '', $this->GoodIB);
+    }
+
+    public function calculateWeight()
+    {
+        $goodIB = (float) str_replace(',', '', $this->GoodIB);
+        $goodOB = (float) str_replace(',', '', $this->GoodOB);
+
+        return $goodIB - $goodOB;
+    }
+
     public function mount()
     {
         $this->DocuDate = now()->format('Y-m-d');
@@ -146,6 +163,12 @@ class PalmPurchaseLive extends Component
             );
         }
 
+
+    }
+
+    public function render()
+    {
+        $latestDate = WebappPOInv::max('DocuDate'); // ค้นหาวันที่ล่าสุด
         // โหลดข้อมูลที่ใช้ซ้ำหลายครั้ง
         $webappPOInvQuery = WebappPOInv::whereDate('DocuDate', $this->selectedDate);
 
@@ -166,11 +189,6 @@ class PalmPurchaseLive extends Component
         $this->progressRam = ($this->totalPalmOfDate > 0) ? ($this->sumRamOfDate / $this->totalPalmOfDate) * 100 : 0;
         $this->progressAgr = ($this->progressRam > 0) ? (100 - $this->progressRam) : 0;
         $this->progressItem = ($listPlan > 0) ? ($this->countRamOfDate / $listPlan) * 100 : 0;
-    }
-
-    public function render()
-    {
-        $latestDate = WebappPOInv::max('DocuDate'); // ค้นหาวันที่ล่าสุด
 
         // โหลดข้อมูลที่จำเป็น
         $webappPOInvs = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
@@ -243,7 +261,7 @@ class PalmPurchaseLive extends Component
             $validatedData['VendorCode'] = $this->VendorCode;
 
             $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
-            $validatedData['GoodNet'] = max(0, (float) $this->GoodIB - (float) $this->GoodOB);
+            $validatedData['GoodNet'] = $this->calculateWeight();
             $validatedData['Amnt1'] = max(0, (float) $this->GoodNet * (float) $this->Price1);
             webappPOInv::create($validatedData);
 
@@ -257,11 +275,11 @@ class PalmPurchaseLive extends Component
             );
             $sumPalm = $this->totalPalmOfDate + $this->GoodNet;
             $message = "FFB : " . number_format($sumPalm, 0, '.', ',') . " kg." .
-                "\n" . "📆 : "  . \Carbon\Carbon::parse($this->DocuDate)->locale('th')->translatedFormat('d F Y') .
-                "\n" . "📋 : "  . $this->BillID .
-                "\n" . "🙎‍♂️ : "  . $this->VendorName .
-                "\n" . "🛒 = "  . number_format($this->GoodNet, 0, '.', ',') . " kg." .
-                "\n" . "🌴 = "  . number_format($sumPalm, 0, '.', ',') . " kg.";
+                "\n" . "📆 วันที่: "  . \Carbon\Carbon::parse($this->DocuDate)->locale('th')->translatedFormat('d F Y') .
+                "\n" . "📋 เลขที่เอกสาร: "  . $this->BillID .
+                "\n" . "🙎‍♂️ ลูกค้า: "  . $this->VendorName .
+                "\n" . "🛒 น้ำหนักสุทธิ = "  . number_format($this->calculateWeight(), 0, '.', ',') . " kg." .
+                "\n" . "🌴 น้ำหนักรวมทั้งหมด= "  . number_format($sumPalm, 0, '.', ',') . " kg.";
 
 
 
@@ -297,9 +315,9 @@ class PalmPurchaseLive extends Component
         $this->BillID = $this->webappPOInv->BillID;
         $this->VendorCarID = $this->webappPOInv->VendorCarID;
         $this->TypeCarID = $this->webappPOInv->TypeCarID;
-        $this->GoodIB = $this->webappPOInv->GoodIB;
-        $this->GoodOB = $this->webappPOInv->GoodOB;
-        $this->GoodNet = $this->webappPOInv->GoodNet;
+        $this->GoodIB = number_format($this->webappPOInv->GoodIB, 0);
+        $this->GoodOB = number_format($this->webappPOInv->GoodOB, 0);
+        $this->GoodNet = number_format($this->webappPOInv->GoodNet, 0);
         $this->Price1 = $this->webappPOInv->Price1;
         if ($this->webappPOInv) {
             $this->VendorCode = $this->webappPOInv->VendorCode;
@@ -319,16 +337,22 @@ class PalmPurchaseLive extends Component
                 'VendorName' => 'required',
                 'VendorCarID' => 'required',
                 'TypeCarID' => 'required',
-                'GoodIB' => 'required|integer|regex:/^\d+$/',
-                'GoodOB' => 'required|integer|regex:/^\d+$/',
                 'Grade' => 'required',
                 'Impurity' => 'required',
                 'Scaler' => 'required',
             ]
         );
+
+        $goodIB = str_replace(',', '', $this->GoodIB);
+        $goodOB = str_replace(',', '', $this->GoodOB);
+        $goodNet = str_replace(',', '', $this->GoodNet);
+        $price1 = str_replace(',', '', $this->Price1);
+        
+        $validatedData['GoodIB'] = max(0, (float) $goodIB);
+        $validatedData['GoodOB'] = max(0, (float) $goodOB);
         $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
-        $validatedData['GoodNet'] = max(0, (float) $this->GoodIB - (float) $this->GoodOB);
-        $validatedData['Amnt1'] = max(0, (float) $this->GoodNet * (float) $this->Price1);
+        $validatedData['GoodNet'] = $this->calculateWeight();
+        $validatedData['Amnt1'] = max(0, (float) $goodNet * (float) $price1);
 
         $this->webappPOInv->update($validatedData);
 

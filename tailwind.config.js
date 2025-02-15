@@ -19,6 +19,9 @@ export default {
                 anuphan: ["Anuphan", "sans-serif"],
                 pridi: ["Pridi", "serif"],
             },
+            spacing: {
+                topbar: '50px', // หรือค่าที่ต้องการ เช่น '4rem'
+              },
         },
     },
 

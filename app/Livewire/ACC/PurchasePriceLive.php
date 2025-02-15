@@ -78,7 +78,7 @@ class PurchasePriceLive extends Component
         $this->resetInputFields();
         $this->showModal = false;
     }
-   
+
     public function calculatePrice()
     {
         $this->Amnt2 = max(0, (float) $this->GoodNet * (float) $this->Price2);
@@ -92,7 +92,7 @@ class PurchasePriceLive extends Component
             ->orderBy('VendorName', 'asc')
             ->distinct() // ป้องกันค่าซ้ำ
             ->get();
-        
+
         $this->setDate();
     }
 
@@ -110,38 +110,17 @@ class PurchasePriceLive extends Component
                 timer: 2500
             );
         }
-    
-        // โหลดข้อมูลที่ใช้ซ้ำหลายครั้ง
-        $webappPOInvQuery = WebappPOInv::whereDate('DocuDate', $this->selectedDate);
-    
-        // คำนวณค่าต่าง ๆ และเก็บเป็น property เพื่อลดการประมวลผลซ้ำ
-        $this->totalPalmOfDate = $webappPOInvQuery->sum('GoodNet');
-        $this->totalItemOfDate = $webappPOInvQuery->count();
-        $this->sumRamOfDate = $webappPOInvQuery->where('VendorCode', 'like', '97%')->sum('GoodNet');
-        $this->countRamOfDate = $webappPOInvQuery->whereIn('TypeCarID', ['10Wheels', '6Wheels', 'Trailer'])->count();
-    
-        // โหลดค่าแผนการผลิต
-        $palmPlanData = PalmPlan::whereDate('created_at', $this->selectedDate)->first();
-        $palmPlan = (int) ($palmPlanData->palm_plan ?? 0);
-        $listPlan = (int) ($palmPlanData->list_plan ?? 0);
-    
-        // คำนวณผลลัพธ์
-        $this->sumAgrOfDate = $this->totalPalmOfDate - $this->sumRamOfDate;
-        $this->progressFFB = ($palmPlan > 0) ? ($this->totalPalmOfDate / $palmPlan) * 100 : 0;
-        $this->progressRam = ($this->totalPalmOfDate > 0) ? ($this->sumRamOfDate / $this->totalPalmOfDate) * 100 : 0;
-        $this->progressAgr = ($this->progressRam > 0) ? (100 - $this->progressRam) : 0;
-        $this->progressItem = ($listPlan > 0) ? ($this->countRamOfDate / $listPlan) * 100 : 0;
     }
-    
+
     public function render()
     {
         $latestDate = WebappPOInv::max('DocuDate'); // ค้นหาวันที่ล่าสุด
-    
+
         // โหลดข้อมูลที่จำเป็น
         $webappPOInvs = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
             ->orderBy('POInvID', 'desc')
             ->paginate(10);
-    
+
         $POInvDTCars = POInvDTCar::limit(10)->get();
         $setPriceScalers = SetPriceScaler::orderBy('id', 'desc')->paginate(5);
         $vendorCarIDs = WebappPOInv::distinct()->pluck('VendorCarID');
@@ -180,7 +159,7 @@ class PurchasePriceLive extends Component
     }
     public function confirmEdit($id)
     {
-        
+
         $this->showModal = true;
         $this->edit = true;
         $this->updateId = $id;
@@ -192,10 +171,10 @@ class PurchasePriceLive extends Component
         $this->TypeCarID = $this->webappPOInv->TypeCarID;
         $this->GoodIB = $this->webappPOInv->GoodIB;
         $this->GoodOB = $this->webappPOInv->GoodOB;
-        $this->GoodNet = $this->webappPOInv->GoodNet;
+        $this->GoodNet = number_format($this->webappPOInv->GoodNet, 0);
         $this->Price1 = $this->webappPOInv->Price1;
         $this->Price2 = $this->webappPOInv->Price2;
-        $this->Amnt2 = $this->webappPOInv->Amnt2;
+        $this->Amnt2 = number_format($this->webappPOInv->Amnt2, 0);
         if ($this->webappPOInv) {
             $this->VendorCode = $this->webappPOInv->VendorCode;
             $this->VendorName = optional($this->webappPOInv->empVendor)->VendorName;
@@ -216,16 +195,15 @@ class PurchasePriceLive extends Component
                     'DocuType' => 'required',
                 ]
             );
+
+            $goodNet = str_replace(',', '', $this->GoodNet);
+            $price2 = str_replace(',', '', $this->Price2);
+
             $webappPOInv = WebappPOInv::find($this->updateId);
-            $validatedData['Amnt2'] = max(0, (float) $this->GoodNet * (float) $this->Price2);
-            
-            if ($webappPOInv) {
-                $webappPOInv->update($validatedData);
-            } else {
-                // สร้างใหม่ถ้าไม่มีข้อมูล
-                WebappPOInv::create($validatedData);
-            }
-    
+            $validatedData['Amnt2'] = max(0, (float) $goodNet * (float) $price2);
+
+            $webappPOInv->update($validatedData);
+
             $this->dispatch(
                 'alert',
                 position: "center",
@@ -234,11 +212,9 @@ class PurchasePriceLive extends Component
                 showConfirmButton: false,
                 timer: 1500
             );
-    
+
             $this->closeModal();
-    
-        }
-        catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (\Illuminate\Validation\ValidationException $e) {
 
             $this->dispatch(
                 'alert',
@@ -251,7 +227,5 @@ class PurchasePriceLive extends Component
 
             $this->closeModal();
         }
-        
-
     }
 }

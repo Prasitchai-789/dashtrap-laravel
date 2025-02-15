@@ -12,17 +12,17 @@
                 </button>
                 <button type="button"
                     class="px-4 py-2 text-sm font-bold rounded-lg btn border-primary text-primary hover:bg-primary hover:text-white font-anuphan me-2"
-                    wire:click='openModal'>
+                    wire:click='openModalBrand'>
                     เพิ่มยี่ห้อ
                 </button>
                 <button type="button"
                     class="px-4 py-2 text-sm font-bold rounded-lg btn border-primary text-primary hover:bg-primary hover:text-white font-anuphan me-2"
-                    wire:click='openModal'>
+                    wire:click='openModalType'>
                     เพิ่มประเภทรถ
                 </button>
                 <button type="button"
                     class="px-4 py-2 text-sm font-bold rounded-lg btn border-primary text-primary hover:bg-primary hover:text-white font-anuphan me-2"
-                    wire:click='openModal'>
+                    wire:click='openModalCharacter'>
                     เพิ่มลักษณะรถ
                 </button>
 
@@ -71,9 +71,66 @@
                                     $carReport->province->ProvinceName ?? 'N/A' }}</td>
                                 <td class="min-w-[60px] max-w-[80px] truncate">{{ $carReport->brand->car_brand_list ??
                                     'N/A' }}</td>
-                                <td class="min-w-[60px] max-w-[80px] truncate">{{ $carReport->car_mileage }}</td>
-                                <td></td>
-                                <td></td>
+                                <td class="min-w-[60px] max-w-[80px] truncate text-center">{{ $carReport->car_mileage == 0 ? '' :
+                                    $carReport->car_mileage }}</td>
+                                <td class="text-center">
+                                    @php
+                                    try {
+                                    $date = \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', $carReport->car_tax);
+                                    } catch (\Exception $e) {
+                                    try {
+                                    $date = \Carbon\Carbon::createFromFormat('d/m/Y', $carReport->car_tax);
+                                    } catch (\Exception $e) {
+                                    $date = null;
+                                    }
+                                    }
+                                    if ($date && $date->format('Y-m-d') !== '1900-01-01') {
+                                    $formattedDate = $date->translatedFormat('j F Y');
+
+                                    // กำหนดสีตามเงื่อนไข
+                                    if ($date->lessThan($today)) {
+                                    $color = 'red'; // 🔴 เลยกำหนด (วันหมดอายุ)
+                                    } elseif ($date->lessThanOrEqualTo($sevenDaysLater)) {
+                                    $color = 'orange'; // 🟡 ใกล้หมดอายุ (เหลือไม่เกิน 7 วัน)
+                                    } else {
+                                    $color = 'black'; // ✅ ปกติ
+                                    }
+
+                                    echo "<span style='color: {$color};'>{$formattedDate}</span>";
+                                    } else {
+                                    echo '❌ วันที่ไม่ถูกต้อง';
+                                    }
+                                    @endphp
+                                </td>
+                                <td class="text-center">
+                                    @php
+                                    try {
+                                    $date = \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', $carReport->car_insurance);
+                                    } catch (\Exception $e) {
+                                    try {
+                                    $date = \Carbon\Carbon::createFromFormat('d/m/Y', $carReport->car_insurance);
+                                    } catch (\Exception $e) {
+                                    $date = null;
+                                    }
+                                    }
+                                    if ($date && $date->format('Y-m-d') !== '1900-01-01') {
+                                    $formattedDate = $date->translatedFormat('j F Y');
+
+                                    // กำหนดสีตามเงื่อนไข
+                                    if ($date->lessThan($today)) {
+                                    $color = 'red'; // 🔴 เลยกำหนด (วันหมดอายุ)
+                                    } elseif ($date->lessThanOrEqualTo($sevenDaysLater)) {
+                                    $color = 'orange'; // 🟡 ใกล้หมดอายุ (เหลือไม่เกิน 7 วัน)
+                                    } else {
+                                    $color = 'black'; // ✅ ปกติ
+                                    }
+
+                                    echo "<span style='color: {$color};'>{$formattedDate}</span>";
+                                    } else {
+                                    echo '❌ วันที่ไม่ถูกต้อง';
+                                    }
+                                    @endphp
+                                </td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
                                     @if ($carReport->car_status == 1)
@@ -195,7 +252,8 @@
                                 id="car_character" name="car_character" wire:model="car_character" required>
                                 <option selected value="">เลือก...</option>
                                 @foreach ($carCharacters as $carCharacter )
-                                <option selected value="{{$carCharacter->id}}">{{$carCharacter->car_character_list}}</option>
+                                <option selected value="{{$carCharacter->id}}">{{$carCharacter->car_character_list}}
+                                </option>
                                 @endforeach
 
                             </select>
@@ -334,7 +392,7 @@
                             </div>
                             <input type="date" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="car_buy" name="car_buy" wire:model="car_buy"/>
+                                id="car_buy" name="car_buy" wire:model="car_buy" />
                         </div>
                     </div>
                 </div>
@@ -352,7 +410,7 @@
                             </div>
                             <input type="date" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="car_tax" name="car_tax" wire:model="car_tax"/>
+                                id="car_tax" name="car_tax" wire:model="car_tax" />
                         </div>
                     </div>
                     <div class="">
@@ -367,7 +425,7 @@
                             </div>
                             <input type="date" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="car_insurance" name="car_insurance" wire:model="car_insurance"/>
+                                id="car_insurance" name="car_insurance" wire:model="car_insurance" />
                         </div>
                     </div>
                 </div>
@@ -394,9 +452,10 @@
                     </div>
                     <div class="flex items-center mt-6">
                         <input class="form-switch" type="checkbox" role="switch" id="additionalNotes_request"
-                            wire:model="additionalNotes_request" wire:change="$set('additionalNotes_request', $event.target.checked ? 1 : 0)">
+                            wire:model="additionalNotes_request"
+                            wire:change="$set('additionalNotes_request', $event.target.checked ? 1 : 0)">
                         <label class=" ms-1.5" for="additionalNotes_request">
-                        ใช้รถ
+                            ใช้รถ
                         </label>
                     </div>
                 </div>
@@ -415,6 +474,104 @@
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
                                 id="car_details" name="car_details" wire:model="car_details">
                             </textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end px-4 py-3 mt-6 border-t gap-x-2 border-default-200">
+                    <button type="submit" class="text-white btn bg-primary" href="#">
+                        {{ $edit ? ' Update' : ' Save' }}
+                    </button>
+                </div>
+            </form>
+        </x-modal>
+        <!-- End Model ADD  -->
+
+        <!-- Model ADD Brand -->
+        <x-modal title="ข้อมูลยี่ห้อรถ" wire:model="showModalBrand" maxWidth="lg" zIndex="20"
+            closeModal="closeModalBrand">
+            <form class="form " wire:submit.prevent="{{ $edit ? 'updateBrand' : 'saveBrand' }}" id="formAddBrand">
+
+                <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
+                    <div class="">
+                        <label for="car_brand_list"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                            ยี่ห้อรถ
+                        </label>
+                        <div class="flex">
+                            <div
+                                class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
+                                <i class="fa-solid fa-barcode"></i>
+                            </div>
+                            <input type="text" placeholder=""
+                                class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
+                                id="car_brand_list" name="car_brand_list" wire:model="car_brand_list" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end px-4 py-3 mt-6 border-t gap-x-2 border-default-200">
+                    <button type="submit" class="text-white btn bg-primary" href="#">
+                        {{ $edit ? ' Update' : ' Save' }}
+                    </button>
+                </div>
+            </form>
+        </x-modal>
+        <!-- End Model ADD  -->
+
+        <!-- Model ADD Type -->
+        <x-modal title="ข้อมูลประเภทรถ" wire:model="showModalType" maxWidth="lg" zIndex="20"
+            closeModal="closeModalType">
+            <form class="form " wire:submit.prevent="{{ $edit ? 'updateCarType' : 'saveCarType' }}" id="formAddCarType">
+
+                <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
+                    <div class="">
+                        <label for="car_type_list"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                            ประเภทรถ
+                        </label>
+                        <div class="flex">
+                            <div
+                                class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
+                                <i class="fa-solid fa-barcode"></i>
+                            </div>
+                            <input type="text" placeholder=""
+                                class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
+                                id="car_type_list" name="car_type_list" wire:model="car_type_list" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end px-4 py-3 mt-6 border-t gap-x-2 border-default-200">
+                    <button type="submit" class="text-white btn bg-primary" href="#">
+                        {{ $edit ? ' Update' : ' Save' }}
+                    </button>
+                </div>
+            </form>
+        </x-modal>
+        <!-- End Model ADD  -->
+
+        <!-- Model ADD Character -->
+        <x-modal title="ข้อมูลเพิ่มลักษณะรถ" wire:model="showModalCharacter" maxWidth="lg" zIndex="20"
+            closeModal="closeModalCharacter">
+            <form class="form " wire:submit.prevent="{{ $edit ? 'updateCarCharacter' : 'saveCarCharacter' }}"
+                id="formAddCarCharacter">
+
+                <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
+                    <div class="">
+                        <label for="car_character_list"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                            เพิ่มลักษณะรถ
+                        </label>
+                        <div class="flex">
+                            <div
+                                class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
+                                <i class="fa-solid fa-barcode"></i>
+                            </div>
+                            <input type="text" placeholder=""
+                                class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
+                                id="car_character_list" name="car_character_list" wire:model="car_character_list"
+                                required />
                         </div>
                     </div>
                 </div>

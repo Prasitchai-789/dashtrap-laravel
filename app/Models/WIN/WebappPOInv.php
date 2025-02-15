@@ -2,6 +2,7 @@
 
 namespace App\Models\WIN;
 
+use App\Models\CAR\CarType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,4 +45,5 @@ class WebappPOInv extends Model
     {
         return $this->belongsTo(POInvDTCar::class, 'TypeCarID', 'TypeCarID');
     }
+    
 }

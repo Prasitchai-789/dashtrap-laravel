@@ -150,12 +150,6 @@
                             type="date" id="selectedDate" wire:model="selectedDate" wire:change="SelectedDate">
                     </div>
                 </div>
-                <!-- ส่วนของปุ่มต่างๆ -->
-                <button type="button"
-                    class="px-4 py-2 text-sm font-bold text-white transition rounded-lg bg-primary hover:bg-blue-500"
-                    wire:click='openModal'>
-                    CREATE
-                </button>
             </div>
 
 
@@ -236,13 +230,13 @@
                                                 </li>
                                                 @elseif ($salesPlan->Status == 'P')
                                                 <li>
-                                                    <a href="#" 
+                                                    <a href="#"
                                                         data-bs-toggle="modal" data-hs-overlay="#modal-palm-purchase"
                                                         class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-start">
                                                     </a>
                                                 </li>
                                                 @endif
-                                                
+
                                                 @can('delete IT')
                                                 <li>
                                                     <a href="#" wire:click='confirmDelete({{ $salesPlan->SOPID }})'
@@ -255,7 +249,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
 
 
                             </tr>
@@ -268,7 +262,7 @@
                 </div>
             </div>
             <!-- End Table -->
-            
+
             <!-- Model ADD  -->
             <x-modal title="แผนการโหลดสินค้า" wire:model="showModal" maxWidth="2xl" zIndex="20" closeModal="closeModal">
 
@@ -386,7 +380,7 @@
                                 </div>
                                 <input type="text" placeholder=""
                                     class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="IBWei" name="IBWei" wire:model="IBWei" wire:blur='calculateNet' required/>
+                                    id="IBWei" name="IBWei" wire:model="IBWei"  {{ $edit ? 'readonly' : ' ' }}/>
                             </div>
                         </div>
                         <div class="">
@@ -401,11 +395,11 @@
                                 </div>
                                 <input type="text" placeholder=""
                                     class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500 me-2"
-                                    id="OBWei" name="OBWei" wire:model="OBWei" wire:blur='calculateNet' required/>
+                                    id="OBWei" name="OBWei" wire:model="OBWei"  required/>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
                         <div class="">
                             <label for="NetWei"
@@ -457,5 +451,5 @@
     </div>
 
 
-    
+
 </div>

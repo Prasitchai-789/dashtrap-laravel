@@ -189,7 +189,7 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="Price2" name="Price2" wire:model="Price2" wire:blur='calculatePrice' required />
+                                id="Price2" name="Price2" wire:model="Price2" required />
                         </div>
                     </div>
                 </div>
