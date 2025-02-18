@@ -14,7 +14,7 @@
 
              <!-- Topbar Brand Logo -->
              <a href="" class="flex md:hidden">
-                 <img src="" class="h-8" alt="Small logo">
+                 <img src="" class="h-8" >
              </a>
 
              <!-- Topbar Search -->
@@ -47,7 +47,7 @@
                          Notifications
                      </div>
 
-                     <div class="divide-y divide-default-100">
+                     {{-- <div class="divide-y divide-default-100">
                          <a href="#" class="flex px-4 py-3 hover:bg-default-100">
                              <div class="flex-shrink-0">
                                  <img class="rounded-full w-11 h-11" src="/images/users/avatar-10.jpg"
@@ -120,7 +120,7 @@
                                  <div class="text-xs text-primary">30 minutes ago</div>
                              </div>
                          </a>
-                     </div>
+                     </div> --}}
 
 
                      <a href="#"

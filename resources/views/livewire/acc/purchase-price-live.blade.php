@@ -15,90 +15,92 @@
                     </div>
                 </div>
             </div>
+            <div class="card-header">
+                <!-- Table -->
+                <div class="overflow-x-auto rounded-lg">
+                    <div class=" font-anuphan">
+                        <table class="w-full border border-collapse ">
+                            <thead class="text-center bg-gray-200">
+                                <tr class="border">
+                                    <th class="p-3 border">ลำดับ</th>
+                                    <th class="p-3 border">วันที่</th>
+                                    <th class="p-3 border">รหัสบิล</th>
+                                    <th class="p-3 border">ชื่อลูกค้า</th>
+                                    <th class="p-3 border">ทะเบียนรถ</th>
+                                    <th class="p-3 border">เข้า</th>
+                                    <th class="p-3 border">ออก</th>
+                                    <th class="p-3 border">สุทธิ</th>
+                                    <th class="p-3 border">ราคา</th>
+                                    <th class="p-3 border">ยอดเงิน</th>
+                                    <th class="p-3 border">ประเภทบิล</th>
+                                    <th class="p-3 text-center border">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($webappPOInvs as $webappPOInv)
+                                <tr class="text-gray-800 hover:bg-gray-100 hover:text-primary">
+                                    <td class="p-3 text-center border">{{ ($webappPOInvs->firstItem() + $loop->index) }}
+                                    </td>
+                                    <td class="p-3 border">{{
+                                        \Carbon\Carbon::parse($webappPOInv->DocuDate)->locale('th')->translatedFormat('d/m/Y')
+                                        }}</td>
+                                    <td class="p-3 border">{{$webappPOInv->BillID}}</td>
+                                    <td class="p-3 border">
+                                        {{ optional($webappPOInv->empVendor)->VendorTitle ?
+                                        optional($webappPOInv->empVendor)->VendorTitle .
+                                        optional($webappPOInv->empVendor)->VendorName :
+                                        optional($webappPOInv->empVendor)->VendorName }}
+                                    </td>
+                                    <td class="p-3 border">{{$webappPOInv->VendorCarID}}</td>
+                                    <td class="p-3 border text-end">{{ number_format($webappPOInv->GoodIB, 0, '.', ',') }}
+                                    </td>
+                                    <td class="p-3 border text-end">{{ number_format($webappPOInv->GoodOB, 0, '.', ',') }}
+                                    </td>
+                                    <td class="p-3 font-bold border text-end">{{ number_format($webappPOInv->GoodNet, 0,
+                                        '.', ',') }}</td>
+                                    <td class="p-3 text-center border">{{
+                                        number_format($webappPOInv->Price2, 2,
+                                        '.', ',') }}</td>
+                                    <td class="p-3 font-bold text-blue-800 border text-end">{{
+                                        number_format($webappPOInv->Amnt2, 2,
+                                        '.', ',') }}</td>
+                                    <td class="p-3 text-center border">
+                                        @if($webappPOInv->DocuType == 309)
+                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            <span class="w-1.5 h-1.5 inline-block bg-red-400 rounded-full"></span>
+                                            ซื้อเชื่อ
+                                        </span>
+                                        @elseif($webappPOInv->DocuType == 312)
+                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            <span class="w-1.5 h-1.5 inline-block bg-green-400 rounded-full"></span>
+                                            ซื้อสด
+                                        </span>
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
 
-            <!-- Table -->
-            <div class="">
-                <div class=" font-anuphan">
-                    <table class="w-full border border-collapse">
-                        <thead class="text-center bg-gray-200">
-                            <tr class="border">
-                                <th class="p-3 border">ลำดับ</th>
-                                <th class="p-3 border">วันที่</th>
-                                <th class="p-3 border">รหัสบิล</th>
-                                <th class="p-3 border">ชื่อลูกค้า</th>
-                                <th class="p-3 border">ทะเบียนรถ</th>
-                                <th class="p-3 border">เข้า</th>
-                                <th class="p-3 border">ออก</th>
-                                <th class="p-3 border">สุทธิ</th>
-                                <th class="p-3 border">ราคา</th>
-                                <th class="p-3 border">ยอดเงิน</th>
-                                <th class="p-3 border">ประเภทบิล</th>
-                                <th class="p-3 text-center border">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($webappPOInvs as $webappPOInv)
-                            <tr class="text-gray-800 hover:bg-gray-100 hover:text-primary">
-                                <td class="p-3 text-center border">{{ ($webappPOInvs->firstItem() + $loop->index) }}
-                                </td>
-                                <td class="p-3 border">{{
-                                    \Carbon\Carbon::parse($webappPOInv->DocuDate)->locale('th')->translatedFormat('d/m/Y')
-                                    }}</td>
-                                <td class="p-3 border">{{$webappPOInv->BillID}}</td>
-                                <td class="p-3 border">
-                                    {{ optional($webappPOInv->empVendor)->VendorTitle ?
-                                    optional($webappPOInv->empVendor)->VendorTitle .
-                                    optional($webappPOInv->empVendor)->VendorName :
-                                    optional($webappPOInv->empVendor)->VendorName }}
-                                </td>
-                                <td class="p-3 border">{{$webappPOInv->VendorCarID}}</td>
-                                <td class="p-3 border text-end">{{ number_format($webappPOInv->GoodIB, 0, '.', ',') }}
-                                </td>
-                                <td class="p-3 border text-end">{{ number_format($webappPOInv->GoodOB, 0, '.', ',') }}
-                                </td>
-                                <td class="p-3 font-bold border text-end">{{ number_format($webappPOInv->GoodNet, 0,
-                                    '.', ',') }}</td>
-                                <td class="p-3 text-center border">{{
-                                    number_format($webappPOInv->Price2, 2,
-                                    '.', ',') }}</td>
-                                <td class="p-3 font-bold text-blue-800 border text-end">{{
-                                    number_format($webappPOInv->Amnt2, 2,
-                                    '.', ',') }}</td>
-                                <td class="p-3 text-center border">
-                                    @if($webappPOInv->DocuType == 309)
-                                    <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                        <span class="w-1.5 h-1.5 inline-block bg-red-400 rounded-full"></span>
-                                        ซื้อเชื่อ
-                                    </span>
-                                    @elseif($webappPOInv->DocuType == 312)
-                                    <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        <span class="w-1.5 h-1.5 inline-block bg-green-400 rounded-full"></span>
-                                        ซื้อสด
-                                    </span>
-                                    @else
-                                        -
-                                    @endif
-                                </td>
+                                    <td
+                                        class="p-2 text-center border  min-w-[100px] max-w-[100px] relative">
+                                        <button type="button"
+                                            class="p-2 text-warning transition  hover:bg-gray-200 min-w-[40px] max-w-[40px]"
+                                            wire:click='confirmEdit({{ $webappPOInv->POInvID }})'>
+                                            <i class="fa-solid fa-pen-to-square me-2"></i>
+                                        </button>
+                                    </td>
 
-                                <td
-                                    class="p-2 text-center border  min-w-[100px] max-w-[100px] relative">
-                                    <button type="button"
-                                        class="p-2 text-warning transition  hover:bg-gray-200 min-w-[40px] max-w-[40px]"
-                                        wire:click='confirmEdit({{ $webappPOInv->POInvID }})'>
-                                        <i class="fa-solid fa-pen-to-square me-2"></i>
-                                    </button>
-                                </td>
-
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="flex mt-4">
-                        {{ $webappPOInvs->links() ?? '' }}
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                <!-- End Table -->
+                <div class="flex mt-4">
+                    {{ $webappPOInvs->links() ?? '' }}
+                </div>
+
             </div>
-            <!-- End Table -->
 
         </div>
         <!-- Model ADD Palm -->

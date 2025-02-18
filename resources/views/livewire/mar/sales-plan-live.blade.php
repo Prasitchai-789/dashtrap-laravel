@@ -161,8 +161,8 @@
 
 
                 <!-- Table -->
-                <div class='overflow-auto'>
-                    <div class="font-anuphan">
+                <div class='overflow-auto rounded-lg'>
+                    <div class="rounded-lg font-anuphan">
                         <table class="w-full border border-collapse">
                             <thead class="text-center text-white bg-green-500">
                                 <tr class="border">
@@ -198,7 +198,7 @@
                                         '-' }}
                                     </td>
 
-                                    <td class="p-2 text-center border min-w-[50px] max-w-[50px] truncate">
+                                    <td class="p-2 text-center border">
                                         @if($salesPlan->Status == 'F')
                                         <span  class="px-3 py-1 text-blue-700 rounded-full btn bg-green-400 min-w-[100px] max-w-[100px]">Finish</span>
                                         @elseif($salesPlan->Status == 'W')
@@ -244,8 +244,8 @@
                                         </div>
                                         @endif
                                     </td>
-                                    
-                                    
+
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -508,6 +508,6 @@
 
         </div>
     </div>
-  
-    
+
+
 </div>

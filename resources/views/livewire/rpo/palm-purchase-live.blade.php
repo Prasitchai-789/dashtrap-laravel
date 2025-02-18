@@ -133,7 +133,7 @@
 
     <div class="page-header">
         <div class="p-6 bg-white rounded-lg shadow-lg">
-            <div class="flex items-center justify-between mb-2">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
                 <!-- ส่วนของ Input วันที่ -->
                 <div class="flex items-center">
                     <label for="selectedDate"
@@ -146,24 +146,23 @@
                 </div>
 
                 <!-- ส่วนของปุ่มต่างๆ -->
-                <div class="flex items-center ml-auto space-x-2 font-bold font-anuphan">
+                <div class="flex flex-col items-center w-full space-y-2 font-bold sm:flex-row sm:w-auto sm:space-y-0 sm:space-x-2 font-anuphan">
                     <button type="button"
-                        class="px-4 py-2 text-sm text-white transition bg-orange-500 rounded-lg hover:bg-orange-400"
-                        wire:click='openModalTableSet'>
+                        class="w-full px-4 py-2 text-sm text-white transition bg-orange-500 rounded-lg hover:bg-orange-400 sm:w-auto" wire:click='openModalTableSet'>
                         ตารางราคา
                     </button>
                     <button type="button"
-                        class="px-4 py-2 text-sm text-white transition rounded-lg bg-success hover:bg-green-500"
-                        wire:click='openModalSet'>
+                        class="w-full px-4 py-2 text-sm text-white transition rounded-lg bg-success hover:bg-green-500 sm:w-auto" wire:click='openModalSet'>
                         กำหนดราคาและเครื่องชั่ง
                     </button>
                     <button type="button"
-                        class="px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500"
-                        wire:click='openModal'>
+                        class="w-full px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500 sm:w-auto" wire:click='openModal'>
                         CREATE
                     </button>
                 </div>
             </div>
+
+
             <!-- Table -->
             <div class="">
                 <div class="overflow-auto font-anuphan">

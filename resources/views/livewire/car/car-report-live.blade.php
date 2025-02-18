@@ -164,13 +164,14 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <!-- ตัวแบ่งหน้า -->
-                    <div class="flex mt-4">
-                        {{ $carReports->links('pagination::tailwind') ?? '' }}
-                    </div>
+
                 </div>
             </div>
             <!-- End Table -->
+             <!-- ตัวแบ่งหน้า -->
+             <div class="flex mt-4">
+                {{ $carReports->links('pagination::tailwind') ?? '' }}
+            </div>
         </div>
 
         <!-- Model ADD  -->
