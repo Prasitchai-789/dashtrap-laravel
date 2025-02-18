@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UseCar extends Model
 {
-    protected $connection = 'sqlsrv2';
+    protected $connection = 'sqlsrv';
     use HasFactory;
     protected $table = 'car_uses';
     protected $primaryKey = 'id';
-    public $incrementing = true; 
+    public $incrementing = true;
     protected $fillable =[
         'card_id',
         'car_id',

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CarType extends Model
 {
     use HasFactory;
-    protected $connection = 'sqlsrv2';
+    protected $connection = 'sqlsrv';
     protected $table = 'car_types';
     protected $fillable =[
         'car_type_list',

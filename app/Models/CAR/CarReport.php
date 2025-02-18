@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class CarReport extends Model
 {
 
-    protected $connection = 'sqlsrv2';
+    protected $connection = 'sqlsrv';
     use HasFactory;
     protected $table = 'car_reports';
     protected $primaryKey = 'id'; // ต้องมี

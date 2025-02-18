@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CarRepair extends Model
 {
     use HasFactory;
-    protected $connection = 'sqlsrv2';
+    protected $connection = 'sqlsrv';
     protected $table = 'car_repairs';
     protected $fillable =[
         'car_id',

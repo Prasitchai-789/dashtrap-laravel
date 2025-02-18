@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CarRequest extends Model
 {
-    protected $connection = 'sqlsrv2';
+    protected $connection = 'sqlsrv';
     use HasFactory;
     protected $table = 'car_requests';
     protected $primaryKey = 'id';
