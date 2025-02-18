@@ -76,61 +76,59 @@
                                 <td class="text-center">
                                     @php
                                     try {
-                                    $date = \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', $carReport->car_tax);
+                                        // แปลงวันที่จากฐานข้อมูล
+                                        $date = \Carbon\Carbon::parse($carReport->car_tax);
                                     } catch (\Exception $e) {
-                                    try {
-                                    $date = \Carbon\Carbon::createFromFormat('d/m/Y', $carReport->car_tax);
-                                    } catch (\Exception $e) {
-                                    $date = null;
+                                        $date = null;
                                     }
-                                    }
+
                                     if ($date && $date->format('Y-m-d') !== '1900-01-01') {
-                                    $formattedDate = $date->translatedFormat('j F Y');
+                                        $formattedDate = $date->translatedFormat('j F Y');
 
-                                    // กำหนดสีตามเงื่อนไข
-                                    if ($date->lessThan($today)) {
-                                    $color = 'red'; // 🔴 เลยกำหนด (วันหมดอายุ)
-                                    } elseif ($date->lessThanOrEqualTo($sevenDaysLater)) {
-                                    $color = 'orange'; // 🟡 ใกล้หมดอายุ (เหลือไม่เกิน 7 วัน)
-                                    } else {
-                                    $color = 'black'; // ✅ ปกติ
-                                    }
+                                        // กำหนดสีตามเงื่อนไข
+                                        if ($date->lessThan($today)) {
+                                            $color = 'red'; // 🔴 เลยกำหนด (วันหมดอายุ)
+                                        } elseif ($date->lessThanOrEqualTo($sevenDaysLater)) {
+                                            $color = 'orange'; // 🟡 ใกล้หมดอายุ (เหลือไม่เกิน 7 วัน)
+                                        } else {
+                                            $color = 'black'; // ✅ ปกติ
+                                        }
 
-                                    echo "<span style='color: {$color};'>{$formattedDate}</span>";
+                                        echo "<span style='color: {$color};'>{$formattedDate}</span>";
                                     } else {
-                                    echo '❌ วันที่ไม่ถูกต้อง';
+                                        echo '❌ วันที่ไม่ถูกต้อง';
                                     }
                                     @endphp
                                 </td>
+
                                 <td class="text-center">
                                     @php
                                     try {
-                                    $date = \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', $carReport->car_insurance);
+                                        // แปลงวันที่จากฐานข้อมูล
+                                        $date = \Carbon\Carbon::parse($carReport->car_insurance);
                                     } catch (\Exception $e) {
-                                    try {
-                                    $date = \Carbon\Carbon::createFromFormat('d/m/Y', $carReport->car_insurance);
-                                    } catch (\Exception $e) {
-                                    $date = null;
+                                        $date = null;
                                     }
-                                    }
+
                                     if ($date && $date->format('Y-m-d') !== '1900-01-01') {
-                                    $formattedDate = $date->translatedFormat('j F Y');
+                                        $formattedDate = $date->translatedFormat('j F Y');
 
-                                    // กำหนดสีตามเงื่อนไข
-                                    if ($date->lessThan($today)) {
-                                    $color = 'red'; // 🔴 เลยกำหนด (วันหมดอายุ)
-                                    } elseif ($date->lessThanOrEqualTo($sevenDaysLater)) {
-                                    $color = 'orange'; // 🟡 ใกล้หมดอายุ (เหลือไม่เกิน 7 วัน)
-                                    } else {
-                                    $color = 'black'; // ✅ ปกติ
-                                    }
+                                        // กำหนดสีตามเงื่อนไข
+                                        if ($date->lessThan($today)) {
+                                            $color = 'red'; // 🔴 เลยกำหนด (วันหมดอายุ)
+                                        } elseif ($date->lessThanOrEqualTo($sevenDaysLater)) {
+                                            $color = 'orange'; // 🟡 ใกล้หมดอายุ (เหลือไม่เกิน 7 วัน)
+                                        } else {
+                                            $color = 'black'; // ✅ ปกติ
+                                        }
 
-                                    echo "<span style='color: {$color};'>{$formattedDate}</span>";
+                                        echo "<span style='color: {$color};'>{$formattedDate}</span>";
                                     } else {
-                                    echo '❌ วันที่ไม่ถูกต้อง';
+                                        echo '❌ วันที่ไม่ถูกต้อง';
                                     }
                                     @endphp
                                 </td>
+
                                 <td class="text-center"></td>
                                 <td class="text-center">
                                     @if ($carReport->car_status == 1)
@@ -149,7 +147,7 @@
                                 </td>
                                 <td class="min-w-[90px] max-w-[90px]  flex items-center justify-end mt-2">
                                     {{-- {{ route('car-view.index', ['carReportId' => $carReport->id]) }} --}}
-                                    <a href="#">
+                                    <a href="{{ route('car-view', ['carReportId' => $carReport->id]) }}">
                                         <i class="me-4 fa-regular fa-eye text-primary hover:text-blue-700 hover:scale-110"
                                             style="font-size: 16px; vertical-align: middle;"></i>
                                     </a>
@@ -451,12 +449,14 @@
                         </div>
                     </div>
                     <div class="flex items-center mt-6">
-                        <input class="form-switch" type="checkbox" role="switch" id="additionalNotes_request"
-                            wire:model="additionalNotes_request"
-                            wire:change="$set('additionalNotes_request', $event.target.checked ? 1 : 0)">
-                        <label class=" ms-1.5" for="additionalNotes_request">
-                            ใช้รถ
-                        </label>
+                        <div class="flex items-center mt-2">
+                            <input type="checkbox" id="car_status" class="form-switch"
+                                wire:model="car_status" wire:change="updateCarStatus" {{ $car_status ? 'checked' : '' }}>
+
+                            <label class="ms-1.5" for="car_canDrive">
+                                {{ $car_status ? 'ใช้งาน' : 'ซ่อม' }}
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
@@ -476,6 +476,36 @@
                             </textarea>
                         </div>
                     </div>
+                </div>
+
+                 <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
+                    <div class="">
+                        <label class="mb-2 font-bold form-label">รูปภาพ</label>
+
+                        <div class="">
+                            <input type="file" class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500" id="car_photo" name="car_photo"
+                                wire:model="car_photo" accept="image/jpeg,image/png">
+
+                            @error('car_photo')
+                                <span class="error text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- แสดงตัวอย่างรูปภาพที่เลือก -->
+                        {{-- @if ($car_photo)
+                            <div class="mt-4">
+                                <p class="text-sm text-gray-600">รูปตัวอย่าง:</p>
+                                <img src="{{ $car_photo->temporaryUrl() }}" class="w-40 h-40 rounded-lg shadow-md">
+                            </div>
+                        @endif --}}
+
+
+                        @if (session()->has('message'))
+                            <p class="mt-2 text-green-500">{{ session('message') }}</p>
+                        @endif
+                    </div>
+
+
                 </div>
 
                 <div class="flex items-center justify-end px-4 py-3 mt-6 border-t gap-x-2 border-default-200">

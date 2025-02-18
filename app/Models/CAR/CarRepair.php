@@ -22,4 +22,9 @@ class CarRepair extends Model
         'car_additionalNotes',
         'car_requesterName',
     ];
+
+    public function carReport()
+    {
+        return $this->belongsTo(CarReport::class, 'car_id', 'id');
+    }
 }

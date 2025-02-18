@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 Route::group(['middleware' => ['auth','role:developer|admin']], function () {
     Route::get('/car-request', [CarController::class, 'carRequest'])->name('car-request');
     Route::get('/car-report', [CarController::class, 'carReport'])->name('car-report');
+    Route::get('/car-view/{carReportId}', [CarController::class, 'carView'])->name('car-view');
 });
 
 

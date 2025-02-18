@@ -10,10 +10,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CarReport extends Model
 {
+
     protected $connection = 'sqlsrv2';
     use HasFactory;
     protected $table = 'car_reports';
-    protected $fillable =[
+    protected $primaryKey = 'id'; // ต้องมี
+    public $incrementing = true;  // ทำให้ id เป็น Auto Increment
+    protected $keyType = 'int';   // กำหนดให้ id เป็น int
+    protected $fillable = [
         'car_number',
         'car_county',
         'car_type',
