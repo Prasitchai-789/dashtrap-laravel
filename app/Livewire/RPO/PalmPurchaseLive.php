@@ -273,6 +273,9 @@ class PalmPurchaseLive extends Component
                 showConfirmButton: false,
                 timer: 1500
             );
+
+            $this->closeModal();
+            
             $sumPalm = $this->totalPalmOfDate + $this->GoodNet;
             $message = "FFB : " . number_format($sumPalm, 0, '.', ',') . " kg." .
                 "\n" . "📆 วันที่: "  . \Carbon\Carbon::parse($this->DocuDate)->locale('th')->translatedFormat('d F Y') .
@@ -285,8 +288,6 @@ class PalmPurchaseLive extends Component
 
             $Telegram = new Telegram();
             $Telegram->sendToTelegram($message);
-
-            $this->closeModal();
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(
                 'alert',
@@ -347,7 +348,7 @@ class PalmPurchaseLive extends Component
         $goodOB = str_replace(',', '', $this->GoodOB);
         $goodNet = str_replace(',', '', $this->GoodNet);
         $price1 = str_replace(',', '', $this->Price1);
-        
+
         $validatedData['GoodIB'] = max(0, (float) $goodIB);
         $validatedData['GoodOB'] = max(0, (float) $goodOB);
         $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');

@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\WIN\EMCust;
 use App\Models\WIN\EMGood;
 use App\Models\MAR\SalesPlan;
+use App\Http\Controllers\Notify\Telegram;
 
 class SalesProductLive extends Component
 {
@@ -105,6 +106,14 @@ class SalesProductLive extends Component
                 showConfirmButton: false,
                 timer: 1500
             );
+            $message = "โหลดสินค้า: " . $salesPlan->GoodName .
+                "\n" . "📆 วันที่: "  . \Carbon\Carbon::parse($salesPlan->SOPDate)->locale('th')->translatedFormat('d F Y') .
+                "\n" . "🚘 ทะเบียน: "  . $salesPlan->NumberCar.
+                "\n" . "🙎‍♂️ ผู้ขับ: "  . $salesPlan->DriverName;
+
+            $Telegram = new Telegram();
+            $Telegram->sendToTelegram($message);
+
         } else {
             // แสดงแจ้งเตือนเมื่อไม่พบข้อมูล
             $this->dispatch(
@@ -295,6 +304,17 @@ class SalesProductLive extends Component
 
             $this->closeModal();
             $this->mount();
+
+            $message = "โหลดสินค้า: " . $salesPlan->GoodName .
+                "\n" . "📆 วันที่: "  . \Carbon\Carbon::parse($salesPlan->SOPDate)->locale('th')->translatedFormat('d F Y') .
+                "\n" . "🚘 ทะเบียน: "  . $salesPlan->NumberCar.
+                "\n" . "🛢️ น้ำหนักสุทธิ: "  .  number_format($validatedData['NetWei'], 0, '.', ',')." กิโลกรัม";
+
+
+
+            $Telegram = new Telegram();
+            $Telegram->sendToTelegram($message);
+
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(
                 'alert',

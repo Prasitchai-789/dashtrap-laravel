@@ -220,8 +220,8 @@ class SalesPlanLive extends Component
 
             $this->closeModal();
             $this->mount();
+            
         } catch (\Illuminate\Validation\ValidationException $e) {
-
             $this->dispatch(
                 'alert',
                 position: "center",
@@ -287,7 +287,6 @@ class SalesPlanLive extends Component
 
             $this->closeModal();
         } catch (\Illuminate\Validation\ValidationException $e) {
-            dd($e->errors());
             $this->dispatch(
                 'alert',
                 position: "center",
