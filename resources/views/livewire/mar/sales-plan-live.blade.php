@@ -164,7 +164,7 @@
                 <div class='overflow-auto rounded-lg'>
                     <div class="rounded-lg font-anuphan">
                         <table class="w-full border border-collapse">
-                            <thead class="text-center text-white bg-green-500">
+                            <thead class="text-center text-white bg-success">
                                 <tr class="border">
                                     <th class="p-3 border">วันที่</th>
                                     <th class="p-3 border">ชื่อสินค้า</th>
@@ -200,7 +200,7 @@
 
                                     <td class="p-2 text-center border">
                                         @if($salesPlan->Status == 'F')
-                                        <span  class="px-3 py-1 text-blue-700 rounded-full btn bg-green-400 min-w-[100px] max-w-[100px]">Finish</span>
+                                        <span  class="px-3 py-1 text-white rounded-full btn bg-success min-w-[100px] max-w-[100px]">Finish</span>
                                         @elseif($salesPlan->Status == 'W')
                                         <button type="button" class="px-3 py-1 border rounded-full btn border-warning text-warning hover:bg-warning hover:text-white min-w-[100px] max-w-[100px]" wire:click='cancel({{ $salesPlan->SOPID }})'>Warning</button>
                                         @elseif($salesPlan->Status == 'P')

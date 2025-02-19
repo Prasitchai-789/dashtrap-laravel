@@ -11,8 +11,10 @@ class WebappPOInv extends Model
     protected $connection = 'sqlsrv2';
     use HasFactory;
     protected $table = 'Webapp_POInv';
+    protected $primaryKey = 'POInvID';
+    public $timestamps = false;
+
     protected $fillable = [
-        'POInvID',
         'DocuDate',
         'BillID',
         'VendorCarID',
@@ -32,10 +34,7 @@ class WebappPOInv extends Model
         'DocuType',
     ];
 
-    protected $primaryKey = 'POInvID';
-    public $incrementing = true;
-    protected $keyType = 'int';
-    public $timestamps = false;
+
 
     public function empVendor()
     {
@@ -45,5 +44,5 @@ class WebappPOInv extends Model
     {
         return $this->belongsTo(POInvDTCar::class, 'TypeCarID', 'TypeCarID');
     }
-    
+
 }

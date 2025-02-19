@@ -1,8 +1,8 @@
 <div>
     <div>
-        <h1 class="mb-4 text-3xl text-center text-blue-500 font-prompt">ยินดีต้อนรับสู่ <span class="text-4xl font-bold"> ISAN PALM </span> </h1>
+        <h1 class="mb-4 text-3xl text-center text-blue-500 font-anuphan">WELCOME TO <span class="text-3xl font-bold text-blue-800"> ISAN PALM </span> </h1>
     </div>
-    <div id="default-carousel" class="relative w-full px-3 rounded-lg" data-carousel="slide">
+    <div id="default-carousel" class="relative w-full px-3 mb-3 rounded-lg" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
             <!-- Item 1 -->
