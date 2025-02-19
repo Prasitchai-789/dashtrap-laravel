@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 });
 
 //-------- MAR ------//
-Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|admin-RPO']], function () {
     Route::get('/sales-plan', [SalesPlanController::class, 'salesPlan'])->name('sales-plan');
 });
 
