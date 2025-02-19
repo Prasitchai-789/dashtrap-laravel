@@ -2,6 +2,7 @@
 
 @section('css')
 @vite(['node_modules/jsvectormap/dist/css/jsvectormap.min.css'])
+@vite(['node_modules/glightbox/dist/css/glightbox.min.css'])
 @endsection
 
 @section('content')
@@ -13,4 +14,5 @@
 
 @section('script')
 @vite(['resources/js/pages/dashboard.js'])
+@vite(['resources/js/pages/gallery.js'])
 @endsection
