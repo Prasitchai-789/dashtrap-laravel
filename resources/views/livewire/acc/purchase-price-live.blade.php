@@ -66,8 +66,8 @@
                                         '.', ',') }}</td>
                                     <td class="p-3 text-center border">
                                         @if($webappPOInv->DocuType == 309)
-                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                            <span class="w-1.5 h-1.5 inline-block bg-red-400 rounded-full"></span>
+                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-pink-100 text-pink-800">
+                                            <span class="w-1.5 h-1.5 inline-block bg-pink-400 rounded-full"></span>
                                             ซื้อเชื่อ
                                         </span>
                                         @elseif($webappPOInv->DocuType == 312)

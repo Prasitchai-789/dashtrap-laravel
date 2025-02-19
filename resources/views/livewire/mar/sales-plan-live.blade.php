@@ -212,36 +212,16 @@
 
                                     <td class="p-2 text-center border min-w-[30px] max-w-[40px]">
                                         @if ($salesPlan->Status == 'W')
-                                        <div class="relative text-center " x-data="{ open: false }">
-                                            <a href="#" class="text-gray-500 hover:text-gray-900 focus:outline-none"
-                                                @click="open = !open">
-                                                <div class="flex items-center justify-center ">
-                                                    <p class="text-lg font-medium text-gray-900 dark:text-white hover:text-xl">
-                                                        ...
-                                                    </p>
-                                                </div>
-                                            </a>
-                                            <!-- Dropdown menu -->
-                                            <div>
-                                                <ul class="absolute right-0 top-full z-[9999] w-48 bg-white border border-gray-200 rounded-md shadow-lg transition-[opacity,margin] mt-2 p-1.5"
-                                                    x-show="open" @click.away="open = false" x-transition>
-                                                    <li>
-                                                        <a href="#" wire:click='confirmEdit({{ $salesPlan->SOPID }})'
-                                                            class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-start">
-                                                            <i class="fa-solid fa-pen-to-square me-2"></i> Edit
-                                                        </a>
-                                                    </li>
-                                                    @can('delete IT')
-                                                    <li>
-                                                        <a href="#" wire:click='confirmDelete({{ $salesPlan->SOPID }})'
-                                                            class="block px-4 py-2 text-red-500 hover:bg-gray-100 text-start">
-                                                            <i class="fa-solid fa-trash me-2"></i> Delete
-                                                        </a>
-                                                    </li>
-                                                    @endcan
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        <a href="#" wire:click='confirmEdit({{ $salesPlan->SOPID  }})'>
+                                            <i class="me-4 fa-regular fa-pen-to-square text-warning hover:text-yellow-700 hover:scale-110"
+                                                style="font-size: 16px; vertical-align: middle;"></i>
+                                        </a>
+                                        @can('delete IT')
+                                        <a href="#" wire:click='confirmDelete({{ $salesPlan->SOPID }})'>
+                                            <i class="fa-regular fa-trash-can text-danger hover:text-red-700 hover:scale-110"
+                                                style="font-size: 16px; vertical-align: middle;"></i>
+                                        </a>
+                                        @endcan
                                         @endif
                                     </td>
 

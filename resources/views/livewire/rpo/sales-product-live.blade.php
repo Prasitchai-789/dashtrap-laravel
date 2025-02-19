@@ -194,7 +194,8 @@
 
                                 <td class="p-2 text-center border min-w-[50px] max-w-[50px] truncate">
                                     @if($salesPlan->Status == 'F')
-                                    <span class="px-3 py-1 text-white rounded-full btn bg-green-500 min-w-[100px] max-w-[100px]">Finish</span>
+                                    <span
+                                        class="px-3 py-1 text-white rounded-full btn bg-green-500 min-w-[100px] max-w-[100px]">Finish</span>
                                     @elseif($salesPlan->Status == 'W')
                                     <button type="button"
                                         class="px-3 py-1 border rounded-full btn border-warning text-warning hover:bg-warning hover:text-white min-w-[100px] max-w-[100px]"
@@ -209,45 +210,21 @@
                                 </td>
 
                                 <td class="p-2 text-center border min-w-[30px] max-w-[40px] relative">
-                                    <div class="relative text-center" x-data="{ open: false }">
-                                        <a href="#" class="text-gray-500 hover:text-gray-900 focus:outline-none"
-                                            @click="open = !open">
-                                            <div class="flex items-center justify-center">
-                                                <p class="text-lg font-medium text-gray-900 dark:text-white hover:text-xl">...</p>
-                                            </div>
-                                        </a>
-                                        <!-- Dropdown menu -->
-                                        <div>
-                                            <ul class="absolute right-0 top-full z-[9999] w-48 bg-white border border-gray-200 rounded-md shadow-lg transition-[opacity,margin] mt-2 p-1.5"
-                                                x-show="open" @click.away="open = false" x-transition>
-                                                @if ($salesPlan->Status == 'F')
-                                                <li>
-                                                    <a href="#" wire:click='confirmEdit({{ $salesPlan->SOPID }})'
-                                                        data-bs-toggle="modal" data-hs-overlay="#modal-palm-purchase"
-                                                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-start">
-                                                        <i class="fa-solid fa-pen-to-square me-2"></i> Edit
-                                                    </a>
-                                                </li>
-                                                @elseif ($salesPlan->Status == 'P')
-                                                <li>
-                                                    <a href="#"
-                                                        data-bs-toggle="modal" data-hs-overlay="#modal-palm-purchase"
-                                                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-start">
-                                                    </a>
-                                                </li>
-                                                @endif
+                                    @if ($salesPlan->Status == 'F')
+                                    <a href="#" wire:click='confirmEdit({{ $salesPlan->SOPID  }})'>
+                                        <i class="me-4 fa-regular fa-pen-to-square text-warning hover:text-yellow-700 hover:scale-110"
+                                            style="font-size: 16px; vertical-align: middle;"></i>
+                                    </a>
+                                    @elseif ($salesPlan->Status == 'P')
 
-                                                @can('delete IT')
-                                                <li>
-                                                    <a href="#" wire:click='confirmDelete({{ $salesPlan->SOPID }})'
-                                                        class="block px-4 py-2 text-red-500 hover:bg-gray-100 text-start">
-                                                        <i class="fa-solid fa-trash me-2"></i> Delete
-                                                    </a>
-                                                </li>
-                                                @endcan
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    @endif
+
+                                    @can('delete IT')
+                                    <a href="#" wire:click='confirmDelete({{ $salesPlan->SOPID }})'>
+                                        <i class="fa-regular fa-trash-can text-danger hover:text-red-700 hover:scale-110"
+                                            style="font-size: 16px; vertical-align: middle;"></i>
+                                    </a>
+                                    @endcan
                                 </td>
 
 
@@ -271,8 +248,8 @@
                     <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-2 font-anuphan">
                         <div class="">
                             <label for="GoodName"
-                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
-                            ชื่อสินค้า
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                ชื่อสินค้า
                             </label>
                             <div class="flex">
                                 <div
@@ -281,7 +258,7 @@
                                 </div>
                                 <input type="text" placeholder="ชื่อสินค้า"
                                     class="font-semibold text-blue-700 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="GoodName" name="GoodName" wire:model="GoodName" readonly/>
+                                    id="GoodName" name="GoodName" wire:model="GoodName" readonly />
                             </div>
                         </div>
                         <div class="">
@@ -296,7 +273,7 @@
                                 </div>
                                 <input type="text" placeholder="กิโลกรัม"
                                     class="font-semibold text-blue-700 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="AmntLoad" name="AmntLoad" wire:model="AmntLoad" readonly/>
+                                    id="AmntLoad" name="AmntLoad" wire:model="AmntLoad" readonly />
                             </div>
                         </div>
                     </div>
@@ -304,8 +281,8 @@
                     <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-2 font-anuphan">
                         <div class="">
                             <label for="CustName"
-                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
-                             ชื่อคู่ค้า
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                ชื่อคู่ค้า
                             </label>
                             <div class="flex">
                                 <div
@@ -314,7 +291,7 @@
                                 </div>
                                 <input type="text" placeholder="ชื่อคู่ค้า"
                                     class="font-semibold text-blue-700 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="CustName" name="CustName" wire:model="CustName" readonly/>
+                                    id="CustName" name="CustName" wire:model="CustName" readonly />
                             </div>
                         </div>
                         <div class="">
@@ -329,7 +306,7 @@
                                 </div>
                                 <input type="text" placeholder=""
                                     class="font-semibold text-blue-700 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="Recipient" name="Recipient" wire:model="Recipient"  readonly/>
+                                    id="Recipient" name="Recipient" wire:model="Recipient" readonly />
                             </div>
                         </div>
                     </div>
@@ -347,7 +324,7 @@
                                 </div>
                                 <input type="text" placeholder=""
                                     class="font-semibold text-blue-700 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="NumberCar" name="NumberCar" wire:model="NumberCar" readonly/>
+                                    id="NumberCar" name="NumberCar" wire:model="NumberCar" readonly />
                             </div>
                         </div>
                         <div class="">
@@ -362,7 +339,7 @@
                                 </div>
                                 <input type="text" placeholder=""
                                     class="font-semibold text-blue-700 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500 me-2"
-                                    id="DriverName" name="DriverName" wire:model="DriverName" readonly/>
+                                    id="DriverName" name="DriverName" wire:model="DriverName" readonly />
                             </div>
                         </div>
                     </div>
@@ -380,7 +357,7 @@
                                 </div>
                                 <input type="text" placeholder=""
                                     class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="IBWei" name="IBWei" wire:model="IBWei"  {{ $edit ? 'readonly' : ' ' }}/>
+                                    id="IBWei" name="IBWei" wire:model="IBWei" {{ $edit ? 'readonly' : ' ' }} />
                             </div>
                         </div>
                         <div class="">
@@ -395,7 +372,7 @@
                                 </div>
                                 <input type="text" placeholder=""
                                     class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500 me-2"
-                                    id="OBWei" name="OBWei" wire:model="OBWei"  required/>
+                                    id="OBWei" name="OBWei" wire:model="OBWei" required />
                             </div>
                         </div>
                     </div>
@@ -413,7 +390,7 @@
                                 </div>
                                 <input type="text" placeholder=""
                                     class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="NetWei" name="NetWei" wire:model="NetWei" readonly/>
+                                    id="NetWei" name="NetWei" wire:model="NetWei" readonly />
                             </div>
                         </div>
                     </div>
