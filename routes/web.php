@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 });
 
 //-------- RPO ------//
-Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|admin-RPO']], function () {
     Route::get('/palm-purchase', [PalmPurchase::class, 'palmPurchase'])->name('palm-purchase');
     Route::get('/palm-plan', [PalmPurchase::class, 'palmPlan'])->name('palm-plan');
     Route::get('/sales-product', [SalesProductController::class, 'salesProduct'])->name('sales-product');
