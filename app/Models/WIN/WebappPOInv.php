@@ -14,6 +14,7 @@ class WebappPOInv extends Model
     protected $primaryKey = 'POInvID';
     public $incrementing = true;
     protected $keyType = 'int';
+    public $timestamps = false;
 
 
     protected $fillable = [
