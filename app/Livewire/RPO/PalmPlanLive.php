@@ -86,23 +86,23 @@ class PalmPlanLive extends Component
         PalmPlan::create($validatedData);
 
 
-        $message ="แจ้งแผน" .
-        "\n" . ' 🌴 แผนรับเข้า'." : ".$this->palm_plan;
+        // $message ="แจ้งแผน" .
+        // "\n" . ' 🌴 แผนรับเข้า'." : ".$this->palm_plan;
 
-        $Discord = new Discord();
-        $Discord->sendToDiscord($message);
+        // $Discord = new Discord();
+        // $Discord->sendToDiscord($message);
 
-        $Telegram = new Telegram();
-        $Telegram->sendToTelegram($message);
+        // $Telegram = new Telegram();
+        // $Telegram->sendToTelegram($message);
 
-        $this->dispatch(
-            'alert',
-            position: "center",
-            icon: "success",
-            title: "บันทึกข้อมูลสำเร็จ",
-            showConfirmButton: false,
-            timer: 1500
-        );
+        // $this->dispatch(
+        //     'alert',
+        //     position: "center",
+        //     icon: "success",
+        //     title: "บันทึกข้อมูลสำเร็จ",
+        //     showConfirmButton: false,
+        //     timer: 1500
+        // );
 
         $this->closeModal();
     }

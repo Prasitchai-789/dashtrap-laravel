@@ -274,9 +274,8 @@ class PalmPurchaseLive extends Component
                 timer: 1500
             );
 
-            $this->closeModal();
 
-            $sumPalm = $this->totalPalmOfDate + max(0, (float) $this->GoodNet);
+            $sumPalm = $this->totalPalmOfDate + max(0, (float) $this->calculateWeight());
             $message = "FFB : " . number_format($sumPalm, 0, '.', ',') . " kg." .
                 "\n" . "📆 วันที่: "  . \Carbon\Carbon::parse($this->DocuDate)->locale('th')->translatedFormat('d F Y') .
                 "\n" . "📋 เลขที่เอกสาร: "  . $this->BillID .
@@ -284,10 +283,10 @@ class PalmPurchaseLive extends Component
                 "\n" . "🛒 น้ำหนักสุทธิ = "  . number_format($this->calculateWeight(), 0, '.', ',') . " kg." .
                 "\n" . "🌴 น้ำหนักรวมทั้งหมด= "  . number_format($sumPalm, 0, '.', ',') . " kg.";
 
-
-
             $Telegram = new Telegram();
             $Telegram->sendToTelegramFFB($message);
+            $this->closeModal();
+
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(
                 'alert',
