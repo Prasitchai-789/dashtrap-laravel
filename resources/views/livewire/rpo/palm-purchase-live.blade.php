@@ -209,7 +209,7 @@
                                 <td class="p-3 text-center border">{{$webappPOInv->Grade}}</td>
                                 <td class="p-3 text-center border">{{$webappPOInv->Impurity}}</td>
 
-                                <td class="flex items-center justify-center p-2 text-center">
+                                <td class="flex items-center justify-center p-2 text-center border">
                                     <a href="#" wire:click='confirmEdit({{ $webappPOInv->POInvID  }})'>
                                         <i class="me-4 fa-regular fa-pen-to-square text-warning hover:text-yellow-700 hover:scale-110"
                                             style="font-size: 16px; vertical-align: middle;"></i>
