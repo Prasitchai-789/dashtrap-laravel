@@ -112,7 +112,7 @@ class SalesProductLive extends Component
                 "\n" . "🙎‍♂️ ผู้ขับ: "  . $salesPlan->DriverName;
 
             $Telegram = new Telegram();
-            $Telegram->sendToTelegram($message);
+            $Telegram->sendToTelegramLoad($message);
 
         } else {
             // แสดงแจ้งเตือนเมื่อไม่พบข้อมูล

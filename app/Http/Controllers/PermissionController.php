@@ -38,6 +38,7 @@ class PermissionController extends Controller
             ]
         ]);
 
+
         Permission::create([
             'name' => $request->name
         ]);

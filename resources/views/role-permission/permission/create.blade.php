@@ -18,7 +18,7 @@
                     @csrf
                     <div>
                         <label for="name" class="inline-block mb-2 text-sm font-medium text-default-800">Name</label>
-                        <input type="text" id="name"
+                        <input type="text" id="name" name="name"
                             class="border rounded-md form-input focus:ring focus:ring-blue-100">
                     </div>
                     <div>

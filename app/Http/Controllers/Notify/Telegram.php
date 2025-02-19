@@ -29,4 +29,15 @@ class Telegram extends Controller
             'text' => $message,
         ]);
     }
+
+    public function sendToTelegramLoad($message)
+    {
+        $telegram = new Api(config('7975458636:AAEO5iSSC1V9gJ9DEtEef7Um6iIsmOaIaEw'));
+        $chatId = '-4737025613';
+
+        $telegram->sendMessage([
+            'chat_id' => $chatId,
+            'text' => $message,
+        ]);
+    }
 }

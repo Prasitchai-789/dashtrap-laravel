@@ -35,7 +35,7 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
 
 
             <li class="px-3 py-2 text-sm font-medium text-default-400">Departments</li>
-
+            @can('view RPO')
             <li class="menu-item hs-accordion font-prompt">
                 <a href="javascript:void(0)"
                     class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
@@ -71,7 +71,9 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                     </ul>
                 </div>
             </li>
+            @endcan
 
+            @can('create MAR')
             <li class="menu-item hs-accordion font-prompt">
                 <a href="javascript:void(0)"
                     class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
@@ -93,7 +95,9 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                     </ul>
                 </div>
             </li>
+            @endcan
 
+            @can('view ACC')
             <li class="menu-item hs-accordion font-prompt">
                 <a href="javascript:void(0)"
                     class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
@@ -115,7 +119,9 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                     </ul>
                 </div>
             </li>
+            @endcan
 
+            @can('view HRE')
             <li class="menu-item hs-accordion font-prompt">
                 <a href="javascript:void(0)"
                     class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
@@ -137,7 +143,9 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                     </ul>
                 </div>
             </li>
+            @endcan
 
+            @can('view ALL')
             <li class="menu-item hs-accordion font-prompt">
                 <a href="javascript:void(0)"
                     class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
@@ -173,7 +181,9 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                     </ul>
                 </div>
             </li>
+            @endcan
 
+            @can('view user')
 
             <li class="px-3 py-2 text-sm font-medium text-default-400">Permission</li>
 
@@ -216,7 +226,7 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                     </ul>
                 </div>
             </li>
-
+            @endcan
 
         </ul>
     </div>

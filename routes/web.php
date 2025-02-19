@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 });
 
 //-------- MAR ------//
-Route::group(['middleware' => ['auth','role:developer|admin|admin-RPO']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|user-RPO|user-MAR']], function () {
     Route::get('/sales-plan', [SalesPlanController::class, 'salesPlan'])->name('sales-plan');
 });
 
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 });
 
 //-------- CAR ------//
-Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|user']], function () {
     Route::get('/car-request', [CarController::class, 'carRequest'])->name('car-request');
     Route::get('/car-report', [CarController::class, 'carReport'])->name('car-report');
     Route::get('/car-view/{carReportId}', [CarController::class, 'carView'])->name('car-view');
