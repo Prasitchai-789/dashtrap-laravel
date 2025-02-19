@@ -136,7 +136,7 @@ class PalmPurchaseLive extends Component
         if (!$setPrices) {
             $this->dispatch('showSweetAlert');
         } else {
-            $this->Price1 = $setPrices->set_price;
+            $this->Price1 = number_format($setPrices->set_price, 2);
             $this->Scaler = $setPrices->set_scaler;
         }
         $this->setDate();

@@ -14,9 +14,10 @@ class SalesPlan extends Model
     use HasFactory;
     protected $table = 'SOPlan';
     protected $primaryKey = 'SOPID'; // ระบุชื่อคอลัมน์ที่เป็น Primary Key ของตาราง
+    public $incrementing = true;
+    protected $keyType = 'int';
     public $timestamps = false; // ปิดการใช้งานคุณสมบัติ timestamps
     protected $fillable =[
-        'SOPID',
         'SOPDate',
         'GoodID',
         'GoodName',

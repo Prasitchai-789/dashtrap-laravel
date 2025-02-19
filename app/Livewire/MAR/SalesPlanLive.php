@@ -191,11 +191,11 @@ class SalesPlanLive extends Component
 
             // ✅ สร้าง SalesPlan
             foreach ($validatedData['drivers'] as $driver) {
-                $lastId = SalesPlan::max('SOPID'); // หาค่า SOPID ล่าสุด
-                $newSOPID = $lastId ? $lastId + 1 : 1;
+                // $lastId = SalesPlan::max('SOPID'); // หาค่า SOPID ล่าสุด
+                // $newSOPID = $lastId ? $lastId + 1 : 1;
 
                 SalesPlan::create([
-                    'SOPID' => $newSOPID,
+                    // 'SOPID' => $newSOPID,
                     'SOPDate' => $validatedData['SOPDate'],
                     'GoodID' => $validatedData['GoodID'],
                     'GoodName' => $validatedData['GoodName'],
@@ -220,7 +220,7 @@ class SalesPlanLive extends Component
 
             $this->closeModal();
             $this->mount();
-            
+
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(
                 'alert',
