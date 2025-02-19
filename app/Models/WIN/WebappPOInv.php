@@ -12,7 +12,9 @@ class WebappPOInv extends Model
     use HasFactory;
     protected $table = 'Webapp_POInv';
     protected $primaryKey = 'POInvID';
-    public $timestamps = false;
+    public $incrementing = true;
+    protected $keyType = 'int';
+
 
     protected $fillable = [
         'DocuDate',
@@ -44,5 +46,4 @@ class WebappPOInv extends Model
     {
         return $this->belongsTo(POInvDTCar::class, 'TypeCarID', 'TypeCarID');
     }
-
 }

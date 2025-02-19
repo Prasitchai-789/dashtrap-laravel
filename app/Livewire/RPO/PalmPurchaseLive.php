@@ -214,7 +214,7 @@ class PalmPurchaseLive extends Component
 
     public function resetInputFields()
     {
-        $this->POInvID = '';
+        // $this->POInvID = '';
         $this->DocuDate = '';
         $this->BillID = '';
         $this->VendorCarID = '';
@@ -255,9 +255,9 @@ class PalmPurchaseLive extends Component
                     'Scaler' => 'required',
                 ]
             );
-            $lastId = WebappPOInv::max('POInvID'); // หาค่าล่าสุด
-            $newId = $lastId ? $lastId + 1 : 1;
-            $validatedData['POInvID'] = $newId;
+            // $lastId = WebappPOInv::max('POInvID'); // หาค่าล่าสุด
+            // $newId = $lastId ? $lastId + 1 : 1;
+            // $validatedData['POInvID'] = $newId;
             $validatedData['VendorCode'] = $this->VendorCode;
 
             $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
@@ -311,7 +311,7 @@ class PalmPurchaseLive extends Component
         $this->edit = true;
         $this->updateId = $id;
         $this->webappPOInv = WebappPOInv::find($id);
-        $this->POInvID = $this->webappPOInv->POInvID;
+        // $this->POInvID = $this->webappPOInv->POInvID;
         $this->DocuDate = $this->webappPOInv->DocuDate;
         $this->BillID = $this->webappPOInv->BillID;
         $this->VendorCarID = $this->webappPOInv->VendorCarID;
