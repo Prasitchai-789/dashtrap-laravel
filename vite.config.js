@@ -7,6 +7,9 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'node_modules/jsvectormap/dist/css/jsvectormap.min.css',
+                'resources/css/icons.css',
+                'resources/js/pages/dashboard.js',
             ],
             refresh: true,
         }),
