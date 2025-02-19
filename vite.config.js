@@ -10,6 +10,7 @@ export default defineConfig({
                 'node_modules/jsvectormap/dist/css/jsvectormap.min.css',
                 'resources/css/icons.css',
                 'resources/js/pages/dashboard.js',
+                'node_modules/glightbox/dist/css/glightbox.min.css', 
             ],
             refresh: true,
         }),
