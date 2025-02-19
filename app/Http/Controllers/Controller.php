@@ -12,8 +12,9 @@ class Controller extends BaseController
 
     public function testLive()
     {
-        return view('car-view-index');
+        return view('test-index');
     }
+
 
     public function starterPage()
     {
