@@ -5,6 +5,7 @@
  */
 
 // import _ from 'lodash/lodash';
+import 'flowbite';
 
 import "dropzone/dist/dropzone-min";
 

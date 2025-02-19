@@ -6,7 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@tailwindcss/forms": "^0.5.2",
+        "@tailwindcss/forms": "^0.5.10",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.2",
         "axios": "^1.6.4",
@@ -25,7 +25,6 @@
         "@iconify/json": "^2.2.227",
         "@iconify/tailwind": "^1.1.1",
         "@tailwindcss/aspect-ratio": "^0.4.2",
-        "@tailwindcss/forms": "^0.5.3",
         "@tailwindcss/typography": "^0.5.9",
         "@tailwindcss/vite": "^4.0.6",
         "apexcharts": "3.27.2",
@@ -35,6 +34,7 @@
         "datatables.net-dt": "^2.0.7",
         "dayjs": "^1.11.5",
         "dropzone": "^6.0.0-beta.2",
+        "flowbite": "^3.1.2",
         "glightbox": "^3.3.0",
         "gmaps": "^0.4.25",
         "gridjs": "^6.2.0",
