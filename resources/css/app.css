@@ -6841,14 +6841,14 @@ Template Name: SAY
 }
 
 .border-left-blue {
-    @apply border-l-[4px] border-[#4099ff];
+    @apply border-l-[8px] border-[#4099ff];
 }
 .border-left-green {
-    @apply border-l-[4px] border-[#2ed8b6];
+    @apply border-l-[8px] border-[#2ed8b6];
 }
 .border-left-yellow {
-    @apply border-l-[4px] border-[#ffb64d];
+    @apply border-l-[8px] border-[#ffb64d];
 }
 .border-left-red {
-    @apply border-l-[4px] border-[#ff5370];
+    @apply border-l-[8px] border-[#ff5370];
 }

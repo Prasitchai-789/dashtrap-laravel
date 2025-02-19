@@ -15,4 +15,8 @@ class PalmPurchase extends Controller
     {
         return view('rpo.palm-plan-index');
     }
+    public function reportPalmPurchase()
+    {
+        return view('rpo.report-palm-purchase-index');
+    }
 }

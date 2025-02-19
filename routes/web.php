@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth','role:developer|admin|admin-RPO']], functi
     Route::get('/palm-purchase', [PalmPurchase::class, 'palmPurchase'])->name('palm-purchase');
     Route::get('/palm-plan', [PalmPurchase::class, 'palmPlan'])->name('palm-plan');
     Route::get('/sales-product', [SalesProductController::class, 'salesProduct'])->name('sales-product');
+    Route::get('/report-palm-purchase', [PalmPurchase::class, 'reportPalmPurchase'])->name('report-palm-purchase');
 });
 
 //-------- HRE ------//
