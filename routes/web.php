@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth','role:developer|admin|user-RPO|user-MAR']]
 });
 
 //-------- ACC ------//
-Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|admin-ACC|user-ACC']], function () {
     Route::get('/purchase-price', [PurchasePriceController::class, 'purchasePrice'])->name('purchase-price');
 });
 
