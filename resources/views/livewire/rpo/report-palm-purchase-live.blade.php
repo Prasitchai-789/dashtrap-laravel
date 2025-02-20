@@ -153,77 +153,62 @@
             </div>
 
         </div>
-        <div class="grid gap-5 mb-5 xl:grid-cols-3 md:grid-cols-3">
-
-            <div class="mx-8 mt-6">
+        <div class="grid grid-cols-1 gap-5 mb-5 md:grid-cols-2 xl:grid-cols-3">
+            <div class="mx-4 mt-6">
                 <div class="mb-4 card border-left-blue">
                     <div class="card-body">
                         <div class="mb-4">
-                            <span
-                                class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
+                            <span class="px-1 py-0.5 text-[10px] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
                             <h5 class="truncate card-title font-prompt">ปริมาณการรับซื้อผลปาล์ม</h5>
                         </div>
-
                         <div class="flex items-center justify-end mb-4">
-                            <h2 class="text-3xl font-bold text-default-800">{{ number_format($totalPalmOfDate, 0, '.',
-                                ',') }}
+                            <h2 class="text-3xl font-bold text-default-800">{{ number_format($totalPalmOfDate, 0, '.', ',') }}
                                 <span class="text-sm font-anuphan"> kg.</span>
                             </h2>
                         </div>
                     </div>
-                    <!--end card body-->
                 </div>
+
                 <div class="mb-4 card border-left-green">
                     <div class="card-body">
                         <div class="mb-4">
-                            <span
-                                class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
+                            <span class="px-1 py-0.5 text-[10px] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
                             <h5 class="truncate card-title font-prompt">ยอดเงิน</h5>
                         </div>
-
                         <div class="flex items-center justify-end mb-4">
-                            <h2 class="text-3xl font-bold text-default-800">{{ number_format($totalAmnt2OfDate, 3, '.',
-                                ',') }}
+                            <h2 class="text-3xl font-bold text-default-800">{{ number_format($totalAmnt2OfDate, 3, '.', ',') }}
                                 <span class="text-sm font-anuphan"> MB</span>
                             </h2>
                         </div>
                     </div>
-                    <!--end card body-->
                 </div>
+
                 <div class="mb-4 card border-left-red">
                     <div class="card-body">
                         <div class="mb-4">
-                            <span
-                                class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
+                            <span class="px-1 py-0.5 text-[10px] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
                             <h5 class="truncate card-title font-prompt">ราคาเฉลี่ย</h5>
                         </div>
-
                         <div class="flex items-center justify-end mb-4">
                             <h2 class="text-3xl font-bold text-default-800">{{ number_format($AvgPrice, 2, '.', ',') }}
                                 <span class="text-sm font-anuphan"> บาท/kg.</span>
                             </h2>
                         </div>
                     </div>
-                    <!--end card body-->
                 </div>
             </div>
 
-            <div class="xl:col-span-2">
-                <div class="mr-8">
+            <div class="xl:col-span-2 md:col-span-1 sm:mx-4">
+                <div class="mr-4">
                     <div class="overflow-x-auto">
                         <div class="inline-block min-w-full align-middle">
                             <div class="overflow-hidden">
                                 <table class="min-w-full divide-y divide-default-200">
                                     <thead>
                                         <tr class="text-lg font-bold font-prompt">
-                                            <th scope="col" class="px-6 py-2 text-start text-default-500">
-                                                ชื่อลูกค้า</th>
-                                            <th scope="col" class="px-6 py-2 text-start text-default-500">
-                                                น้ำหนัก
-                                            </th>
-                                            <th scope="col" class="px-6 py-2 text-start text-default-500">
-                                                ราคาเฉลี่ย
-                                            </th>
+                                            <th class="px-6 py-2 text-start text-default-500">ชื่อลูกค้า</th>
+                                            <th class="px-6 py-2 text-start text-default-500">น้ำหนัก</th>
+                                            <th class="px-6 py-2 text-start text-default-500">ราคาเฉลี่ย</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-default-200">
@@ -252,6 +237,7 @@
                 </div>
             </div>
         </div>
+
 
     </div>
     {{-- <div class="mt-2 card">
