@@ -313,7 +313,7 @@ class SalesProductLive extends Component
 
 
             $Telegram = new Telegram();
-            $Telegram->sendToTelegram($message);
+            $Telegram->sendToTelegramSales($message);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(

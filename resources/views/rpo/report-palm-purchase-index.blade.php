@@ -84,7 +84,7 @@ channel.bind('form-submit', function(data) {
 </script>
 
 
-{{-- @vite(['resources/js/pages/dashboard.js']) --}}
+@vite(['resources/js/pages/charts-apex.js'])
 
 
 @endsection

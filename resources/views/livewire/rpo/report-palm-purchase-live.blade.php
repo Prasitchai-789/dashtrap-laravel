@@ -129,23 +129,27 @@
             <!--end card body-->
         </div>
     </div>
-    <div class="card">
+    <div class="overflow-auto card">
         <div class="mt-6 mb-3">
-            <div class="flex items-center justify-between">
-
+            <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+                <!-- ส่วนเลือกวันที่ -->
                 <div class="flex items-center mx-8">
                     <label for="selectedDate"
                         class="items-center inline-block text-sm font-medium text-default-800 me-2 font-anuphan">เลือกวันที่</label>
                     <div class="md:col-span-3">
-                        <input
-                            class="font-semibold text-blue-900 rounded-lg form-input focus:ring-blue-500 focus:border-blue-500"
+                        <input class="font-semibold text-blue-900 rounded-lg form-input focus:ring-blue-500 focus:border-blue-500"
                             type="date" id="selectedDate" wire:model="selectedDate" wire:change="setDate">
                     </div>
                 </div>
-                <h5 class="text-2xl text-center card-title font-prompt">ข้อมูลการรับซื้อผลปาล์ม <span
-                        class="text-blue-500">วันที่ {{
-                        \Carbon\Carbon::parse($selectedDate)->locale('th')->translatedFormat('d F Y') }}</span></h5>
-                <h5 class="text-2xl text-center card-title font-prompt"></h5>
+
+                <!-- ส่วนแสดงวันที่ -->
+                <h5 class="text-2xl text-center card-title font-prompt">
+                    ข้อมูลการรับซื้อผลปาล์ม <br class="sm:hidden">
+                    <span class="text-blue-500">
+                        {{ \Carbon\Carbon::parse($selectedDate)->locale('th')->translatedFormat('d F Y') }}
+                    </span>
+                </h5>
+                <h5></h5>
             </div>
 
         </div>
@@ -225,21 +229,19 @@
                                     <tbody class="divide-y divide-default-200">
                                         @foreach ($sumVendors as $vendor)
                                         <tr class="text-xl font-anuphan">
-                                            <td
-                                                class="px-6 py-2 text-sm font-medium whitespace-nowrap text-default-800">
+                                            <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-default-800">
                                                 {{ $vendor->empVendor->VendorName }}</td>
                                             <td class="px-6 py-2 text-sm font-bold whitespace-nowrap text-default-800">
                                                 {{ number_format($vendor->totalGoodNet, 2) }} </td>
                                             @if ($AvgPrice < $vendor->avgPrice)
-                                                <td class="px-6 py-2 text-sm font-bold text-red-500 whitespace-nowrap">
-                                                    {{ number_format($vendor->avgPrice, 2) }}
-                                                </td>
-                                                @else
-                                                <td
-                                                    class="px-6 py-2 text-sm font-bold text-default-800 whitespace-nowrap">
-                                                    {{ number_format($vendor->avgPrice, 2) }}
-                                                </td>
-                                                @endif
+                                            <td class="px-6 py-2 text-sm font-bold text-red-500 whitespace-nowrap">
+                                                {{ number_format($vendor->avgPrice, 2) }}
+                                            </td>
+                                            @else
+                                            <td class="px-6 py-2 text-sm font-bold text-default-800 whitespace-nowrap">
+                                                {{ number_format($vendor->avgPrice, 2) }}
+                                            </td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -250,5 +252,15 @@
                 </div>
             </div>
         </div>
+
     </div>
+    {{-- <div class="mt-2 card">
+        <div class="card">
+            <div class="p-6">
+                <h4 class="mb-4 card-title">Column with Data Labels</h4>
+
+                <div id="column_chart_datalabel" class="apex-charts" dir="ltr"></div>
+            </div>
+        </div><!--end card-->
+    </div> --}}
 </div>

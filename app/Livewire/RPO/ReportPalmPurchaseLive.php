@@ -102,14 +102,6 @@ class ReportPalmPurchaseLive extends Component
     {
         $this->DocuDate = now()->format('Y-m-d');
         $this->selectedDate = now()->format('Y-m-d');
-
-        $setPrices = SetPriceScaler::whereDate('created_at', $this->selectedDate)->first();
-        if (!$setPrices) {
-            $this->dispatch('showSweetAlert');
-        } else {
-            $this->Price1 = number_format($setPrices->set_price, 2);
-            $this->Scaler = $setPrices->set_scaler;
-        }
         $this->setDate();
     }
 
