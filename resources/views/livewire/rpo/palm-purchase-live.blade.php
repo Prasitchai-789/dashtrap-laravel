@@ -188,9 +188,9 @@
                             <tr class="text-gray-800 hover:bg-gray-100 hover:text-primary">
                                 <td class="p-3 text-center border">{{ ($webappPOInvs->firstItem() + $loop->index) }}
                                 </td>
-                                <td class="p-3 border">
-                                    {{ \Carbon\Carbon::createFromFormat('M d Y h:i:s:A', $webappPOInv->DocuDate)->locale('th')->translatedFormat('d M Y') }}
-                                </td>
+                                <td class="p-3 border">{{
+                                    \Carbon\Carbon::parse($webappPOInv->DocuDate)->locale('th')->translatedFormat('d/m/Y')
+                                    }}</td>
                                 <td class="p-3 border">{{$webappPOInv->BillID}}</td>
                                 <td class="p-3 border">{{$webappPOInv->poInvDTCar->TypeCarName}}</td>
                                 <td class="p-3 border">{{$webappPOInv->VendorCarID}}</td>
