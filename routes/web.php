@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 });
 
 //-------- RPO ------//
-Route::group(['middleware' => ['auth','role:developer|admin|admin-RPO']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|GM|admin-RPO']], function () {
     Route::get('/palm-purchase', [PalmPurchase::class, 'palmPurchase'])->name('palm-purchase');
     Route::get('/palm-plan', [PalmPurchase::class, 'palmPlan'])->name('palm-plan');
     Route::get('/sales-product', [SalesProductController::class, 'salesProduct'])->name('sales-product');
@@ -59,23 +59,23 @@ Route::group(['middleware' => ['auth','role:developer|admin|admin-RPO']], functi
 });
 
 //-------- HRE ------//
-Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|GM']], function () {
     Route::get('/employee', [Employee::class, 'employee'])->name('employee');
     Route::get('/use-car', [UseCarController::class, 'useCar'])->name('use-car');
 });
 
 //-------- MAR ------//
-Route::group(['middleware' => ['auth','role:developer|admin|user-RPO|user-MAR']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|GM|user-RPO|user-MAR']], function () {
     Route::get('/sales-plan', [SalesPlanController::class, 'salesPlan'])->name('sales-plan');
 });
 
 //-------- ACC ------//
-Route::group(['middleware' => ['auth','role:developer|admin|admin-ACC|user-ACC']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|GM|admin-ACC|user-ACC']], function () {
     Route::get('/purchase-price', [PurchasePriceController::class, 'purchasePrice'])->name('purchase-price');
 });
 
 //-------- CAR ------//
-Route::group(['middleware' => ['auth','role:developer|admin|user']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|GM|user']], function () {
     Route::get('/car-request', [CarController::class, 'carRequest'])->name('car-request');
     Route::get('/car-report', [CarController::class, 'carReport'])->name('car-report');
     Route::get('/car-view/{carReportId}', [CarController::class, 'carView'])->name('car-view');
