@@ -1,6 +1,136 @@
 <div>
     @include('layouts.root/page-title', ['subtitle' => 'ฝ่ายบัญชีและการเงิน', 'title' => 'บันทึกราคารับซื้อ'])
 
+    <div class="grid gap-5 mb-2 xl:grid-cols-4 md:grid-cols-2">
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-4">
+                    <span
+                        class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
+                    <h5 class="truncate card-title font-prompt">จำนวนรายการ</h5>
+                </div>
+
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-3xl font-medium text-default-800">{{ number_format($totalItemOfDate, 0, '.', ',') }}
+                        <span class="text-sm"> รายการ</span>
+                    </h2>
+                    <span class="flex items-center">
+                        <span class="text-sm text-default-400">{{ number_format($progressItem, 0) }}%</span>
+                        @if ($progressItem > 70)
+                        <i class="fa-solid fa-arrow-up text-success ms-2"></i>
+                        @else
+                        <i class="fa-solid fa-arrow-down text-danger ms-2"></i>
+                        @endif
+                    </span>
+                </div>
+
+                <div class="flex w-full h-1.5 bg-default-200 rounded-full overflow-hidden shadow-sm">
+                    <div class="flex flex-col justify-center overflow-hidden rounded-full bg-primary" role="progressbar"
+                        aria-valuenow="{{ $progressItem }}" aria-valuemin="0" aria-valuemax="100"
+                        style="width: {{ $progressItem }}%;">
+                    </div>
+                </div>
+            </div>
+            <!--end card body-->
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-4">
+                    <span
+                        class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
+                    <h5 class="truncate card-title font-prompt">ปริมาณผลปาล์ม</h5>
+                </div>
+
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-3xl font-medium text-default-800">{{ number_format($totalPalmOfDate, 0, '.', ',') }}
+                        <span class="text-sm">kg.</span>
+                    </h2>
+                    <span class="flex items-center">
+                        <span class="text-sm text-default-400">{{ number_format($progressFFB, 0) }}%</span>
+                        @if ($progressFFB > 70)
+                        <i class="fa-solid fa-arrow-up text-success ms-2"></i>
+                        @else
+                        <i class="fa-solid fa-arrow-down text-danger ms-2"></i>
+                        @endif
+                    </span>
+                </div>
+
+                <div class="flex w-full h-1.5 bg-default-200 rounded-full overflow-hidden shadow-sm">
+                    <div class="flex flex-col justify-center overflow-hidden rounded-full bg-success" role="progressbar"
+                        aria-valuenow="{{ $progressFFB }}" aria-valuemin="0" aria-valuemax="100"
+                        style="width: {{ $progressFFB }}%;">
+                    </div>
+                </div>
+            </div>
+            <!--end card body-->
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-4">
+                    <span
+                        class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
+                    <h5 class="truncate card-title font-prompt">ราคาเฉลี่ย</h5>
+                </div>
+
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-3xl font-medium text-default-800">{{ number_format($AvgPrice, 2, '.', ',') }}
+                        <span class="text-sm"> บาท/kg.</span>
+                    </h2>
+                    <span class="flex items-center">
+                        <span class="text-sm text-default-400">{{ number_format($progressMaxPrice2, 0) }}%</span>
+                        @if ($progressMaxPrice2 < $avgPrice2)
+                        <i class="fa-solid fa-arrow-up text-success ms-2"></i>
+                        @else
+                        <i class="fa-solid fa-arrow-down text-danger ms-2"></i>
+                        @endif
+                    </span>
+                </div>
+
+                <div class="flex w-full h-1.5 bg-default-200 rounded-full overflow-hidden shadow-sm">
+                    <div class="flex flex-col justify-center overflow-hidden rounded-full bg-danger" role="progressbar"
+                        aria-valuenow="{{ $progressMaxPrice2 }}" aria-valuemin="0" aria-valuemax="100"
+                        style="width: {{ $progressMaxPrice2 }}%;">
+                    </div>
+                </div>
+            </div>
+            <!--end card body-->
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-4">
+                    <span
+                        class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
+                    <h5 class="truncate card-title font-prompt">ยอดเงิน</h5>
+                </div>
+
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-3xl font-medium text-default-800">{{ number_format($totalAmnt2OfDate, 3, '.', ',') }}
+                        <span class="text-sm"> MB.</span>
+                    </h2>
+                    <span class="flex items-center">
+                        <span class="text-sm text-default-400">{{ number_format($progressMaxPrice2, 0) }}%</span>
+                        @if ($progressMaxPrice2 > 91)
+                        <i class="fa-solid fa-arrow-up text-success ms-2"></i>
+                        @else
+                        <i class="fa-solid fa-arrow-down text-danger ms-2"></i>
+                        @endif
+                    </span>
+                </div>
+
+                <div class="flex w-full h-1.5 bg-default-200 rounded-full overflow-hidden shadow-sm">
+                    <div class="flex flex-col justify-center overflow-hidden rounded-full bg-warning" role="progressbar"
+                        aria-valuenow="{{ $progressMaxPrice2 }}" aria-valuemin="0" aria-valuemax="100"
+                        style="width: {{ $progressMaxPrice2 }}%;">
+                    </div>
+                </div>
+            </div>
+            <!--end card body-->
+        </div>
+
+
+    </div>
     <div class="page-header">
         <div class="p-6 bg-white rounded-lg shadow-lg">
             <div class="flex items-center justify-between mb-2">

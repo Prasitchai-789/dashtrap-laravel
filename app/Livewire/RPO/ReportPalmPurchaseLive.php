@@ -54,6 +54,7 @@ class ReportPalmPurchaseLive extends Component
     public $set_scaler;
     public $selectedDate;
     public $totalPalmOfDate;
+    public $totalPalmOfAmnt2;
     public $totalAmnt2OfDate;
     public $totalItemOfDate;
     public $sumRamOfDate;
@@ -136,6 +137,8 @@ class ReportPalmPurchaseLive extends Component
         $this->totalPalmOfDate = $webappPOInvQuery->sum('GoodNet');
         $this->totalAmnt2OfDate = $webappPOInvQuery->sum('Amnt2')/1000000;
         $this->totalItemOfDate = $webappPOInvQuery->count();
+        $this->totalPalmOfAmnt2 = (clone $webappPOInvQuery)->where('Amnt2', '!=', 0)->sum('GoodNet');
+
 
         // ดึงข้อมูลเฉพาะที่ต้องใช้เงื่อนไขใหม่
         $this->sumRamOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
@@ -147,7 +150,7 @@ class ReportPalmPurchaseLive extends Component
             ->count();
 
         // ใช้ค่าที่โหลดมาแล้ว เพื่อป้องกัน Query ซ้ำ
-        $this->AvgPrice = ($this->totalPalmOfDate > 0) ? (($this->totalAmnt2OfDate*1000000) / $this->totalPalmOfDate) : 0;
+        $this->AvgPrice = ($this->totalPalmOfDate > 0) ? (($this->totalAmnt2OfDate*1000000) / $this->totalPalmOfAmnt2) : 0;
 
         // โหลดค่าแผนการผลิต
         $palmPlanData = PalmPlan::whereDate('created_at', $this->selectedDate)->first();

@@ -182,7 +182,7 @@
                         </div>
 
                         <div class="flex items-center justify-end mb-4">
-                            <h2 class="text-3xl font-bold text-default-800">{{ number_format($totalAmnt2OfDate, 2, '.',
+                            <h2 class="text-3xl font-bold text-default-800">{{ number_format($totalAmnt2OfDate, 3, '.',
                                 ',') }}
                                 <span class="text-sm font-anuphan"> MB</span>
                             </h2>

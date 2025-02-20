@@ -52,14 +52,18 @@ class PurchasePriceLive extends Component
     public $set_scaler;
     public $selectedDate;
     public $totalPalmOfDate;
+    public $totalPalmOfAmnt2;
+    public $totalAmnt2OfDate;
     public $totalItemOfDate;
+    public $AvgPrice;
     public $sumRamOfDate;
     public $sumAgrOfDate;
     public $countRamOfDate;
     public $progressItem = 0;
-    public $progressRam = 0;
-    public $progressAgr = 0;
+    public $progressMaxPrice2 = 0;
+    public $progressAvg = 0;
     public $progressFFB = 0;
+    public $avgPrice2 = 0;
     public $vendorCarID;
 
     public bool $isLoading = false;
@@ -114,7 +118,43 @@ class PurchasePriceLive extends Component
 
     public function render()
     {
+        Carbon::setLocale('th');
         $latestDate = WebappPOInv::max('DocuDate'); // ค้นหาวันที่ล่าสุด
+        // โหลดข้อมูลที่ใช้ซ้ำหลายครั้ง
+        $webappPOInvQuery = WebappPOInv::whereDate('DocuDate', $this->selectedDate);
+
+        // ดึงค่าต่างๆ มาก่อน เพื่อไม่ต้อง query ซ้ำ
+        $this->totalPalmOfDate = $webappPOInvQuery->sum('GoodNet');
+        $this->totalAmnt2OfDate = $webappPOInvQuery->sum('Amnt2') / 1000000;
+        $this->totalItemOfDate = $webappPOInvQuery->count();
+        $this->totalPalmOfAmnt2 = (clone $webappPOInvQuery)->where('Amnt2', '!=', 0)->sum('GoodNet');
+
+
+        // ดึงข้อมูลเฉพาะที่ต้องใช้เงื่อนไขใหม่
+        $this->sumRamOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
+            ->where('VendorCode', 'like', '97%')
+            ->sum('GoodNet');
+
+        $this->countRamOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
+            ->whereIn('TypeCarID', ['10Wheels', '6Wheels', 'Trailer'])
+            ->count();
+
+        // ใช้ค่าที่โหลดมาแล้ว เพื่อป้องกัน Query ซ้ำ
+        $this->AvgPrice = ($this->totalPalmOfDate > 0) ? (($this->totalAmnt2OfDate * 1000000) / $this->totalPalmOfAmnt2) : 0;
+
+        // โหลดค่าแผนการผลิต
+        $palmPlanData = PalmPlan::whereDate('created_at', $this->selectedDate)->first();
+        $palmPlan = (int) ($palmPlanData->palm_plan ?? 0);
+        $listPlan = (int) ($palmPlanData->list_plan ?? 0);
+        $maxPrice2 = WebappPOInv::max('Price2');
+        $this->avgPrice2 = WebappPOInv::average('Price2');
+
+        // คำนวณผลลัพธ์
+        $this->sumAgrOfDate = $this->totalPalmOfDate - $this->sumRamOfDate;
+        $this->progressFFB = ($palmPlan > 0) ? ($this->totalPalmOfDate / $palmPlan) * 100 : 0;
+        $this->progressMaxPrice2 = ($this->AvgPrice > 0) ? ($this->AvgPrice / $maxPrice2) * 100 : 0;
+        $this->progressAvg = ($this->progressMaxPrice2 > 0) ? (100 - $this->progressMaxPrice2) : 0;
+        $this->progressItem = ($listPlan > 0) ? ($this->countRamOfDate / $listPlan) * 100 : 0;
 
         // โหลดข้อมูลที่จำเป็น
         $webappPOInvs = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
