@@ -168,6 +168,7 @@ class PalmPurchaseLive extends Component
 
     public function render()
     {
+        // Carbon::setLocale('th');
         $latestDate = WebappPOInv::max('DocuDate'); // ค้นหาวันที่ล่าสุด
         // โหลดข้อมูลที่ใช้ซ้ำหลายครั้ง
         $webappPOInvQuery = WebappPOInv::whereDate('DocuDate', $this->selectedDate);
@@ -202,7 +203,6 @@ class PalmPurchaseLive extends Component
         $POInvDTCars = POInvDTCar::limit(10)->get();
         $setPriceScalers = SetPriceScaler::orderBy('id', 'desc')->paginate(5);
         $vendorCarIDs = WebappPOInv::distinct()->pluck('VendorCarID');
-
         return view('livewire.rpo.palm-purchase-live', [
             'webappPOInvs' => $webappPOInvs,
             'POInvDTCars' => $POInvDTCars,
