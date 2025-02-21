@@ -12,7 +12,7 @@ export default defineConfig({
                 'resources/js/pages/dashboard.js',
                 'node_modules/glightbox/dist/css/glightbox.min.css',
                 'resources/js/pages/gallery.js',
-                'resources/js/pages/charts-apex.js'
+                // 'resources/js/pages/charts-apex.js'
             ],
             refresh: true,
         }),

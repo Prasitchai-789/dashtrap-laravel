@@ -5,6 +5,7 @@ use App\Http\Controllers\CAR\CarController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HRE\Employee;
 use App\Http\Controllers\CAR\UseCarController;
+use App\Http\Controllers\Dashboard\GraphController;
 use App\Http\Controllers\MAR\SalesPlanController;
 use App\Http\Controllers\RPO\SalesProductController;
 use Illuminate\Support\Facades\Route;
@@ -79,6 +80,11 @@ Route::group(['middleware' => ['auth','role:developer|admin|GM|user']], function
     Route::get('/car-request', [CarController::class, 'carRequest'])->name('car-request');
     Route::get('/car-report', [CarController::class, 'carReport'])->name('car-report');
     Route::get('/car-view/{carReportId}', [CarController::class, 'carView'])->name('car-view');
+});
+
+//-------- Dashboard ------//
+Route::group(['middleware' => ['auth','role:developer|admin|GM']], function () {
+    Route::get('/graph-palm', [GraphController::class, 'graphPalmPuchase'])->name('graph-palm');
 });
 
 

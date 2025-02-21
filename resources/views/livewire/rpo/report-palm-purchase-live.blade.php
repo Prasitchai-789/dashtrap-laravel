@@ -237,16 +237,5 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-    {{-- <div class="mt-2 card">
-        <div class="card">
-            <div class="p-6">
-                <h4 class="mb-4 card-title">Column with Data Labels</h4>
-
-                <div id="column_chart_datalabel" class="apex-charts" dir="ltr"></div>
-            </div>
-        </div><!--end card-->
-    </div> --}}
 </div>

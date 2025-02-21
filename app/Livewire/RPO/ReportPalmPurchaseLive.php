@@ -150,8 +150,13 @@ class ReportPalmPurchaseLive extends Component
             ->count();
 
         // ใช้ค่าที่โหลดมาแล้ว เพื่อป้องกัน Query ซ้ำ
-        $this->AvgPrice = ($this->totalPalmOfDate > 0) ? (($this->totalAmnt2OfDate*1000000) / $this->totalPalmOfAmnt2) : 0;
-
+        if ($this->totalPalmOfAmnt2 > 0) {
+            $this->AvgPrice = ($this->totalPalmOfDate > 0)
+                ? (($this->totalAmnt2OfDate * 1000000) / $this->totalPalmOfAmnt2)
+                : 0;
+        } else {
+            $this->AvgPrice = 0; // ป้องกันหารด้วยศูนย์
+        }
         // โหลดค่าแผนการผลิต
         $palmPlanData = PalmPlan::whereDate('created_at', $this->selectedDate)->first();
         $palmPlan = (int) ($palmPlanData->palm_plan ?? 0);
