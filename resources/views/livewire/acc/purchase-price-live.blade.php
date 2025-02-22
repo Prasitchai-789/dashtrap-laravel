@@ -80,9 +80,9 @@
                     <span class="flex items-center">
                         <span class="text-sm text-default-400">{{ number_format($progressMaxPrice2, 0) }}%</span>
                         @if ($progressMaxPrice2 < $avgPrice2)
-                        <i class="fa-solid fa-arrow-up text-success ms-2"></i>
+                        <i class="fa-solid fa-arrow-down text-success ms-2"></i>
                         @else
-                        <i class="fa-solid fa-arrow-down text-danger ms-2"></i>
+                        <i class="fa-solid fa-arrow-up text-danger ms-2"></i>
                         @endif
                     </span>
                 </div>
@@ -112,9 +112,9 @@
                     <span class="flex items-center">
                         <span class="text-sm text-default-400">{{ number_format($progressMaxPrice2, 0) }}%</span>
                         @if ($progressMaxPrice2 > 91)
-                        <i class="fa-solid fa-arrow-up text-success ms-2"></i>
+                        <i class="fa-solid fa-arrow-down text-success ms-2"></i>
                         @else
-                        <i class="fa-solid fa-arrow-down text-danger ms-2"></i>
+                        <i class="fa-solid fa-arrow-up text-danger ms-2"></i>
                         @endif
                     </span>
                 </div>
