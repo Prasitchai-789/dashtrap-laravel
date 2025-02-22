@@ -162,8 +162,6 @@ class PalmPurchaseLive extends Component
                 timer: 2500
             );
         }
-
-
     }
 
     public function render()
@@ -255,9 +253,6 @@ class PalmPurchaseLive extends Component
                     'Scaler' => 'required',
                 ]
             );
-            // $lastId = WebappPOInv::max('POInvID'); // หาค่าล่าสุด
-            // $newId = $lastId ? $lastId + 1 : 1;
-            // $validatedData['POInvID'] = $newId;
             $validatedData['VendorCode'] = $this->VendorCode;
 
             $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
@@ -273,11 +268,15 @@ class PalmPurchaseLive extends Component
                 showConfirmButton: false,
                 timer: 1500
             );
+            $countPOInvs = WebappPOInv::whereDate('DocuDate', $this->selectedDate)->count();
 
+            // ลำดับที่เพิ่มเข้ามาใหม่
+            $newOrder = $countPOInvs++;
 
             $sumPalm = $this->totalPalmOfDate + max(0, (float) $this->calculateWeight());
             $message = "FFB : " . number_format($sumPalm, 0, '.', ',') . " kg." .
                 "\n" . "📆 วันที่: "  . \Carbon\Carbon::parse($this->DocuDate)->locale('th')->translatedFormat('d F Y') .
+                "\n" . "✅ รายการที่: "  . $newOrder .
                 "\n" . "📋 เลขที่เอกสาร: "  . $this->BillID .
                 "\n" . "🙎‍♂️ ลูกค้า: "  . $this->VendorName .
                 "\n" . "🛒 น้ำหนักสุทธิ = "  . number_format($this->calculateWeight(), 0, '.', ',') . " kg." .
@@ -286,7 +285,6 @@ class PalmPurchaseLive extends Component
             $Telegram = new Telegram();
             $Telegram->sendToTelegramFFB($message);
             $this->closeModal();
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(
                 'alert',

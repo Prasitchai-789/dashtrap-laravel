@@ -78,7 +78,7 @@ class UseCarLive extends Component
     {
         //
     }
-   
+
     public function render()
     {
         Carbon::setLocale('th');
@@ -151,12 +151,11 @@ class UseCarLive extends Component
                 "\n" . "🙋‍♂️ : " . $user_name .
                 "\n" . "💼 : "  . $job .
                 "\n" . "🚘 : " . $car_number .
-                "\n" . "📟 : " . $use_start .
-                "\n" . "🌐 : "  . "isanpalm.dyndns.info:8001";
+                "\n" . "📟 : " . $use_start ;
 
             // ส่งข้อความไปยัง Telegram
             $Telegram = new Telegram();
-            $Telegram->sendToTelegram($message);
+            $Telegram->sendToTelegramPassCar($message);
 
             // อัปเดตสถานะคำขอรถ
             $carRequest->update([
@@ -263,11 +262,10 @@ class UseCarLive extends Component
                 "\n" . "💼 : "  . $jop .
                 "\n" . "🚘 : " . $car_number .
                 "\n" . "📟 : " . $use_start .
-                "\n" . "📟 : " . $use_end .
-                "\n" . "🌐 : "  . "isanpalm.dyndns.info:8001";
+                "\n" . "📟 : " . $use_end ;
 
             $Telegram = new Telegram();
-            $Telegram->sendToTelegram($message);
+            $Telegram->sendToTelegramPassCar($message);
 
             $this->dispatch(
                 'alert',

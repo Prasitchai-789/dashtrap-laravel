@@ -76,11 +76,16 @@ class CarRequestLive extends Component
         $this->closeModal();
     }
 
-    public function mount()
+    public function mount(CarRequest $carRequest)
     {
         $this->depts = EMDept::limit(20)->get();
         $this->employees = Employee::orderBy('EmpName', 'asc')->get();
         $this->carReports = CarReport::orderBy('car_number', 'asc')->get();
+        $this->carRequest = $carRequest;
+        $this->approver_request = Auth::user()->name;
+        $this->user_request = Auth::user()->emp_id;
+        $dept = Employee::where('EmpID', Auth::user()->emp_id)->first();
+        $this->department_request = $dept->DeptID;
     }
 
     public function render()
@@ -130,7 +135,8 @@ class CarRequestLive extends Component
             $message = "แจ้งขออนุญาต" .
                 "\n" . "🙎‍♂️ :"  . $empName[0]->EmpName .
                 "\n" . "💼 : "  . $this->job_request .
-                "\n" . "🚘 : " . $carReports[0]->car_number . " " . $carReports[0]->province->ProvinceName;
+                "\n" . "🚘 : " . $carReports[0]->car_number . " " . $carReports[0]->province->ProvinceName .
+                "\n" . "🚘 : " . "http://isanpalm.dyndns.info:8002/car-request" ;
 
             event(new NotifyProcessed([
                 'position' => "center",
@@ -142,7 +148,7 @@ class CarRequestLive extends Component
             ]));
 
             $Telegram = new Telegram();
-            $Telegram->sendToTelegram($message);
+            $Telegram->sendToTelegramCarRequest($message);
 
             $this->dispatch(
                 'alert',

@@ -4,9 +4,11 @@ namespace App\Livewire\Technician;
 
 use Carbon\Carbon;
 use Livewire\Component;
+use App\Models\HRE\Employee;
 use Livewire\WithPagination;
 use App\Models\Technician\TypeWork;
 use App\Models\Technician\WorkOrder;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Notify\Telegram;
 
 class WorkOrderLive extends Component
@@ -70,6 +72,12 @@ class WorkOrderLive extends Component
         $this->Image = '';
     }
 
+    public function mount(WorkOrder $workOrder)
+    {
+        $this->workOrder = $workOrder;
+        $emp = Employee::where('EmpID', Auth::user()->emp_id)->first();
+        $this->NameOfInformant = $emp->EmpName;
+    }
     public function render()
     {
         $workOrders = WorkOrder::orderBy('id', 'desc')
@@ -130,29 +138,24 @@ class WorkOrderLive extends Component
                 showConfirmButton: false,
                 timer: 1500
             );
+
+            $type = TypeWork::where('TypeWorkID', $validatedData['TypeWork'])->value('TypeWork'); // ดึงค่า TypeWork โดยตรง
+
+            $message = "แจ้งซ่อม : " . $this->MachineName .
+                "\n" . "🙎‍♂️ ผู้แจ้ง: "  . $this->NameOfInformant .
+                "\n" . "📋 ประเภท: "  . $type .
+                "\n" . "📝 รายละเอียด: "  . $this->Detail .
+                "\n" . "🚧 สถานที่: "  . $this->Location  .
+                "\n" . "📞 เบอร์: "  . $this->Telephone;
+
             if ($this->TypeWork == 1) {
-                $type = TypeWork::where('TypeWorkID', $validatedData['TypeWork'])->first()->TypeWork;
-                //IT
-                $message = "แจ้งซ่อม : " . $this->MachineName .
-                    "\n" . "🙎‍♂️ ผู้แจ้ง: "  . $this->NameOfInformant .
-                    "\n" . "📋 ประเภท: "  . $type .
-                    "\n" . "📝 รายละเอียด: "  . $this->Detail .
-                    "\n" . "🚧 สถานที่: "  . $this->Location  .
-                    "\n" . "📞 เบอร์: "  . $this->Telephone;
                 $Telegram = new Telegram();
                 $Telegram->sendToTelegramITE($message);
             } else {
-                $type = TypeWork::where('TypeWorkID', $validatedData['TypeWork'])->first()->TypeWork;
-
-                $message = "แจ้งซ่อม : " . $this->MachineName .
-                    "\n" . "🙎‍♂️ ผู้แจ้ง: "  . $this->NameOfInformant .
-                    "\n" . "📋 ประเภท: "  . $type .
-                    "\n" . "📝 รายละเอียด: "  . $this->Detail .
-                    "\n" . "🚧 สถานที่: "  . $this->Location  .
-                    "\n" . "📞 เบอร์: "  . $this->Telephone;
                 $Telegram = new Telegram();
                 $Telegram->sendToTelegramMT($message);
             }
+
 
 
 

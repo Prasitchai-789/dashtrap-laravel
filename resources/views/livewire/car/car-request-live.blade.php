@@ -7,7 +7,7 @@
                 <!-- ส่วนของปุ่มต่างๆ -->
 
                 <button type="button"
-                    class="px-4 py-2 text-sm font-bold text-white transition rounded-lg bg-primary hover:bg-blue-500 font-anuphan"
+                    class="px-4 py-2 text-sm font-bold text-white transition rounded-lg bg-primary hover:bg-blue-500 font-anuphan hover:shadow-lg hover:scale-105 btn"
                     wire:click='openModal'>
                     ขออนุญาต
                 </button>
@@ -178,7 +178,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="grid grid-cols-1 m-4 mb-5 md:grid-cols-1 font-prompt">
                     <div class="flex items-center mt-2">
                         <input class="form-switch" type="checkbox" role="switch" id="use_check"

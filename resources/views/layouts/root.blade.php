@@ -38,9 +38,19 @@
 
     @include('layouts.root/footer-scripts')
 
+
+
     @yield('script')
 
-   
+    <script>
+        function nextFocusable() {
+            let focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+            let elements = [...document.querySelectorAll(focusableElements)];
+            let index = elements.indexOf(document.activeElement);
+            return elements[index + 1] || elements[0]; // โฟกัสไปที่ถัดไป หรือกลับไปที่แรกสุด
+        }
+    </script>
+
     @vite(['resources/js/app.js'])
 
 </body>

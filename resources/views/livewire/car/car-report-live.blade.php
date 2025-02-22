@@ -3,31 +3,31 @@
 
     <div class="overflow-hidden card">
         <div class="px-6 pt-4 pb-0">
-            <div class="flex items-center justify-start font-prompt">
+            <div class="flex flex-wrap items-center justify-start gap-2 font-prompt">
                 <!-- ส่วนของปุ่มต่างๆ -->
                 <button type="button"
-                    class="px-4 py-2 text-sm font-bold text-white transition rounded-lg btn border-primary bg-primary hover:bg-blue-500 font-anuphan me-2"
+                    class="px-4 py-2 text-sm font-bold text-white transition rounded-lg btn border-primary bg-primary hover:bg-blue-500 font-anuphan hover:shadow-lg hover:scale-105"
                     wire:click='openModal'>
                     เพิ่มรถ
                 </button>
                 <button type="button"
-                    class="px-4 py-2 text-sm font-bold rounded-lg btn border-primary text-primary hover:bg-primary hover:text-white font-anuphan me-2"
+                    class="px-4 py-2 text-sm font-bold rounded-lg btn border-primary text-primary hover:bg-primary hover:text-white font-anuphan hover:shadow-lg hover:scale-105"
                     wire:click='openModalBrand'>
                     เพิ่มยี่ห้อ
                 </button>
                 <button type="button"
-                    class="px-4 py-2 text-sm font-bold rounded-lg btn border-primary text-primary hover:bg-primary hover:text-white font-anuphan me-2"
+                    class="px-4 py-2 text-sm font-bold rounded-lg btn border-primary text-primary hover:bg-primary hover:text-white font-anuphan hover:shadow-lg hover:scale-105"
                     wire:click='openModalType'>
                     เพิ่มประเภทรถ
                 </button>
                 <button type="button"
-                    class="px-4 py-2 text-sm font-bold rounded-lg btn border-primary text-primary hover:bg-primary hover:text-white font-anuphan me-2"
+                    class="px-4 py-2 text-sm font-bold rounded-lg btn border-primary text-primary hover:bg-primary hover:text-white font-anuphan hover:shadow-lg hover:scale-105"
                     wire:click='openModalCharacter'>
                     เพิ่มลักษณะรถ
                 </button>
-
             </div>
         </div>
+
         <div class="card-header">
             <!-- Table -->
             <div class="">

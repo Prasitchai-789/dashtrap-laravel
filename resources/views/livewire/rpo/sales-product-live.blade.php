@@ -154,9 +154,9 @@
 
 
             <!-- Table -->
-            <div class="inline-block min-w-full align-middle sm:overflow-auto">
+            <div class='overflow-auto rounded-lg'>
                 <div class="rounded-lg font-anuphan">
-                    <table class="min-w-full divide-y divide-default-200">
+                    <table class="w-full border border-collapse">
                         <thead class="text-center bg-gray-200">
                             <tr class="border">
                                 <th class="p-3 border">ชื่อสินค้า</th>
@@ -192,18 +192,18 @@
                                     '-' }}
                                 </td>
 
-                                <td class="p-2 text-center border min-w-[50px] max-w-[50px] truncate">
+                                <td class="p-2 text-center border min-w-[100px] max-w-[100px] truncate">
                                     @if($salesPlan->Status == 'F')
                                     <span
                                         class="px-3 py-1 text-white rounded-full btn bg-green-500 min-w-[100px] max-w-[100px]">Finish</span>
                                     @elseif($salesPlan->Status == 'W')
                                     <button type="button"
-                                        class="px-3 py-1 border rounded-full btn border-warning text-warning hover:bg-warning hover:text-white min-w-[100px] max-w-[100px]"
+                                        class="px-3 py-1 border rounded-full btn border-warning text-warning hover:bg-warning hover:text-white min-w-[100px] max-w-[100px] hover:shadow-lg hover:scale-105"
                                         wire:click='changeStatus({{ $salesPlan->SOPID }})'>Waiting
                                     </button>
                                     @elseif($salesPlan->Status == 'P')
                                     <button type="button"
-                                        class="px-3 py-1 border rounded-full btn bg-blue-500  text-white hover:border-primary hover:bg-white hover:text-primary min-w-[100px] max-w-[100px]"
+                                        class="px-3 py-1 border rounded-full btn bg-blue-500  text-white hover:border-primary hover:bg-white hover:text-primary min-w-[100px] max-w-[100px] hover:shadow-lg hover:scale-105"
                                         wire:click='confirmSave({{ $salesPlan->SOPID }})'>Processing
                                     </button>
                                     @endif

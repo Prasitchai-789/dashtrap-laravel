@@ -6,7 +6,7 @@
                 <div class="flex items-center justify-end mb-2">
                     <!-- ส่วนของปุ่มต่างๆ -->
                     <button type="button"
-                        class="px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500"
+                        class="px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500 hover:shadow-lg hover:scale-105"
                         wire:click='openModal'>
                         CREATE
                     </button>
@@ -122,7 +122,7 @@
                                     class="flex items-center justify-center px-3 font-semibold bg-blue-100 border border-blue-200 rounded-s-md border-e-0">
                                     <i class="fa-regular fa-circle-user"></i>
                                 </div>
-                                <input type="text" placeholder="ชื่อสินค้า"
+                                <input type="text" placeholder="ชื่อผู้แจ้ง"
                                     class="font-semibold text-blue-700 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
                                     id="NameOfInformant" name="NameOfInformant" wire:model="NameOfInformant" required />
                             </div>
@@ -162,7 +162,7 @@
                                     class="flex items-center justify-center px-3 font-semibold bg-blue-100 border border-blue-200 rounded-s-md border-e-0">
                                     <i class="fa-solid fa-clipboard-user"></i>
                                 </div>
-                                <input type="text" placeholder="ชื่อคู่ค้า"
+                                <input type="text" placeholder="ชื่อเครื่อง"
                                     class="font-semibold text-blue-700 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
                                     id="MachineName" name="MachineName" wire:model="MachineName" required />
                             </div>

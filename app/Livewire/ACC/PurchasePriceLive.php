@@ -218,8 +218,8 @@ class PurchasePriceLive extends Component
         $this->GoodIB = $this->webappPOInv->GoodIB;
         $this->GoodOB = $this->webappPOInv->GoodOB;
         $this->GoodNet = number_format($this->webappPOInv->GoodNet, 0);
-        $this->Price1 = $this->webappPOInv->Price1;
-        $this->Price2 = $this->webappPOInv->Price2;
+        $this->Price1 = number_format($this->webappPOInv->Price1, 2);
+        $this->Price2 = number_format($this->webappPOInv->Price2, 2);
         $this->Amnt2 = number_format($this->webappPOInv->Amnt2, 0);
         if ($this->webappPOInv) {
             $this->VendorCode = $this->webappPOInv->VendorCode;

@@ -252,7 +252,7 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="BillID" name="BillID" wire:model="BillID" required />
+                                id="BillID" name="BillID" wire:model="BillID" required/>
                         </div>
                     </div>
 

@@ -63,7 +63,28 @@ class Telegram extends Controller
     public function sendToTelegramMT($message)
     {
         $telegram = new Api('7828630375:AAHMFhQEO0jz6YoJ8-aOM6z_X3vfzG4HbQM');
-        $chatId = -4624014542 ;
+        $chatId = -4727411984 ;
+
+        $telegram->sendMessage([
+            'chat_id' => $chatId,
+            'text' => $message,
+        ]);
+    }
+    public function sendToTelegramCarRequest($message)
+    {
+        $telegram = new Api('7881990195:AAFz8qi7VRqTjeiS3Pvk5rRXwGGjOqYyKWw');
+        $chatId = -4537055248 ;
+
+        $telegram->sendMessage([
+            'chat_id' => $chatId,
+            'text' => $message,
+        ]);
+    }
+
+    public function sendToTelegramPassCar($message)
+    {
+        $telegram = new Api('7727097108:AAGqUpEAIjF9upJCxhSXrX01ibvOFXh14f0');
+        $chatId = -4629180512 ;
 
         $telegram->sendMessage([
             'chat_id' => $chatId,

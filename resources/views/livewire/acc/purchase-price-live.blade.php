@@ -212,11 +212,10 @@
 
                                     <td
                                         class="p-2 text-center border  min-w-[100px] max-w-[100px] relative">
-                                        <button type="button"
-                                            class="p-2 text-warning transition  hover:bg-gray-200 min-w-[40px] max-w-[40px]"
-                                            wire:click='confirmEdit({{ $webappPOInv->POInvID }})'>
-                                            <i class="fa-solid fa-pen-to-square me-2"></i>
-                                        </button>
+                                        <a href="#" wire:click='confirmEdit({{ $webappPOInv->POInvID  }})'>
+                                            <i class="me-4 fa-regular fa-pen-to-square text-warning hover:text-yellow-700 hover:scale-110"
+                                                style="font-size: 16px; vertical-align: middle;"></i>
+                                        </a>
                                     </td>
 
                                 </tr>

@@ -7,7 +7,7 @@
                 <div class="flex items-center justify-end mb-2">
                     <!-- ส่วนของปุ่มต่างๆ -->
                         <button type="button"
-                            class="px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500"
+                            class="px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500 hover:shadow-lg hover:scale-105"
                             wire:click='openModal'>
                             CREATE
                         </button>

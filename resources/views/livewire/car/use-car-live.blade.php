@@ -164,7 +164,7 @@
                                     <td class="px-6 py-2.5 text-sm min-w-[130px] max-w-[140px] truncate text-center">
                                         @if ( $useCar->use_status == 1)
                                         <button
-                                            class="inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-100 text-red-800 hover:bg-red-200 min-w-[90px] max-w-[100px]"
+                                            class="inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-100 text-red-800 hover:bg-red-200 min-w-[90px] max-w-[100px] hover:shadow-lg hover:scale-105 btn"
                                             wire:click.prevent='end({{ $useCar->id }})'>
                                             <span class="w-1.5 h-1.5 inline-block bg-red-400 rounded-full"></span>
                                             นำรถไปใช้
