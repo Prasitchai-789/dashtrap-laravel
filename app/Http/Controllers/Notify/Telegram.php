@@ -50,4 +50,24 @@ class Telegram extends Controller
             'text' => $message,
         ]);
     }
+    public function sendToTelegramITE($message)
+    {
+        $telegram = new Api('7579608948:AAHSF6GbjI1mqF_YlcqmgNn7P0eiUFh-bpE');
+        $chatId = -4723323365 ;
+
+        $telegram->sendMessage([
+            'chat_id' => $chatId,
+            'text' => $message,
+        ]);
+    }
+    public function sendToTelegramMT($message)
+    {
+        $telegram = new Api('7828630375:AAHMFhQEO0jz6YoJ8-aOM6z_X3vfzG4HbQM');
+        $chatId = -4624014542 ;
+
+        $telegram->sendMessage([
+            'chat_id' => $chatId,
+            'text' => $message,
+        ]);
+    }
 }

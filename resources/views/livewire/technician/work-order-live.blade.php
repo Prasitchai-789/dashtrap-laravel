@@ -315,7 +315,7 @@
                                 </div>
                                 <select type="text"
                                     class="font-semibold text-blue-900 form-select rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="Status" name="Status"" wire:model=" Status"" required>
+                                    id="Status" name="Status" wire:model="Status" required>
                                     <option disabled selected value="">
                                         เลือกสถานะ</option>
                                     <option value="1">รอดำเนินการ
@@ -379,4 +379,6 @@
 
         </div>
     </div>
+    <!-- Loading Indicator -->
+
 </div>

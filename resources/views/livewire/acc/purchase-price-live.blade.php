@@ -227,7 +227,7 @@
                 </div>
                 <!-- End Table -->
                 <div class="flex mt-4">
-                    {{ $webappPOInvs->links() ?? '' }}
+                    {{ $webappPOInvs->links('pagination::tailwind') ?? '' }}
                 </div>
 
             </div>

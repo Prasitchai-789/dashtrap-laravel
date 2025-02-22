@@ -70,7 +70,7 @@
                         </tbody>
                     </table>
                     <div class="flex mt-4">
-                        {{ $employees->links() ?? '' }}
+                        {{ $employees->links('pagination::tailwind') ?? '' }}
                     </div>
                 </div>
             </div>

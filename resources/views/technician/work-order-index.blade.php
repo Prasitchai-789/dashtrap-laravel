@@ -10,162 +10,88 @@
 
 <livewire:technician.work-order-live />
 
+<div id="loading" class="font-prompt"
+
+    style="display: none ; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 0, 0, 0.7); color: white; padding: 15px 20px; border-radius: 15px; font-size: 16px; font-weight: bold;">
+    กำลังสร้างเอกสาร
+    <button type="button" class="inline-flex items-center justify-center gap-3 px-5 py-2 text-base font-semibold tracking-wide text-center align-middle duration-500 rounded-full cursor-default border-primary/10 text-primary hover:text-white">
+        <div class="animate-spin w-5 h-5 border-[3px] border-current border-t-transparent rounded-full" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+        Loading...
+    </button> <!-- button-end -->
+</div>
+
+
 @endsection
 
 
 @section('script')
+
+
 <script>
     window.addEventListener('modifyPdf', function(event) {
-            modifyPdf(event);
-            console.log(1);
+        modifyPdf(event);
+    });
 
-        });
+    const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib;
 
-        const {
-            degrees,
-            PDFDocument,
-            rgb,
-            StandardFonts
-        } = PDFLib
+    async function modifyPdf(event) {
+        const loadingElement = document.getElementById("loading");
+        loadingElement.style.display = "block"; // แสดง Loading
 
-        async function modifyPdf(event) {
+        try {
+            // ดึง PDF ต้นฉบับ
+            const pdfUrl = '/pdfs/FM-ITE-68-0004_Network.pdf';
+            const existingPdfBytes = await fetch(pdfUrl).then(res => res.arrayBuffer());
 
-// Fetch an existing PDF document
-const url = '/pdfs/FM-ITE-68-0004_Network.pdf'
-const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+            // โหลด PDF
+            const pdfDoc = await PDFDocument.load(existingPdfBytes);
+            pdfDoc.registerFontkit(fontkit);
 
-// Load a PDFDocument from the existing PDF bytes
-const pdfDoc = await PDFDocument.load(existingPdfBytes)
+            // โหลดฟอนต์ภาษาไทย
+            const thaiFontBytes = await fetch('https://script-app.github.io/font/THSarabunNew.ttf').then(res => res.arrayBuffer());
+            const thaiFont = await pdfDoc.embedFont(thaiFontBytes);
 
-// Register the `fontkit` instance
-pdfDoc.registerFontkit(fontkit)
+            // ดึงหน้าแรก
+            const firstPage = pdfDoc.getPages()[0];
+            const { width, height } = firstPage.getSize();
 
-// Fetch and embed the Thai font
-const thaiFontBytes = await fetch('https://script-app.github.io/font/THSarabunNew.ttf').then(res => res
-    .arrayBuffer());
-const thaiFont = await pdfDoc.embedFont(thaiFontBytes);
+            // 🔹 ฟังก์ชันช่วยใส่ข้อความลง PDF
+            function drawText(text, x, y, size = 14) {
+                if (text) {
+                    firstPage.drawText(text, { x, y, size, font: thaiFont, color: rgb(0.1, 0.1, 0.95) });
+                }
+            }
 
-// Embed the Helvetica font
-//   const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+            // 🔹 ใส่ข้อมูลในเอกสาร
+            drawText(event.detail.Number, width / 2 + 115, height / 2 + 302, 16);
+            drawText(event.detail.NameOfInformant, 77, 700);
+            drawText(event.detail.NameOfInformant, 340, 560);
+            drawText(event.detail.Date, 370, 540);
+            drawText('', 258, 700); // แผนก
+            drawText('', 358, 700); // ฝ่าย
+            drawText(event.detail.Location, 155, 681);
+            drawText(event.detail.MachineName, 394, 681);
+            drawText(event.detail.Detail, 145, 644);
+            drawText(event.detail.RepairReport, 125, 423);
+            drawText(event.detail.Technician, 305, 132);
+            // drawText(event.detail.updateDate, 310, 112);
 
-// Get the first page of the document
-const pages = pdfDoc.getPages()
-const firstPage = pages[0]
+            // 🔹 สร้างไฟล์ PDF ใหม่
+            const pdfBytes = await pdfDoc.save();
 
-// Get the width and height of the first page
-const {
-    width,
-    height
-} = firstPage.getSize()
+            // 🔹 ดาวน์โหลด PDF
+            download(pdfBytes, "ใบแจ้งซ่อม FM-ITE-68-0004.pdf", "application/pdf");
 
-// Draw a string of text diagonally across the first page
-//เลขที่
-firstPage.drawText(event.detail.Number, {
-    x: width / 2 + 115,
-    y: height / 2 + 302,
-    size: 16,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-    // rotate: degrees(-45),
-})
-//ชื่อ
-firstPage.drawText(event.detail.NameOfInformant, {
-    x: 77,
-    y: 700,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-//ชื่อ
-firstPage.drawText(event.detail.NameOfInformant, {
-    x: 340,
-    y: 560,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-//วันที่
-firstPage.drawText(event.detail.Date, {
-    x: 370,
-    y: 540,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-//แผนก
-firstPage.drawText('', {
-    x: 258,
-    y: 700,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-
-//ฝ่าย
-firstPage.drawText('', {
-    x: 358,
-    y: 700,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-//ที่ตั้ง
-firstPage.drawText(event.detail.Location, {
-    x: 155,
-    y: 681,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-
-//หมายเลขเครื่อง
-firstPage.drawText(event.detail.MachineName, {
-    x: 394,
-    y: 681,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-//อาการ
-firstPage.drawText(event.detail.Detail, {
-    x: 145,
-    y: 644,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-
-firstPage.drawText(event.detail.RepairReport, {
-    x: 125,
-    y: 423,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-
-firstPage.drawText(event.detail.Technician, {
-    x: 305,
-    y: 132,
-    size: 14,
-    font: thaiFont,
-    color: rgb(0.1, 0.1, 0.95),
-});
-// firstPage.drawText(event.detail.updateDate, {
-//     x: 310,
-//     y: 112,
-//     size: 14,
-//     font: thaiFont,
-//     color: rgb(0.1, 0.1, 0.95),
-// });
-// Serialize the PDFDocument to bytes (a Uint8Array)
-const pdfBytes = await pdfDoc.save()
-
-// Trigger the browser to download the PDF document
-download(pdfBytes, "ใบแจ้งซ่อม FM-ITE-68-0004_Network.pdf", "application/pdf");
-}
-
-
-
+        } catch (error) {
+            console.error("เกิดข้อผิดพลาด:", error);
+            alert("เกิดข้อผิดพลาดในการสร้างไฟล์ PDF");
+        } finally {
+            loadingElement.style.display = "none"; // ซ่อน Loading
+        }
+    }
 </script>
+
 
 @endsection

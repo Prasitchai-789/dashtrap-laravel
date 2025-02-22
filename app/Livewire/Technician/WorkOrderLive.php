@@ -115,7 +115,11 @@ class WorkOrderLive extends Component
                     'Detail' => 'nullable',
                 ]
             );
-            $validatedData['Number'] = $this->generateReferenceNumber();
+            if ($this->TypeWork == 1) {
+                $validatedData['Number'] = $this->generateReferenceNumber();
+            } else {
+                $validatedData['Number'] = null;
+            }
             WorkOrder::create($validatedData);
 
             $this->dispatch(
@@ -126,18 +130,33 @@ class WorkOrderLive extends Component
                 showConfirmButton: false,
                 timer: 1500
             );
+            if ($this->TypeWork == 1) {
+                $type = TypeWork::where('TypeWorkID', $validatedData['TypeWork'])->first()->TypeWork;
+                //IT
+                $message = "แจ้งซ่อม : " . $this->MachineName .
+                    "\n" . "🙎‍♂️ ผู้แจ้ง: "  . $this->NameOfInformant .
+                    "\n" . "📋 ประเภท: "  . $type .
+                    "\n" . "📝 รายละเอียด: "  . $this->Detail .
+                    "\n" . "🚧 สถานที่: "  . $this->Location  .
+                    "\n" . "📞 เบอร์: "  . $this->Telephone;
+                $Telegram = new Telegram();
+                $Telegram->sendToTelegramITE($message);
+            } else {
+                $type = TypeWork::where('TypeWorkID', $validatedData['TypeWork'])->first()->TypeWork;
 
-            $message = "แจ้งซ่อม : " . $this->MachineName .
-                "\n" . "🙎‍♂️ ลูกค้า: "  . $this->NameOfInformant .
-                "\n" . "📋 ประเภท: "  . $this->TypeWork .
-                "\n" . "📝 รายละเอียด: "  . $this->Detail .
-                "\n" . "🚧 สถานที่: "  . $this->Location  .
-                "\n" . "📞 เบอร์: "  . $this->Telephone;
+                $message = "แจ้งซ่อม : " . $this->MachineName .
+                    "\n" . "🙎‍♂️ ผู้แจ้ง: "  . $this->NameOfInformant .
+                    "\n" . "📋 ประเภท: "  . $type .
+                    "\n" . "📝 รายละเอียด: "  . $this->Detail .
+                    "\n" . "🚧 สถานที่: "  . $this->Location  .
+                    "\n" . "📞 เบอร์: "  . $this->Telephone;
+                $Telegram = new Telegram();
+                $Telegram->sendToTelegramMT($message);
+            }
 
-            $Telegram = new Telegram();
-            $Telegram->sendToTelegramTest($message);
+
+
             $this->closeModal();
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(
                 'alert',
@@ -158,11 +177,20 @@ class WorkOrderLive extends Component
         $this->updateId = $id;
         $this->showEdit($id);
     }
+    public function changeStatus($id)
+    {
+        $this->resetInputFields();
+        $this->showModalTechnician = true;
+        $this->edit = true;
+        $this->updateId = $id;
+        $this->showEdit($id);
+    }
+
     public function showEdit($id)
     {
         $this->workOrder = WorkOrder::find($id);
         $this->NameOfInformant = $this->workOrder->NameOfInformant;
-        $this->Status = $this->workOrder->Status;
+        // $this->Status = $this->workOrder->Status;
         $this->TypeWork = $this->workOrder->TypeWork;
         $this->Number = $this->workOrder->Number;
         $this->MachineName = $this->workOrder->MachineName;
@@ -175,14 +203,6 @@ class WorkOrderLive extends Component
         $this->RepairReport = $this->workOrder->RepairReport;
         $this->RepairDate = $this->workOrder->RepairDate;
         $this->Remark = $this->workOrder->Remark;
-    }
-    public function changeStatus($id)
-    {
-        $this->resetInputFields();
-        $this->showModalTechnician = true;
-        $this->edit = true;
-        $this->updateId = $id;
-        $this->showEdit($id);
     }
 
     public function updateEdit()

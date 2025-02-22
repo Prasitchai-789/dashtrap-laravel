@@ -231,7 +231,7 @@
                             </tbody>
                         </table>
                         <div class="flex mt-4">
-                            {{ $salesPlans->links() ?? '' }}
+                            {{ $salesPlans->links('pagination::tailwind') ?? '' }}
                         </div>
                     </div>
                 </div>
