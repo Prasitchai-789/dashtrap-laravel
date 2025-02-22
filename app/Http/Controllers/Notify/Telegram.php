@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class Telegram extends Controller
 {
-    public function sendToTelegram($message)
+    public function sendToTelegramTest($message)
     {
         $telegram = new Api(config('services.telegram.bot_token'));
         $chatId = env('TELEGRAM_CHAT_ID');

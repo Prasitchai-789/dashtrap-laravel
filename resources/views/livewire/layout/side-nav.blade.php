@@ -192,6 +192,30 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
             </li>
             @endcan
 
+            @can('view ALL')
+            <li class="menu-item hs-accordion font-prompt">
+                <a href="javascript:void(0)"
+                    class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
+                    <span class="text-2xl fa-solid fa-screwdriver-wrench"></span>
+                    <span class="menu-text"> ซ่อมบำรุง </span>
+                    <span class="menu-arrow"></span>
+                </a>
+
+                <div id="sidenavLevel"
+                    class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+                    <ul class="mt-1 space-y-1">
+                        <li class="menu-item">
+                            <a href="{{ route('work-order') }}"
+                                class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
+                                <i class="menu-dot"></i>
+                                <span class="menu-text">แจ้งซ่อม</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            @endcan
+
             @can('view user')
 
             <li class="px-3 py-2 text-sm font-medium text-default-400">Permission</li>

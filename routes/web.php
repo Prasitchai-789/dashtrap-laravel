@@ -13,6 +13,7 @@ use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RPO\PalmPurchase;
+use App\Http\Controllers\Technician\WorkOrderController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -86,6 +87,12 @@ Route::group(['middleware' => ['auth','role:developer|admin|GM|user']], function
 Route::group(['middleware' => ['auth','role:developer|admin|GM']], function () {
     Route::get('/graph-palm', [GraphController::class, 'graphPalmPuchase'])->name('graph-palm');
 });
+
+//-------- Technician ------//
+Route::group(['middleware' => ['auth','role:developer|admin|GM|user']], function () {
+    Route::get('/work-order', [WorkOrderController::class, 'workOrder'])->name('work-order');
+});
+
 
 
 
