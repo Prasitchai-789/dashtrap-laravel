@@ -345,6 +345,8 @@
                                     <option value="ห้องสโตร์">ห้องสโตร์
                                     </option>
                                     <option value="ป้อมรปภ.">ป้อมรปภ.</option>
+                                    <option value="ห้องตาชั่ง">ห้องตาชั่ง</option>
+                                    <option value="ห้องทำงานมั่นสกล">ห้องทำงานมั่นสกล</option>
                                     <option value="ห้องประชุมใหญ่">
                                         ห้องประชุมใหญ่</option>
                                     <option value="โรงอาหาร">โรงอาหาร</option>
