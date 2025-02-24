@@ -14,7 +14,7 @@
 
              <!-- Topbar Brand Logo -->
              <a href="" class="flex md:hidden">
-                 <img src="" class="h-8" >
+                 <img src="/images/apple-touch-icon.png" class="h-8" >
              </a>
 
              <!-- Topbar Search -->

@@ -12,6 +12,7 @@
     @yield('css')
     <!-- Scripts -->
     @include('layouts.root/head-css')
+    @livewireStyles
 </head>
 
 <body>
@@ -51,7 +52,7 @@
         }
     </script>
 
-    @vite(['resources/js/app.js'])
+    @livewireScripts
 
 </body>
 

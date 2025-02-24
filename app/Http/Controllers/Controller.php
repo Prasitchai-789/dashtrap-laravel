@@ -10,11 +10,15 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function testLive()
+    public function login()
     {
-        return view('test-index');
+        return view('home-index');
     }
 
+    public function home()
+    {
+        return view('home-index');
+    }
 
     public function starterPage()
     {

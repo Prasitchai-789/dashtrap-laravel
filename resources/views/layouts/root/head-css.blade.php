@@ -1,3 +1,6 @@
 
-@vite(['resources/css/icons.css', 'resources/css/app.css',])
-@vite(['resources/js/app.js'])
+@vite([
+    'resources/css/icons.css',
+    'resources/css/app.css',
+    'resources/js/app.js'
+])

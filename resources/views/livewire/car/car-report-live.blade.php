@@ -151,11 +151,11 @@
                                         <i class="me-4 fa-regular fa-eye text-primary hover:text-blue-700 hover:scale-110"
                                             style="font-size: 16px; vertical-align: middle;"></i>
                                     </a>
-                                    <a href="#" wire:click='confirmEdit({{ $carReport->id }})'>
+                                    <a href="javascript:void(0)" wire:click='confirmEdit({{ $carReport->id }})'>
                                         <i class="me-4 fa-regular fa-pen-to-square text-warning hover:text-yellow-700 hover:scale-110"
                                             style="font-size: 16px; vertical-align: middle;"></i>
                                     </a>
-                                    <a href="#" wire:click='confirmDelete({{ $carReport->id }})'>
+                                    <a href="javascript:void(0)" wire:click='confirmDelete({{ $carReport->id }})'>
                                         <i class="fa-regular fa-trash-can text-danger hover:text-red-700 hover:scale-110"
                                             style="font-size: 16px; vertical-align: middle;"></i>
                                     </a>
@@ -176,7 +176,7 @@
 
         <!-- Model ADD  -->
         <x-modal title="ข้อมูลรถ" wire:model="showModal" maxWidth="4xl" zIndex="20" closeModal="closeModal">
-            <form class="form " wire:submit.prevent="{{ $edit ? 'updateCarReport' : 'saveCarReport' }}"
+            <form class="form " wire:submit.prevent="{{ $edit ? 'updateCarReport' : 'saveCarReport' }}" method="POST"
                 id="formAddCarReport">
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-2 font-anuphan">
@@ -454,7 +454,7 @@
                             <input type="checkbox" id="car_status" class="form-switch"
                                 wire:model="car_status" wire:change="updateCarStatus" {{ $car_status ? 'checked' : '' }}>
 
-                            <label class="ms-1.5" for="car_canDrive">
+                            <label class="ms-1.5" for="car_status">
                                 {{ $car_status ? 'ใช้งาน' : 'ซ่อม' }}
                             </label>
                         </div>
@@ -521,7 +521,7 @@
         <!-- Model ADD Brand -->
         <x-modal title="ข้อมูลยี่ห้อรถ" wire:model="showModalBrand" maxWidth="lg" zIndex="20"
             closeModal="closeModalBrand">
-            <form class="form " wire:submit.prevent="{{ $edit ? 'updateBrand' : 'saveBrand' }}" id="formAddBrand">
+            <form class="form " wire:submit.prevent="{{ $edit ? 'updateBrand' : 'saveBrand' }}" id="formAddBrand" method="POST">
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
                     <div class="">
@@ -553,7 +553,7 @@
         <!-- Model ADD Type -->
         <x-modal title="ข้อมูลประเภทรถ" wire:model="showModalType" maxWidth="lg" zIndex="20"
             closeModal="closeModalType">
-            <form class="form " wire:submit.prevent="{{ $edit ? 'updateCarType' : 'saveCarType' }}" id="formAddCarType">
+            <form class="form " wire:submit.prevent="{{ $edit ? 'updateCarType' : 'saveCarType' }}" id="formAddCarType" method="POST">
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
                     <div class="">
@@ -585,7 +585,7 @@
         <!-- Model ADD Character -->
         <x-modal title="ข้อมูลเพิ่มลักษณะรถ" wire:model="showModalCharacter" maxWidth="lg" zIndex="20"
             closeModal="closeModalCharacter">
-            <form class="form " wire:submit.prevent="{{ $edit ? 'updateCarCharacter' : 'saveCarCharacter' }}"
+            <form class="form " wire:submit.prevent="{{ $edit ? 'updateCarCharacter' : 'saveCarCharacter' }}" method="POST"
                 id="formAddCarCharacter">
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">

@@ -18,7 +18,7 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
 
             <li class="menu-item">
                 <a class="group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5"
-                    href="{{ route('test') }}">
+                    href="{{ route('home') }}">
                     <i class="text-3xl i-ph-gauge-duotone"></i>
                     Welcome
                 </a>

@@ -26,8 +26,10 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return redirect('/login');
+});
 
-Route::get('/test', [Controller::class, 'testLive'])->name('test');
 Route::get('/starter', [Controller::class, 'starterPage'])->name('starter');
 
 Route::view('dashboard', 'dashboard')
@@ -38,8 +40,13 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+//-------- home ------//
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user']], function () {
+    Route::get('/home', [Controller::class, 'home'])->name('home');
+});
+
 //-------- permissions ------//
-Route::group(['middleware' => ['auth','role:developer|admin']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin']], function () {
     Route::resource('permissions', PermissionController::class);
     Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);
 
@@ -53,7 +60,7 @@ Route::group(['middleware' => ['auth','role:developer|admin']], function () {
 });
 
 //-------- RPO ------//
-Route::group(['middleware' => ['auth','role:developer|admin|GM|admin-RPO']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM|admin-RPO']], function () {
     Route::get('/palm-purchase', [PalmPurchase::class, 'palmPurchase'])->name('palm-purchase');
     Route::get('/palm-plan', [PalmPurchase::class, 'palmPlan'])->name('palm-plan');
     Route::get('/sales-product', [SalesProductController::class, 'salesProduct'])->name('sales-product');
@@ -61,22 +68,22 @@ Route::group(['middleware' => ['auth','role:developer|admin|GM|admin-RPO']], fun
 });
 
 //-------- HRE ------//
-Route::group(['middleware' => ['auth','role:developer|admin|GM']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM']], function () {
     Route::get('/employee', [Employee::class, 'employee'])->name('employee');
 });
 
 //-------- MAR ------//
-Route::group(['middleware' => ['auth','role:developer|admin|GM|user-RPO|user-MAR']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user-RPO|user-MAR']], function () {
     Route::get('/sales-plan', [SalesPlanController::class, 'salesPlan'])->name('sales-plan');
 });
 
 //-------- ACC ------//
-Route::group(['middleware' => ['auth','role:developer|admin|GM|admin-ACC|user-ACC']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM|admin-ACC|user-ACC']], function () {
     Route::get('/purchase-price', [PurchasePriceController::class, 'purchasePrice'])->name('purchase-price');
 });
 
 //-------- CAR ------//
-Route::group(['middleware' => ['auth','role:developer|admin|GM|user|staff']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user|staff']], function () {
     Route::get('/car-request', [CarController::class, 'carRequest'])->name('car-request');
     Route::get('/car-report', [CarController::class, 'carReport'])->name('car-report');
     Route::get('/car-view/{carReportId}', [CarController::class, 'carView'])->name('car-view');
@@ -84,14 +91,16 @@ Route::group(['middleware' => ['auth','role:developer|admin|GM|user|staff']], fu
 });
 
 //-------- Dashboard ------//
-Route::group(['middleware' => ['auth','role:developer|admin|GM']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM']], function () {
     Route::get('/graph-palm', [GraphController::class, 'graphPalmPuchase'])->name('graph-palm');
 });
 
 //-------- Technician ------//
-Route::group(['middleware' => ['auth','role:developer|admin|GM|user']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user']], function () {
     Route::get('/work-order', [WorkOrderController::class, 'workOrder'])->name('work-order');
 });
+
+
 
 
 

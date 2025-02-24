@@ -63,6 +63,7 @@ class CarReportLive extends Component
     public $today;
     public $sevenDaysLater;
     public $photoPath;
+    public $search = '';
 
     protected $rules = [
         'car_number' => 'required|string|max:255',
@@ -96,6 +97,10 @@ class CarReportLive extends Component
         $this->departments = EMDept::orderBy('DeptID', 'ASC')->get();
     }
 
+    public function updatedSearch()
+    {
+        $this->resetPage(); // รีเซ็ต Pagination เมื่อมีการค้นหา
+    }
     public bool $isLoading = false;
 
     public function initLoading()
@@ -382,7 +387,7 @@ class CarReportLive extends Component
         $this->car_mileage = $carReport->car_mileage;
         $this->car_date = $carReport->car_date ? date_format(date_create($carReport->car_date), "Y-m-d") : null;
         $this->car_buy = $carReport->car_buy ? date_format(date_create($carReport->car_buy), "Y-m-d") : null;
-        $this->car_tax = $carReport->car_tax ? date_format(date_create( $carReport->car_tax), "Y-m-d") : null;
+        $this->car_tax = $carReport->car_tax ? date_format(date_create($carReport->car_tax), "Y-m-d") : null;
         $this->car_insurance = $carReport->car_insurance ? date_format(date_create($carReport->car_insurance), "Y-m-d") : null;
         $this->car_photo = $carReport->car_photo;
         $this->car_status = $carReport->car_status;
@@ -390,85 +395,85 @@ class CarReportLive extends Component
         $this->car_department = $carReport->car_department;
     }
     public function updateCarReport()
-{
-    try {
-        // ตรวจสอบข้อมูลก่อนบันทึก
-        $validatedData = $this->validate([
-            'car_number' => 'required|string|max:255',
-            'car_county' => 'nullable',
-            'car_type' => 'nullable',
-            'car_character' => 'nullable',
-            'car_brand' => 'nullable',
-            'car_model' => 'nullable|string|max:255',
-            'car_year' => 'nullable',
-            'car_color' => 'nullable|string|max:100',
-            'car_fuel' => 'nullable|string|max:100',
-            'car_mileage' => 'nullable',
-            'car_date' => 'nullable|date',
-            'car_buy' => 'nullable|date',
-            'car_tax' => 'nullable|date',
-            'car_insurance' => 'nullable|date',
-            // 'car_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'car_status' => 'boolean',
-            'car_details' => 'nullable|string',
-            'car_department' => 'nullable',
-        ]);
+    {
+        try {
+            // ตรวจสอบข้อมูลก่อนบันทึก
+            $validatedData = $this->validate([
+                'car_number' => 'required|string|max:255',
+                'car_county' => 'nullable',
+                'car_type' => 'nullable',
+                'car_character' => 'nullable',
+                'car_brand' => 'nullable',
+                'car_model' => 'nullable|string|max:255',
+                'car_year' => 'nullable',
+                'car_color' => 'nullable|string|max:100',
+                'car_fuel' => 'nullable|string|max:100',
+                'car_mileage' => 'nullable',
+                'car_date' => 'nullable|date',
+                'car_buy' => 'nullable|date',
+                'car_tax' => 'nullable|date',
+                'car_insurance' => 'nullable|date',
+                // 'car_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                'car_status' => 'boolean',
+                'car_details' => 'nullable|string',
+                'car_department' => 'nullable',
+            ]);
 
-        // ดึงข้อมูลรถจากฐานข้อมูล
-        $carReport = CarReport::findOrFail($this->updateId);
+            // ดึงข้อมูลรถจากฐานข้อมูล
+            $carReport = CarReport::findOrFail($this->updateId);
 
-        // ตรวจสอบว่ามีการอัปโหลดภาพใหม่หรือไม่
-        if ($this->car_photo) {
-            if ($this->car_photo instanceof \Illuminate\Http\UploadedFile) {
-                // ลบภาพเก่า ถ้ามี
-                if ($carReport->car_photo && Storage::disk('public')->exists($carReport->car_photo)) {
-                    Storage::disk('public')->delete($carReport->car_photo);
+            // ตรวจสอบว่ามีการอัปโหลดภาพใหม่หรือไม่
+            if ($this->car_photo) {
+                if ($this->car_photo instanceof \Illuminate\Http\UploadedFile) {
+                    // ลบภาพเก่า ถ้ามี
+                    if ($carReport->car_photo && Storage::disk('public')->exists($carReport->car_photo)) {
+                        Storage::disk('public')->delete($carReport->car_photo);
+                    }
+
+                    // ดึงชื่อไฟล์และส่วนขยาย
+                    $fileName = pathinfo($this->car_photo->getClientOriginalName(), PATHINFO_FILENAME);
+                    $extension = $this->car_photo->getClientOriginalExtension();
+
+                    // ป้องกันชื่อซ้ำ
+                    $fileName = $fileName . '_' . time() . '.' . $extension;
+
+                    // บันทึกไฟล์ไปยัง storage/app/public/Image_car
+                    $filePath = $this->car_photo->storeAs('Image_car', $fileName, 'public');
+
+                    // เก็บ path เพื่อบันทึกลงฐานข้อมูล
+                    $validatedData['car_photo'] = $filePath;
+                } else {
+                    // ใช้ภาพเดิมถ้าไม่มีการอัปโหลดใหม่
+                    $validatedData['car_photo'] = $carReport->car_photo;
                 }
-
-                // ดึงชื่อไฟล์และส่วนขยาย
-                $fileName = pathinfo($this->car_photo->getClientOriginalName(), PATHINFO_FILENAME);
-                $extension = $this->car_photo->getClientOriginalExtension();
-
-                // ป้องกันชื่อซ้ำ
-                $fileName = $fileName . '_' . time() . '.' . $extension;
-
-                // บันทึกไฟล์ไปยัง storage/app/public/Image_car
-                $filePath = $this->car_photo->storeAs('Image_car', $fileName, 'public');
-
-                // เก็บ path เพื่อบันทึกลงฐานข้อมูล
-                $validatedData['car_photo'] = $filePath;
-            } else {
-                // ใช้ภาพเดิมถ้าไม่มีการอัปโหลดใหม่
-                $validatedData['car_photo'] = $carReport->car_photo;
             }
+            // อัปเดตข้อมูล
+            $carReport->update($validatedData);
+
+            // แจ้งเตือนสำเร็จ
+            $this->dispatch(
+                'alert',
+                position: "center",
+                icon: "success",
+                title: "บันทึกข้อมูลสำเร็จ",
+                showConfirmButton: false,
+                timer: 1500
+            );
+
+            $this->closeModal();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            dd($e->errors());
+            $this->dispatch(
+                'alert',
+                position: "center",
+                icon: "error",
+                title: "เกิดข้อผิดพลาด",
+                showConfirmButton: false,
+                timer: 1500
+            );
+            $this->closeModal();
         }
-        // อัปเดตข้อมูล
-        $carReport->update($validatedData);
-
-        // แจ้งเตือนสำเร็จ
-        $this->dispatch(
-            'alert',
-            position: "center",
-            icon: "success",
-            title: "บันทึกข้อมูลสำเร็จ",
-            showConfirmButton: false,
-            timer: 1500
-        );
-
-        $this->closeModal();
-    } catch (\Illuminate\Validation\ValidationException $e) {
-        dd($e->errors());
-        $this->dispatch(
-            'alert',
-            position: "center",
-            icon: "error",
-            title: "เกิดข้อผิดพลาด",
-            showConfirmButton: false,
-            timer: 1500
-        );
-        $this->closeModal();
     }
-}
 
 
 

@@ -7,7 +7,7 @@
 
 @section('content')
 
-<livewire:test-live/>
+<livewire:home-live/>
 
 @endsection
 
