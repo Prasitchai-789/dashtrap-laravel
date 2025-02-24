@@ -292,7 +292,7 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="car_model" name="car_model" wire:model="car_model" required />
+                                id="car_model" name="car_model" wire:model="car_model"  />
                         </div>
                     </div>
                 </div>
@@ -325,7 +325,7 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="car_year" name="car_year" wire:model="car_year" required />
+                                id="car_year" name="car_year" wire:model="car_year"  />
                         </div>
                     </div>
                 </div>
@@ -429,7 +429,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-2 font-anuphan">
+                <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-3 font-anuphan">
                     <div class="">
                         <label for="car_department"
                             class="inline-block mb-2 text-sm font-medium text-default-800">ฝ่ายที่ดูแล</label>
@@ -456,6 +456,16 @@
 
                             <label class="ms-1.5" for="car_status">
                                 {{ $car_status ? 'ใช้งาน' : 'ซ่อม' }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-6">
+                        <div class="flex items-center mt-2">
+                            <input type="checkbox" id="car_card" class="form-switch"
+                                wire:model="car_card" wire:change="updateCarStatus" {{ $car_card ? 'checked' : '' }}>
+
+                            <label class="ms-1.5" for="car_card">
+                                {{ $car_card ? 'เก็บสถิติ' : '-' }}
                             </label>
                         </div>
                     </div>

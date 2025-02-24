@@ -79,7 +79,9 @@ class CarRequestLive extends Component
     {
         $this->depts = EMDept::limit(20)->get();
         $this->employees = Employee::orderBy('EmpName', 'asc')->get();
-        $this->carReports = CarReport::orderBy('car_number', 'asc')->get();
+        $this->carReports = CarReport::where('car_card', 1)
+            ->orderBy('car_number', 'asc')
+            ->get();
         $this->carRequest = $carRequest;
         $this->approver_request = Auth::user()->name;
         $this->user_request = Auth::user()->emp_id;
@@ -194,9 +196,9 @@ class CarRequestLive extends Component
         if ($carRequest) {
             $this->dispatch(
                 'confirmApprove',
-                carRequestId:$this->carRequestId,
-                title: $empName[0]->EmpName."\n"."ใช้รถ : ".$carRequest->carReport->car_number." ".$carRequest->carReport->province->ProvinceName,
-                text: "ภารกิจ : ".$carRequest->job_request,
+                carRequestId: $this->carRequestId,
+                title: $empName[0]->EmpName . "\n" . "ใช้รถ : " . $carRequest->carReport->car_number . " " . $carRequest->carReport->province->ProvinceName,
+                text: "ภารกิจ : " . $carRequest->job_request,
             );
         } else {
             session()->flash('error', 'Car Request not found.');

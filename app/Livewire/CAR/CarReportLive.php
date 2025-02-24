@@ -84,7 +84,7 @@ class CarReportLive extends Component
         'car_status' => 'boolean',
         'car_details' => 'nullable|string',
         'car_department' => 'nullable|string',
-        'car_card' => 'nullable|string',
+        'car_card' => 'boolean',
     ];
 
     public function mount(CarReport $carReport)
@@ -218,6 +218,7 @@ class CarReportLive extends Component
                 'car_insurance' => 'nullable|date',
                 'car_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
                 'car_status' => 'boolean',
+                'car_card' => 'boolean',
                 'car_details' => 'nullable|string',
                 'car_department' => 'nullable|string',
             ]);
@@ -241,7 +242,6 @@ class CarReportLive extends Component
                     $validatedData['car_photo'] = $this->car_photo;
                 }
             }
-
 
 
             CarReport::create($validatedData);
@@ -391,6 +391,7 @@ class CarReportLive extends Component
         $this->car_insurance = $carReport->car_insurance ? date_format(date_create($carReport->car_insurance), "Y-m-d") : null;
         $this->car_photo = $carReport->car_photo;
         $this->car_status = $carReport->car_status;
+        $this->car_card = $carReport->car_card;
         $this->car_details = $carReport->car_details;
         $this->car_department = $carReport->car_department;
     }
@@ -415,6 +416,7 @@ class CarReportLive extends Component
                 'car_insurance' => 'nullable|date',
                 // 'car_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
                 'car_status' => 'boolean',
+                'car_card' => 'boolean',
                 'car_details' => 'nullable|string',
                 'car_department' => 'nullable',
             ]);
