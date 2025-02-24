@@ -20,6 +20,11 @@
                     <table class="w-full border border-collapse">
                         <thead class="text-center bg-gray-200 ">
                             <tr class="font-prompt">
+                                @can('approver_car')
+                                <th>
+                                    สถานะ
+                                </th>
+                                @endcan
                                 <th class="p-4">
                                     วันที
                                 </th>
@@ -38,26 +43,14 @@
                                 <th>
                                     ผู้อนุญาต
                                 </th>
-                                <th>
-                                    สถานะ
-                                </th>
+
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($carRequests as $carRequest)
                             <tr class="border font-anuphan hover:bg-gray-100 hover:text-blue-500">
-                                <td class="p-2.5 text-center min-w-[60px] max-w-[70px] truncate">
-                                    {{ \Carbon\Carbon::parse($carRequest->created_at)->locale('th')->translatedFormat('d F Y') }}</td>
-                                <td class="min-w-[60px] max-w-[80px] truncate">{{ $carRequest->employee->EmpName ??
-                                    'N/A' }}</td>
-                                <td class="min-w-[60px] max-w-[150px] truncate">{{ $carRequest->job_request }}</td>
-                                <td class="min-w-[60px] max-w-[70px] truncate">{{
-                                    $carRequest->employee->webDept->DeptName ?? 'N/A' }} </td>
-                                <td class="min-w-[50px] max-w-[60px] truncate">{{ $carRequest->carReport->car_number ??
-                                    'N/A' }} {{ $carRequest->carReport->province->ProvinceName ?? 'N/A' }}</td>
-                                <td class="min-w-[50px] max-w-[50px] truncate">{{ $carRequest->approver_request ?? '-'
-                                    }}</td>
+                                @can('approver_car')
                                 <td class="min-w-[50px] max-w-[80px] truncate text-center">
                                     @if ( $carRequest->status_request == 1)
                                     <span
@@ -79,6 +72,19 @@
                                     </button>
                                     @endif
                                 </td>
+                                @endcan
+                                <td class="p-2.5 text-center min-w-[60px] max-w-[70px] truncate">
+                                    {{ \Carbon\Carbon::parse($carRequest->created_at)->locale('th')->translatedFormat('d F Y') }}</td>
+                                <td class="min-w-[60px] max-w-[80px] truncate">{{ $carRequest->employee->EmpName ??
+                                    'N/A' }}</td>
+                                <td class="min-w-[60px] max-w-[150px] truncate">{{ $carRequest->job_request }}</td>
+                                <td class="min-w-[60px] max-w-[70px] truncate">{{
+                                    $carRequest->employee->webDept->DeptName ?? 'N/A' }} </td>
+                                <td class="min-w-[50px] max-w-[60px] truncate">{{ $carRequest->carReport->car_number ??
+                                    'N/A' }} {{ $carRequest->carReport->province->ProvinceName ?? 'N/A' }}</td>
+                                <td class="min-w-[50px] max-w-[50px] truncate">{{ $carRequest->approver_request ?? '-'
+                                    }}</td>
+
                                 <td class="min-w-[50px] max-w-[60px] truncate flex items-center justify-end mt-2">
                                     @if($carRequest->status_request != 1 && $carRequest->status_request != 2)
                                     @can('approver_car')

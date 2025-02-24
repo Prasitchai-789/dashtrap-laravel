@@ -41,6 +41,10 @@ class WorkOrderLive extends Component
     public $RepairDate;
     public $Remark;
     public $Image;
+    public $count1 = 0;
+    public $count2 = 0;
+    public $count3 = 0;
+    public $count4 = 0;
 
     public function openModal()
     {
@@ -82,6 +86,10 @@ class WorkOrderLive extends Component
     {
         $workOrders = WorkOrder::orderBy('id', 'desc')
             ->paginate(10);
+        $this->count1 = WorkOrder::where('Status', 1)->count();
+        $this->count2 = WorkOrder::where('Status', 2)->count();
+        $this->count3 = WorkOrder::where('Status', 3)->count();
+        $this->count4 = WorkOrder::where('Status', 4)->count();
         $typeWorks = TypeWork::orderBy('TypeWorkID', 'ASC')->get();
         return view('livewire.technician.work-order-live', [
             'workOrders' => $workOrders,
