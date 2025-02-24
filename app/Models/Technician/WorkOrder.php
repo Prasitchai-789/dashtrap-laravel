@@ -28,6 +28,7 @@ class WorkOrder extends Model
         'Remark',
         'Telephone',
         'Image',
+        'finishDate',
     ];
 
 

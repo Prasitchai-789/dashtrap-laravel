@@ -74,9 +74,11 @@
             drawText(event.detail.Location, 155, 681);
             drawText(event.detail.MachineName, 394, 681);
             drawText(event.detail.Detail, 145, 644);
+            drawText(event.detail.RepairDate, 115, 479);
+            drawText(event.detail.finishDate, 285, 479);
             drawText(event.detail.RepairReport, 125, 423);
             drawText(event.detail.Technician, 305, 132);
-            // drawText(event.detail.updateDate, 310, 112);
+            drawText(event.detail.finishDate, 310, 112);
 
             // 🔹 สร้างไฟล์ PDF ใหม่
             const pdfBytes = await pdfDoc.save();
