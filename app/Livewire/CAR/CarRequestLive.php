@@ -21,7 +21,6 @@ class CarRequestLive extends Component
         'deleteConfirmed' => 'deleteItem',
         'approveCarRequest' => 'approveCarRequest',
         'rejectCarRequest' => 'rejectCarRequest',
-        'stopSound' => 'stopSound'
     ];
     public $edit = false;
     public CarRequest $carRequest;
@@ -136,7 +135,7 @@ class CarRequestLive extends Component
                 "\n" . "🙎‍♂️ :"  . $empName[0]->EmpName .
                 "\n" . "💼 : "  . $this->job_request .
                 "\n" . "🚘 : " . $carReports[0]->car_number . " " . $carReports[0]->province->ProvinceName .
-                "\n" . "🚘 : " . "http://isanpalm.dyndns.info:8002/car-request" ;
+                "\n" . "🚘 : " . "http://isanpalm.dyndns.info:8002/car-request";
 
             event(new NotifyProcessed([
                 'position' => "center",
@@ -172,14 +171,33 @@ class CarRequestLive extends Component
         }
     }
 
+    // public function confirmApprove($id)
+    // {
+    //     $this->carRequestId = $id;
+    //     $carRequest = CarRequest::find($id);
+    //     if ($carRequest) {
+    //         $this->dispatch('confirmApprove', [
+    //             'carRequestId' => $this->carRequestId,
+    //             'title' => "ยืนยันการอนุมัติ",
+    //         ]);
+    //     } else {
+    //         session()->flash('error', 'Car Request not found.');
+    //     }
+    // }
+
     public function confirmApprove($id)
     {
         $this->carRequestId = $id;
         $carRequest = CarRequest::find($id);
+        $nameId = $carRequest->user_request;
+        $empName = Employee::where('EmpID', '=', $nameId)->get();
         if ($carRequest) {
-            $this->dispatch('confirmApprove', [
-                'carRequestId' => $this->carRequestId,
-            ]);
+            $this->dispatch(
+                'confirmApprove',
+                carRequestId:$this->carRequestId,
+                title: $empName[0]->EmpName,
+                text: $carRequest->job_request,
+            );
         } else {
             session()->flash('error', 'Car Request not found.');
         }

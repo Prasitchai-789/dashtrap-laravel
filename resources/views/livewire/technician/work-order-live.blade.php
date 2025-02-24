@@ -415,8 +415,23 @@
 
 
                     @if (!empty($edit) && $edit == 1)
+                        <div class="mx-4 mb-4">
+                            <h1 class="text-lg font-semibold text-blue-800 font-anuphan">ข้อมูลการแจ้งซ่อม</h1>
+                            <div class="mx-8 mt-4 text-lg font-semibold font-anuphan">
+                                <h1 class="py-2">วันที่แจ้งซ่อม :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{
+                                    \Carbon\Carbon::parse($workOrder->created_at)->locale('th')->translatedFormat('d/m/Y')
+                                    }}</span></h1>
+                                <h1 class="py-2"> ชื่อผู้แจ้ง : <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->NameOfInformant }}</span> </h1>
+                                <h1 class="py-2"> ชื่อเครื่อง :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->MachineName }} {{ $workOrder->MachineCode }}</span></h1>
+                                <h1 class="py-2"> รายละเอียด :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->Detail }}</span></h1>
+                                <h1 class="py-2"> ที่อยู่ :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->Location }}</span></h1>
+                                <h1 class="py-2"> โทร :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->Telephone }}</span></h1>
+
+
+                            </div>
+                        </div>
                     <hr>
-                    <div class="mx-4 mt-6 text-lg font-semibold text-blue-800 font-anuphan">ข้อมูลสำหรับเจ้าหน้าที่
+                    <div class="mx-4 mt-2 text-lg font-semibold text-blue-800 font-anuphan">ข้อมูลสำหรับเจ้าหน้าที่
                     </div>
                     <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-2 font-anuphan">
                         <div class="">

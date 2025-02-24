@@ -309,3 +309,60 @@ window.addEventListener('changeStatus', function () {
     });
 });
 
+
+    window.addEventListener("confirmApprove", event => {
+        // ดึงค่าจาก event.detail ให้ถูกต้อง
+        const { carRequestId, title ,text} = event.detail;
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                cancelButton: "bg-danger me-2 p-3 rounded text-white font-anuphan",
+                confirmButton: "bg-success me-2 p-3 rounded text-white font-anuphan",
+                title: "font-prompt text-2xl",
+                htmlContainer: "font-prompt text-lg text-blue-500",
+            },
+            buttonsStyling: false,
+        });
+
+        swalWithBootstrapButtons
+            .fire({
+                title: title, // ใช้ title ที่รับมาจาก Livewire
+                text: text,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'อนุมัติ!',
+                cancelButtonText: 'ไม่อนุมัติ'
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('approveCarRequest', { carRequestId });
+                    Swal.fire({
+                        title: 'อนุมัติแล้ว!',
+                        text: 'คำขอได้ถูกอนุมัติเรียบร้อย.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2500,
+                        customClass: {
+                            title: "font-prompt text-2xl",
+                            htmlContainer: "font-prompt text-lg",
+                        },
+                        buttonsStyling: false
+                    });
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Livewire.dispatch('rejectCarRequest', { carRequestId });
+                    Swal.fire({
+                        title: 'ไม่อนุมัติ!',
+                        text: 'คำขอได้ถูกปฏิเสธเรียบร้อย.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500,
+                        customClass: {
+                            title: "font-prompt text-2xl",
+                            htmlContainer: "font-prompt text-lg",
+                        },
+                        buttonsStyling: false
+                    });
+                }
+            });
+    });
+

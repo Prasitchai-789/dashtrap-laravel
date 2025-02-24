@@ -17,9 +17,10 @@
 
 
 @section('script')
-<script>
+{{-- <script>
     window.addEventListener("confirmApprove", event => {
     const carRequestId = event.detail;
+    let data = event.detail;
 
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -33,8 +34,8 @@
 
     swalWithBootstrapButtons
         .fire({
-            title: 'คุณต้องการอนุมัติคำขอนี้หรือไม่?',
-            // text: "คุณต้องการอนุมัติคำขอนี้หรือไม่?",
+            // title: 'คุณต้องการอนุมัติคำขอนี้หรือไม่?',
+            text: "คุณต้องการอนุมัติคำขอนี้หรือไม่?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'ใช่, อนุมัติ!',
@@ -77,30 +78,7 @@
             }
         });
 });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // เล่นเสียงเมื่อได้รับคำสั่ง
-        Livewire.on('playSound', function () {
-            var audio = document.getElementById('successSound');
-            audio.play();
-
-            // ตั้งเวลาหยุดเสียงหลังจาก 5 วินาที
-            setTimeout(function() {
-                audio.pause();  // หยุดเสียง
-                audio.currentTime = 0;  // รีเซ็ตเสียงกลับไปที่จุดเริ่มต้น
-                Livewire.dispatch('stopSound');  // หยุดการเล่นเสียง
-            }, 3000);  // 5000 ms = 5 วินาที
-        });
-
-        // หากคุณต้องการหยุดเสียงทันที
-        Livewire.on('stopSound', function () {
-            var audio = document.getElementById('successSound');
-            audio.pause();
-            audio.currentTime = 0;
-        });
-    });
-</script>
+</script> --}}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endsection

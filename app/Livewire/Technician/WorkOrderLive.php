@@ -202,6 +202,7 @@ class WorkOrderLive extends Component
         $this->workOrder = WorkOrder::find($id);
         $this->NameOfInformant = $this->workOrder->NameOfInformant;
         // $this->Status = $this->workOrder->Status;
+        $this->created_at = $this->workOrder->created_at;
         $this->TypeWork = $this->workOrder->TypeWork;
         $this->Number = $this->workOrder->Number;
         $this->MachineName = $this->workOrder->MachineName;
