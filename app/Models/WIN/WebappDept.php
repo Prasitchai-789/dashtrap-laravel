@@ -10,6 +10,8 @@ class WebappDept extends Model
     protected $connection = 'sqlsrv2';
     use HasFactory;
     protected $table = 'Webapp_Dept';
+    protected $primaryKey = 'DeptID';
+    public $timestamps = false;
     protected $fillable =[
 
     ];

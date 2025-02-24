@@ -8,6 +8,7 @@ use App\Models\HRE\Employee;
 use Livewire\WithPagination;
 use App\Models\CAR\CarReport;
 use App\Models\CAR\CarRequest;
+use App\Models\WIN\WebappDept;
 use App\Events\NotifyProcessed;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Notify\Discord;
@@ -77,7 +78,7 @@ class CarRequestLive extends Component
 
     public function mount(CarRequest $carRequest)
     {
-        $this->depts = EMDept::limit(20)->get();
+        $this->depts = WebappDept::limit(20)->get();
         $this->employees = Employee::orderBy('EmpName', 'asc')->get();
         $this->carReports = CarReport::where('car_card', 1)
             ->orderBy('car_number', 'asc')
