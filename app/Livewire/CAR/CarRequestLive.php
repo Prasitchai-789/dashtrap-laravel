@@ -195,8 +195,8 @@ class CarRequestLive extends Component
             $this->dispatch(
                 'confirmApprove',
                 carRequestId:$this->carRequestId,
-                title: $empName[0]->EmpName,
-                text: $carRequest->job_request,
+                title: $empName[0]->EmpName."\n"."ใช้รถ : ".$carRequest->carReport->car_number." ".$carRequest->carReport->province->ProvinceName,
+                text: "ภารกิจ : ".$carRequest->job_request,
             );
         } else {
             session()->flash('error', 'Car Request not found.');
