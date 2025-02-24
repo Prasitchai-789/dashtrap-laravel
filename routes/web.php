@@ -63,7 +63,6 @@ Route::group(['middleware' => ['auth','role:developer|admin|GM|admin-RPO']], fun
 //-------- HRE ------//
 Route::group(['middleware' => ['auth','role:developer|admin|GM']], function () {
     Route::get('/employee', [Employee::class, 'employee'])->name('employee');
-    Route::get('/use-car', [UseCarController::class, 'useCar'])->name('use-car');
 });
 
 //-------- MAR ------//
@@ -77,10 +76,11 @@ Route::group(['middleware' => ['auth','role:developer|admin|GM|admin-ACC|user-AC
 });
 
 //-------- CAR ------//
-Route::group(['middleware' => ['auth','role:developer|admin|GM|user']], function () {
+Route::group(['middleware' => ['auth','role:developer|admin|GM|user|staff']], function () {
     Route::get('/car-request', [CarController::class, 'carRequest'])->name('car-request');
     Route::get('/car-report', [CarController::class, 'carReport'])->name('car-report');
     Route::get('/car-view/{carReportId}', [CarController::class, 'carView'])->name('car-view');
+    Route::get('/use-car', [UseCarController::class, 'useCar'])->name('use-car');
 });
 
 //-------- Dashboard ------//

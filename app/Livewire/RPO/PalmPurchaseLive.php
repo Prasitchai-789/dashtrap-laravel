@@ -316,7 +316,7 @@ class PalmPurchaseLive extends Component
         $this->GoodIB = number_format($this->webappPOInv->GoodIB, 0);
         $this->GoodOB = number_format($this->webappPOInv->GoodOB, 0);
         $this->GoodNet = number_format($this->webappPOInv->GoodNet, 0);
-        $this->Price1 = $this->webappPOInv->Price1;
+        $this->Price1 = number_format($this->webappPOInv->Price1, 2);
         if ($this->webappPOInv) {
             $this->VendorCode = $this->webappPOInv->VendorCode;
             $this->VendorName = optional($this->webappPOInv->empVendor)->VendorName;
