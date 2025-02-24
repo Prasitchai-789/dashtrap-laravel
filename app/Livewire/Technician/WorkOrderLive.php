@@ -190,7 +190,6 @@ class WorkOrderLive extends Component
     }
     public function changeStatus($id)
     {
-        $this->resetInputFields();
         $this->showModalTechnician = true;
         $this->edit = true;
         $this->updateId = $id;

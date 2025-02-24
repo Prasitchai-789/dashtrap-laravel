@@ -419,13 +419,13 @@
                             <h1 class="text-lg font-semibold text-blue-800 font-anuphan">ข้อมูลการแจ้งซ่อม</h1>
                             <div class="mx-8 mt-4 text-lg font-semibold font-anuphan">
                                 <h1 class="py-2">วันที่แจ้งซ่อม :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{
-                                    \Carbon\Carbon::parse($workOrder->created_at)->locale('th')->translatedFormat('d/m/Y')
+                                    \Carbon\Carbon::parse($created_at)->locale('th')->translatedFormat('d/m/Y')
                                     }}</span></h1>
-                                <h1 class="py-2"> ชื่อผู้แจ้ง : <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->NameOfInformant }}</span> </h1>
-                                <h1 class="py-2"> ชื่อเครื่อง :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->MachineName }} {{ $workOrder->MachineCode }}</span></h1>
-                                <h1 class="py-2"> รายละเอียด :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->Detail }}</span></h1>
-                                <h1 class="py-2"> ที่อยู่ :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->Location }}</span></h1>
-                                <h1 class="py-2"> โทร :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $workOrder->Telephone }}</span></h1>
+                                <h1 class="py-2"> ชื่อผู้แจ้ง : <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $NameOfInformant }}</span> </h1>
+                                <h1 class="py-2"> ชื่อเครื่อง :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $MachineName }} {{ $MachineCode }}</span></h1>
+                                <h1 class="py-2"> รายละเอียด :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $Detail }}</span></h1>
+                                <h1 class="py-2"> ที่อยู่ :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $Location }}</span></h1>
+                                <h1 class="py-2"> โทร :  <span class="text-lg font-semibold text-blue-800 font-anuphan">{{ $Telephone }}</span></h1>
 
 
                             </div>
