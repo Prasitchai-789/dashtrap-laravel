@@ -7,7 +7,7 @@
                 <div class="mb-4">
                     <span
                         class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
-                    <h5 class="truncate card-title font-prompt">จำนวนรายการ</h5>
+                    <h5 class="truncate card-title font-prompt">รอดำเนินการ</h5>
                 </div>
 
                 <div class="flex items-center justify-between mb-4">
@@ -39,12 +39,12 @@
                 <div class="mb-4">
                     <span
                         class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
-                    <h5 class="truncate card-title font-prompt">เกษตรกร</h5>
+                    <h5 class="truncate card-title font-prompt">กำลังดำเนินการ</h5>
                 </div>
 
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-3xl font-medium text-default-800">
-                        <span class="text-sm"> kg.</span>
+                        <span class="text-sm"> รายการ</span>
                     </h2>
                     <span class="flex items-center">
                         <span class="text-sm text-default-400"></span>
@@ -71,12 +71,12 @@
                 <div class="mb-4">
                     <span
                         class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
-                    <h5 class="truncate card-title font-prompt">ลานเท</h5>
+                    <h5 class="truncate card-title font-prompt">ส่งซ่อมภายนอก</h5>
                 </div>
 
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-3xl font-medium text-default-800">
-                        <span class="text-sm"> kg.</span>
+                        <span class="text-sm"> รายการ</span>
                     </h2>
                     <span class="flex items-center">
                         <span class="text-sm text-default-400"></span>
@@ -103,12 +103,12 @@
                 <div class="mb-4">
                     <span
                         class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
-                    <h5 class="truncate card-title font-prompt">ปริมาณผลปาล์ม</h5>
+                    <h5 class="truncate card-title font-prompt">ดำเนินการเสร็จ</h5>
                 </div>
 
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-3xl font-medium text-default-800">
-                        <span class="text-sm">kg.</span>
+                        <span class="text-sm">รายการ</span>
                     </h2>
                     <span class="flex items-center">
                         <span class="text-sm text-default-400"></span>
