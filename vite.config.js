@@ -13,7 +13,8 @@ export default defineConfig({
                 'node_modules/glightbox/dist/css/glightbox.min.css',
                 'resources/js/pages/gallery.js',
                 'resources/js/pages/charts-apex.js',
-                'resources/js/pages/graph-palm.js'
+                'resources/js/pages/graph-palm.js',
+                'resources/js/pages/graph-price.js',
             ],
             refresh: true,
         }),
