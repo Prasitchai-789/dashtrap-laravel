@@ -45,7 +45,7 @@ $zIndex = $zIndex ?? 999;
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-3 border-b rounded-t bg-primary md:p-4">
                     <h3 class="text-xl font-semibold text-white font-prompt">
-                        {{ $title }}
+                        {{ $title ?? ''}}
                     </h3>
                     <button type="button" x-on:click="show = false" wire:click="closeModal"
                         class="inline-flex items-center justify-center w-8 h-8 text-sm text-red-600 bg-transparent rounded-lg hover:bg-red-500 hover:text-white ms-auto dark:hover:bg-gray-600 dark:hover:text-white">

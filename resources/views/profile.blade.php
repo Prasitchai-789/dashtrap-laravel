@@ -30,11 +30,10 @@
 @extends('layouts.root')
 
 @section('css')
-@vite(['node_modules/jsvectormap/dist/css/jsvectormap.min.css'])
 @endsection
 
 @section('content')
-@include('layouts.root/page-title', ['subtitle' => 'Department', 'title' => 'Profile Information'])
+@include('layouts.root/page-title', ['subtitle' => 'Profile', 'title' => 'Profile Information'])
 <div class="page-header">
     <div class="p-6 mb-0 bg-white rounded-lg shadow-lg page-block">
             <div class="max-w-xl mb-6">
@@ -46,7 +45,7 @@
             </div>
             <hr class="my-6 border-gray-300 border-dashed border-t-1">
             <div class="max-w-xl">
-                <livewire:profile.delete-user-form />
+                {{-- <livewire:profile.delete-user-form /> --}}
             </div>
     </div>
 </div>
@@ -55,5 +54,4 @@
 
 
 @section('script')
-@vite(['resources/js/pages/dashboard.js'])
 @endsection
