@@ -5,14 +5,13 @@
 
 @section('content')
 
-<livewire:dashboard.graph-palm-purchase-live/>
+<livewire:dashboard.graph-total-palm-live/>
 
 @endsection
 
 
 @section('script')
 
-@vite(['resources/js/pages/graph-palm.js'])
-
+@vite(['resources/js/pages/graph-total-palm.js'])
 
 @endsection

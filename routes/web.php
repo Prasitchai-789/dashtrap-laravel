@@ -3,6 +3,8 @@
 use App\Http\Controllers\ACC\PurchasePriceController;
 use App\Http\Controllers\CAR\CarController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dashboard\GraphTotalPalmController;
+use App\Http\Controllers\Dashboard\TableTotalPalmController;
 use App\Http\Controllers\HRE\Employee;
 use App\Http\Controllers\CAR\UseCarController;
 use App\Http\Controllers\Dashboard\GraphController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RPO\PalmPurchase;
 use App\Http\Controllers\Technician\WorkOrderController;
 use App\Http\Controllers\UserController;
+use Laravel\Prompts\Table;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,8 +94,10 @@ Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user|staff']], f
 });
 
 //-------- Dashboard ------//
-Route::group(['middleware' => ['auth', 'role:developer|admin|GM']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|GM']], function () {
     Route::get('/graph-palm', [GraphController::class, 'graphPalmPuchase'])->name('graph-palm');
+    Route::get('/table-palm', [TableTotalPalmController::class, 'tableTotalPalm'])->name('table-palm');
+    Route::get('/graph-total-palm', [GraphTotalPalmController::class, 'graphTotalPalm'])->name('graph-total-palm');
 });
 
 //-------- Technician ------//

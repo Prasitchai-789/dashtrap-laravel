@@ -520,7 +520,7 @@
                                 id="set_price" name="set_price" wire:model="set_price" required step="0.01" min="0" />
                         </div>
                     </div>
-                    <div class="set_scaler">
+                    <div class="">
                         <label for="set_scaler" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             เครื่องชั่ง
                         </label>
@@ -618,5 +618,7 @@
         <!-- End Model ADD TableSetPrice -->
 
     </div>
+
+
 </div>
 

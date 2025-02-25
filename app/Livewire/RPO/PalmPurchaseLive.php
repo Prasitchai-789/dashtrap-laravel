@@ -2,6 +2,7 @@
 
 namespace App\Livewire\RPO;
 
+use DateTime;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\RPO\PalmPlan;
@@ -201,11 +202,14 @@ class PalmPurchaseLive extends Component
         $POInvDTCars = POInvDTCar::limit(10)->get();
         $setPriceScalers = SetPriceScaler::orderBy('id', 'desc')->paginate(5);
         $vendorCarIDs = WebappPOInv::distinct()->pluck('VendorCarID');
+
+
         return view('livewire.rpo.palm-purchase-live', [
             'webappPOInvs' => $webappPOInvs,
             'POInvDTCars' => $POInvDTCars,
             'setPriceScalers' => $setPriceScalers,
             'vendorCarIDs' => $vendorCarIDs,
+
         ]);
     }
 

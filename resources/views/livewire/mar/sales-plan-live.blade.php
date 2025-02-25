@@ -210,7 +210,7 @@
                                         @endif
                                     </td>
 
-                                    <td class="p-2 text-center border min-w-[30px] max-w-[40px]">
+                                    <td class="flex items-center justify-end p-2 text-center border min-w-[30px] max-w-[40px]">
                                         @if ($salesPlan->Status == 'W')
                                         <a href="#" wire:click='confirmEdit({{ $salesPlan->SOPID  }})'>
                                             <i class="me-4 fa-regular fa-pen-to-square text-warning hover:text-yellow-700 hover:scale-110"

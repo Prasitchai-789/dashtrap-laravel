@@ -10,10 +10,6 @@
         <!--end card-->
     </div>
 
-    <p>Click the button to modify an existing PDF document with <code>pdf-lib</code></p>
-    <button onclick="modifyPdf()">Modify PDF</button>
-    <p class="small">(Your browser will download the resulting file)</p>
-
 </div>
 
 
