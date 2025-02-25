@@ -108,12 +108,11 @@ class SalesProductLive extends Component
             );
             $message = "โหลดสินค้า: " . $salesPlan->GoodName .
                 "\n" . "📆 วันที่: "  . \Carbon\Carbon::parse($salesPlan->SOPDate)->locale('th')->translatedFormat('d F Y') .
-                "\n" . "🚘 ทะเบียน: "  . $salesPlan->NumberCar.
+                "\n" . "🚘 ทะเบียน: "  . $salesPlan->NumberCar .
                 "\n" . "🙎‍♂️ ผู้ขับ: "  . $salesPlan->DriverName;
 
             $Telegram = new Telegram();
             $Telegram->sendToTelegramLoad($message);
-
         } else {
             // แสดงแจ้งเตือนเมื่อไม่พบข้อมูล
             $this->dispatch(
@@ -210,8 +209,16 @@ class SalesProductLive extends Component
             ? (($sumOfDateData[2147]->totalCount - $sumOfDateData[2147]->countP - $sumOfDateData[2147]->countW) / $sumOfDateData[2147]->totalCount) * 100
             : 0;
 
-        $this->progressPKN = ($sumOfDateData[2152]->totalCount ?? 0) > 0
-            ? (($sumOfDateData[2147]->totalCount - $sumOfDateData[2147]->countP - $sumOfDateData[2147]->countW) / $sumOfDateData[2152]->totalCount) * 100
+        // $this->progressPKN = ($sumOfDateData[2152]->totalCount ?? 0) > 0
+        //     ? (($sumOfDateData[2147]->totalCount - $sumOfDateData[2147]->countP - $sumOfDateData[2147]->countW) / $sumOfDateData[2152]->totalCount) * 100
+        //     : 0;
+        $this->progressPKN = (isset($sumOfDateData[2152]) && ($sumOfDateData[2152]->totalCount ?? 0) > 0)
+            ? (
+                (($sumOfDateData[2147]->totalCount ?? 0)
+                    - ($sumOfDateData[2147]->countP ?? 0)
+                    - ($sumOfDateData[2147]->countW ?? 0))
+                / ($sumOfDateData[2152]->totalCount ?? 1)
+            ) * 100
             : 0;
 
         $this->progressShell = ($sumOfDateData[2151]->totalCount ?? 0) > 0
@@ -307,14 +314,13 @@ class SalesProductLive extends Component
 
             $message = "โหลดสินค้า: " . $salesPlan->GoodName .
                 "\n" . "📆 วันที่: "  . \Carbon\Carbon::parse($salesPlan->SOPDate)->locale('th')->translatedFormat('d F Y') .
-                "\n" . "🚘 ทะเบียน: "  . $salesPlan->NumberCar.
-                "\n" . "🛢️ น้ำหนักสุทธิ: "  .  number_format($validatedData['NetWei'], 0, '.', ',')." กิโลกรัม";
+                "\n" . "🚘 ทะเบียน: "  . $salesPlan->NumberCar .
+                "\n" . "🛢️ น้ำหนักสุทธิ: "  .  number_format($validatedData['NetWei'], 0, '.', ',') . " กิโลกรัม";
 
 
 
             $Telegram = new Telegram();
             $Telegram->sendToTelegramSales($message);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(
                 'alert',
