@@ -9,6 +9,8 @@ use App\Http\Controllers\HRE\Employee;
 use App\Http\Controllers\CAR\UseCarController;
 use App\Http\Controllers\Dashboard\GraphController;
 use App\Http\Controllers\MAR\SalesPlanController;
+use App\Http\Controllers\RPO\AveragePriceController;
+use App\Http\Controllers\RPO\GraphPriceController;
 use App\Http\Controllers\RPO\SalesProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
@@ -68,6 +70,8 @@ Route::group(['middleware' => ['auth', 'role:developer|admin|GM|admin-RPO']], fu
     Route::get('/palm-plan', [PalmPurchase::class, 'palmPlan'])->name('palm-plan');
     Route::get('/sales-product', [SalesProductController::class, 'salesProduct'])->name('sales-product');
     Route::get('/report-palm-purchase', [PalmPurchase::class, 'reportPalmPurchase'])->name('report-palm-purchase');
+    Route::get('/average-price', [AveragePriceController::class, 'averagePrice'])->name('average-price');
+    Route::get('/graph-price', [GraphPriceController::class, 'graphPrice'])->name('graph-price');
 });
 
 //-------- HRE ------//

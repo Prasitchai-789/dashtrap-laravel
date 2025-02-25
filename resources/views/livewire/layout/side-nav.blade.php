@@ -98,6 +98,20 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                                 <span class="menu-text">แผนการรับซื้อ</span>
                             </a>
                         </li>
+                        <li class="menu-item">
+                            <a href="{{ route('average-price') }}"
+                                class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
+                                <i class="menu-dot"></i>
+                                <span class="menu-text">ราคาเฉลี่ย</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ route('graph-price') }}"
+                                class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
+                                <i class="menu-dot"></i>
+                                <span class="menu-text">กราฟราคา</span>
+                            </a>
+                        </li>
                         @can('delete RPO')
                         <li class="menu-item">
                             <a href="{{ route('report-palm-purchase') }}"
