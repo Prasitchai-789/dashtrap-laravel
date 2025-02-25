@@ -15,6 +15,7 @@ export default defineConfig({
                 'resources/js/pages/charts-apex.js',
                 'resources/js/pages/graph-palm.js',
                 'resources/js/pages/graph-price.js',
+                'resources/js/pages/graph-total-palm.js',
             ],
             refresh: true,
         }),
