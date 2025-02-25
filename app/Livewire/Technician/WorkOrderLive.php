@@ -234,17 +234,21 @@ class WorkOrderLive extends Component
             ]
         );
         $workOrder = WorkOrder::findOrFail($this->updateId);
-
+        if (empty($workOrder->RepairDate)) {
+            $validatedData['RepairDate'] = now();
+        } else {
+            unset($validatedData['RepairDate']); // ลบออกจากอาร์เรย์เพื่อไม่ให้อัปเดต
+        }
         if ($validatedData['Status'] == 4) {
             $validatedData['WorkStatus'] = "ส่งมอบงาน";
-            $validatedData['RepairDate'] = date('Y-m-d H:i:s');
+            $validatedData['finishDate'] = date('Y-m-d H:i:s');
         } else {
             if ($validatedData['Status'] == 5) {
                 $validatedData['WorkStatus'] = "ยกเลิก";
-                $validatedData['RepairDate'] = date('Y-m-d H:i:s');
+                $validatedData['finishDate'] = date('Y-m-d H:i:s');
             } else {
                 $validatedData['WorkStatus'] = "มอบหมายงาน";
-                $validatedData['RepairDate'] = date('Y-m-d H:i:s');
+                $validatedData['finishDate'] = date('Y-m-d H:i:s');
             }
         }
         $workOrder->update($validatedData);
@@ -353,9 +357,9 @@ class WorkOrderLive extends Component
                 RepairReport: $workOrder->RepairReport,
                 Technician: $workOrder->Technician,
                 Date: Carbon::parse($workOrder->created_at)->locale('th')->translatedFormat('j F Y'),
-                updateDate: Carbon::parse($workOrder->updated_at)->locale('th')->translatedFormat('j F Y'),
-                RepairDate: Carbon::parse($workOrder->RepairDate)->locale('th')->translatedFormat('j F Y'),
-                finishDate: Carbon::parse($workOrder->finishDate)->locale('th')->translatedFormat('j F Y'),
+                updateDate: Carbon::parse($workOrder->updated_at)->locale('th')->translatedFormat('j F Y') ?? '',
+                RepairDate: Carbon::parse($workOrder->RepairDate)->locale('th')->translatedFormat('j F Y') ?? '',
+                finishDate: Carbon::parse($workOrder->finishDate)->locale('th')->translatedFormat('j F Y') ?? '',
             );
         } else {
             $this->dispatch(
