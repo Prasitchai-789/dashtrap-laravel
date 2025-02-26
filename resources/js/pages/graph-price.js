@@ -3,7 +3,7 @@ import ApexCharts from "apexcharts";
 
 var options = {
     chart: {
-        height: 350,
+        height: 500,
         type: 'bar',
         toolbar: {
             show: false,
