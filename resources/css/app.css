@@ -5022,7 +5022,7 @@ main{
 .apexcharts-legend-text,
 .apexcharts-subtitle-text,
 .apexcharts-tooltip {
-  font-family: Montserrat, sans-serif !important;
+  /* font-family: Montserrat, sans-serif !important; */
   font-family: "IBM Plex Sans", sans-serif;
   font-weight: 500;
   --tw-text-opacity: 1;

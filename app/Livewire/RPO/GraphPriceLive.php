@@ -15,10 +15,12 @@ class GraphPriceLive extends Component
         // แปลงข้อมูลสำหรับ ApexCharts
         $categories = [
             'หน้าป้าย',
-            'บริษัท อีสานพัฒนาอุตสาหกรรมปาล์ม จำกัด',
-            'บริษัท สุขสมบูรณ์ สกลนคร',
-            'บริษัท แอ๊บโซลูท ปาล์ม จำกัด',
-            'บริษัท สุขสมบูรณ์ ชลบุรี'
+            'อีสานปาล์ม',
+            'สุขสมบูรณ์ สกลนคร',
+            'แอ๊บโซลูท',
+            'สุขสมบูรณ์ ชลบุรี',
+            'วิจิตรภัณฑ์',
+            'ยูนิวานิช',
         ];
 
         // ดึงข้อมูลในแต่ละคอลัมน์มาใช้ในการแสดงกราฟ
@@ -28,6 +30,10 @@ class GraphPriceLive extends Component
             $averagePrices->price_ssg_sakon,
             $averagePrices->price_app,
             $averagePrices->price_ssg_chon,
+            $averagePrices->price_wijit,
+            $averagePrices->price_uni,
+
+
         ];
     } else {
         // ถ้าไม่มีข้อมูลล่าสุดให้ใช้ค่าเริ่มต้น

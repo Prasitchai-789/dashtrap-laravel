@@ -1,9 +1,6 @@
 import ApexCharts from "apexcharts";
 // column chart with datalabels
 
-// ตรวจสอบค่าที่ได้จาก event
-console.log('Categories:', categories);
-console.log('Data Series:', dataSeries);
 var options = {
     chart: {
         height: 350,
@@ -18,24 +15,29 @@ var options = {
             dataLabels: {
                 position: 'top', // top, center, bottom
             },
+            distributed: true,
         }
+    },
+    legend: {
+        show: false, // ปิดการแสดง legend
     },
     dataLabels: {
         enabled: true,
         formatter: function (val) {
             return val !== null ? val.toLocaleString() + "" : "";
         },
-        offsetY: -30,
+        offsetY: -50,
         style: {
-            fontSize: '16px',
+            fontSize: '30px',
+            fontFamily: " Prompt, sans-serif ",
             colors: ["#304758"]
         }
     },
     series: [{
-        name: 'ปริมาณผลปาล์ม',
+        name: 'ราคา',
         data: dataSeries
     }],
-    colors: ['#03a9f4'],
+    colors: ['#008FFB', '#008FFB', '#FF4560', '#00E396', '#FEB019', '#a5cbcb', '#a5a2cf',],
     grid: {
         borderColor: '#f1f1f1',
         show: true, // ปิดการแสดงเส้นกริดทั้งหมด
@@ -46,7 +48,7 @@ var options = {
         labels: {
             offsetY: 0,
             style: {
-                fontFamily: 'Anuphan, sans-serif', // ใส่ฟอนต์ที่คุณต้องการ
+                fontFamily: " Prompt, sans-serif ",
                 fontSize: '14px', // ขนาดฟอนต์
                 fontWeight: 'normal', // ความหนาของฟอนต์
                 color: '#333' // สีฟอนต์
@@ -99,13 +101,12 @@ var options = {
         labels: {
             show: false,
             formatter: function (val) {
-                return val !== null ? val.toLocaleString() + " kg" : "";
+                return val !== null ? val.toLocaleString() + " บาท" : "";
             }
         }
 
     },
     title: {
-        text: '',
         floating: true,
         offsetY: 330,
         align: 'center',

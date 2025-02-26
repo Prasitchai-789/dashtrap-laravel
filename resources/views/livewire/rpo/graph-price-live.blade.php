@@ -4,7 +4,7 @@
     <div class="mt-2 card">
         <div class="card">
             <div class="p-6">
-                <h4 class="mb-4 card-title font-prompt ">กราฟแสดงราคาเฉลี่ย</h4>
+                <h4 class="flex justify-center mb-4 text-2xl card-title font-prompt">ราคารับซื้อผลปาล์ม วันที่ </h4>
 
                 <div id="graph-price" class="apex-charts" dir="ltr"></div>
             </div>

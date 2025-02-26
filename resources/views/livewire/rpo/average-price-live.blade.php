@@ -107,8 +107,26 @@
                     <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-2 font-anuphan">
 
                         <div class="">
+                            <label for="created_at"
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
+                                วันที่
+                            </label>
+                            <div class="flex">
+                                <div
+                                    class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <input type="date" placeholder=""
+                                    class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
+                                    id="created_at" name="created_at" wire:model="created_at" required  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-2 font-anuphan">
+
+                        <div class="">
                             <label for="price_font"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 ราคาหน้าป้าย
                             </label>
                             <div class="flex">
@@ -123,7 +141,7 @@
                         </div>
                         <div class="">
                             <label for="price_isp"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 บริษัท อีสานพัฒนาอุตสาหกรรมปาล์ม จำกัด
                             </label>
                             <div class="flex">
@@ -141,7 +159,7 @@
 
                         <div class="">
                             <label for="price_ssg_sakon"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 บริษัท สุขสมบูรณ์ สกลนคร
                             </label>
                             <div class="flex">
@@ -156,7 +174,7 @@
                         </div>
                         <div class="">
                             <label for="price_app"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 บริษัท แอ๊บโซลูท ปาล์ม จำกัด
                             </label>
                             <div class="flex">
@@ -174,7 +192,7 @@
 
                         <div class="">
                             <label for="price_ssg_chon"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 บริษัท สุขสมบูรณ์ ชลบุรี
                             </label>
                             <div class="flex">
@@ -189,7 +207,7 @@
                         </div>
                         <div class="">
                             <label for="price_sang"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 บริษัท แสงศิริ น้ำมันปาล์ม จำกัด
                             </label>
                             <div class="flex">
@@ -206,7 +224,7 @@
                     <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-2 font-anuphan">
                         <div class="">
                             <label for="price_see"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 บริษัท ศรีเจริญปาล์มออยล์ จำกัด
                             </label>
                             <div class="flex">
@@ -221,7 +239,7 @@
                         </div>
                         <div class="">
                             <label for="price_wijit"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 บริษัท วิจิตรภัณฑ์สวนปาล์ม จำกัด
                             </label>
                             <div class="flex">
@@ -239,7 +257,7 @@
 
                         <div class="">
                             <label for="price_uni"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 บริษัท ยูนิวานิจ จำกัด
                             </label>
                             <div class="flex">
@@ -254,7 +272,7 @@
                         </div>
                         <div class="">
                             <label for="price_chaw"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                class="block mb-2 text-sm font-medium text-default-600 dark:text-white font-prompt">
                                 บริษัท ชุมนุมสหกรณ์ชาวสวน จำกัด
                             </label>
                             <div class="flex">

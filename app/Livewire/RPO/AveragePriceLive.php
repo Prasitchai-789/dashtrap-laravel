@@ -18,6 +18,7 @@ class AveragePriceLive extends Component
     public $showModal = false;
     public $deleteId;
     public $updateId;
+    public $created_at;
     public $price_font;
     public $price_isp;
     public $price_ssg_sakon;
@@ -49,7 +50,7 @@ class AveragePriceLive extends Component
 
     public function mount()
     {
-        //
+        $this->created_at = now()->subDay()->format('Y-m-d');
     }
     public function resetInputFields()
     {
@@ -120,6 +121,7 @@ class AveragePriceLive extends Component
         $this->edit = true;
         $this->updateId = $id;
         $this->averagePrice = AveragePrice::find($id);
+        $this->created_at = $this->averagePrice->created_at->format('Y-m-d');
         $this->price_font = number_format($this->averagePrice->price_font, 2);
         $this->price_isp = number_format($this->averagePrice->price_isp, 2);
         $this->price_ssg_sakon = number_format($this->averagePrice->price_ssg_sakon, 2);
