@@ -150,8 +150,8 @@
                 <div class="overflow-x-auto rounded-lg">
                     <div class=" font-anuphan">
                         <table class="w-full border border-collapse ">
-                            <thead class="text-center bg-gray-200">
-                                <tr class="border">
+                            <thead class="text-center bg-pink-100">
+                                <tr class="text-pink-700 border">
                                     <th class="p-3 border">ลำดับ</th>
                                     <th class="p-3 border">วันที่</th>
                                     <th class="p-3 border">รหัสบิล</th>

@@ -146,7 +146,7 @@
 
                 <!-- Table -->
                 <div class="">
-                    <div class="overflow-x-auto font-anuphan">
+                    <div class="overflow-x-auto rounded-lg font-anuphan">
                         <table class="w-full border border-collapse">
                             <thead class="text-center bg-gray-200">
                                 <tr class="border ">

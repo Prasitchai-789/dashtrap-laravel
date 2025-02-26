@@ -286,6 +286,8 @@
                         </div>
                     </div>
                 </div>
+                <hr class="mx-4 mt-6 mb-2 border-blue-200 border-dashed border-t-1">
+                <h1 class="ml-4 text-lg font-bold text-blue-800 font-anuphan">ข้อมูลลูกค้า</h1>
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-2 md:grid-cols-2 font-anuphan">
 
@@ -379,6 +381,8 @@
 
                 </div>
 
+                <hr class="mx-4 mt-6 mb-2 border-blue-200 border-dashed border-t-1">
+                <h1 class="ml-4 text-lg font-bold text-blue-800 font-anuphan">ข้อมูลน้ำหนัก</h1>
                 <div class="grid grid-cols-1 gap-4 m-4 mb-2 md:grid-cols-3 font-anuphan">
 
                     <div class="">
