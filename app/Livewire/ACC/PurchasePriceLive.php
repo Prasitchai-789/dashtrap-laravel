@@ -55,6 +55,7 @@ class PurchasePriceLive extends Component
     public $totalPalmOfAmnt2;
     public $totalAmnt2OfDate;
     public $totalItemOfDate;
+    public $ItemOfDate;
     public $AvgPrice;
     public $sumRamOfDate;
     public $sumAgrOfDate;
@@ -122,13 +123,13 @@ class PurchasePriceLive extends Component
         $latestDate = WebappPOInv::max('DocuDate'); // ค้นหาวันที่ล่าสุด
         // โหลดข้อมูลที่ใช้ซ้ำหลายครั้ง
         $webappPOInvQuery = WebappPOInv::whereDate('DocuDate', $this->selectedDate);
+        $this->ItemOfDate = (clone $webappPOInvQuery)->whereNotNull('Amnt2')->count();
 
         // ดึงค่าต่างๆ มาก่อน เพื่อไม่ต้อง query ซ้ำ
         $this->totalPalmOfDate = $webappPOInvQuery->sum('GoodNet');
         $this->totalAmnt2OfDate = $webappPOInvQuery->sum('Amnt2') / 1000000;
         $this->totalItemOfDate = $webappPOInvQuery->count();
         $this->totalPalmOfAmnt2 = (clone $webappPOInvQuery)->where('Amnt2', '!=', 0)->sum('GoodNet');
-
 
         // ดึงข้อมูลเฉพาะที่ต้องใช้เงื่อนไขใหม่
         $this->sumRamOfDate = WebappPOInv::whereDate('DocuDate', $this->selectedDate)

@@ -57,6 +57,7 @@ class PalmPurchaseLive extends Component
     public $selectedDate;
     public $totalPalmOfDate;
     public $totalItemOfDate;
+    public $ItemOfDate;
     public $sumRamOfDate;
     public $sumAgrOfDate;
     public $countRamOfDate;
@@ -172,12 +173,13 @@ class PalmPurchaseLive extends Component
         // โหลดข้อมูลที่ใช้ซ้ำหลายครั้ง
         $webappPOInvQuery = WebappPOInv::whereDate('DocuDate', $this->selectedDate);
 
+        $this->ItemOfDate = (clone $webappPOInvQuery)->whereNull('Amnt2')->count();
+
         // คำนวณค่าต่าง ๆ และเก็บเป็น property เพื่อลดการประมวลผลซ้ำ
         $this->totalPalmOfDate = $webappPOInvQuery->sum('GoodNet');
         $this->totalItemOfDate = $webappPOInvQuery->count();
         $this->sumRamOfDate = $webappPOInvQuery->where('VendorCode', 'like', '97%')->sum('GoodNet');
         $this->countRamOfDate = $webappPOInvQuery->whereIn('TypeCarID', ['10Wheels', '6Wheels', 'Trailer'])->count();
-
         // โหลดค่าแผนการผลิต
         $palmPlanData = PalmPlan::whereDate('created_at', $this->selectedDate)->first();
         $palmPlan = (int) ($palmPlanData->palm_plan ?? 0);

@@ -3,10 +3,12 @@
 
     <div class="grid gap-5 mb-2 xl:grid-cols-4 md:grid-cols-2">
         <div class="card">
-            <div class="card-body">
+            <div class="relative card-body">
                 <div class="mb-4">
-                    <span
-                        class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
+                    @if ($ItemOfDate > 0)
+                     <span class="absolute -top-2 -right-3 flex items-center justify-center w-6 h-6 text-[10px] font-semibold text-white bg-red-400 rounded-full font-anuphan animate-bounce">{{ $ItemOfDate }}</span>
+                    @endif
+                    <span class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
                     <h5 class="truncate card-title font-prompt">จำนวนรายการ</h5>
                 </div>
 
