@@ -17,6 +17,7 @@ use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RPO\PalmPurchase;
+use App\Http\Controllers\RPO\ReportRPOController;
 use App\Http\Controllers\Technician\WorkOrderController;
 use App\Http\Controllers\UserController;
 use Laravel\Prompts\Table;
@@ -72,6 +73,7 @@ Route::group(['middleware' => ['auth', 'role:developer|admin|GM|admin-RPO']], fu
     Route::get('/report-palm-purchase', [PalmPurchase::class, 'reportPalmPurchase'])->name('report-palm-purchase');
     Route::get('/average-price', [AveragePriceController::class, 'averagePrice'])->name('average-price');
     Route::get('/graph-price', [GraphPriceController::class, 'graphPrice'])->name('graph-price');
+    Route::get('/report-purchase', [ReportRPOController::class, 'reportPOInv'])->name('report-purchase');
 });
 
 //-------- HRE ------//

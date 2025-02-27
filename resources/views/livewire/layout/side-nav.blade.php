@@ -98,6 +98,33 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                                 <span class="menu-text">แผนการรับซื้อ</span>
                             </a>
                         </li>
+
+                        @can('delete RPO')
+                        <li class="menu-item">
+                            <a href="{{ route('report-palm-purchase') }}"
+                                class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
+                                <i class="menu-dot"></i>
+                                <span class="menu-text">รายงานการรับซื้อ</span>
+                            </a>
+                        </li>
+                        @endcan
+                    </ul>
+                </div>
+            </li>
+            @endcan
+            @can('view RPO')
+            <li class="menu-item hs-accordion font-prompt">
+                <a href="javascript:void(0)"
+                    class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
+                    <span class="text-2xl fa-solid fa-table-columns"></span>
+                    <span class="menu-text"> รายงานฝ่ายจัดซื้อปาล์ม </span>
+                    <span class="menu-arrow"></span>
+                </a>
+
+                <div id="sidenavLevel"
+                    class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+                    <ul class="mt-1 space-y-1">
+
                         <li class="menu-item">
                             <a href="{{ route('average-price') }}"
                                 class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
@@ -112,15 +139,13 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                                 <span class="menu-text">กราฟราคา</span>
                             </a>
                         </li>
-                        @can('delete RPO')
                         <li class="menu-item">
-                            <a href="{{ route('report-palm-purchase') }}"
+                            <a href="{{ route('report-purchase') }}"
                                 class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
                                 <i class="menu-dot"></i>
                                 <span class="menu-text">รายงานการรับซื้อ</span>
                             </a>
                         </li>
-                        @endcan
                     </ul>
                 </div>
             </li>

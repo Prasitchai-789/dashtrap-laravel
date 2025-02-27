@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="flex w-full h-1.5 bg-default-200 rounded-full overflow-hidden shadow-sm">
-                    <div class="flex flex-col justify-center overflow-hidden rounded-full bg-primary" role="progressbar"
+                    <div class="flex flex-col justify-center overflow-hidden rounded-full bg-success" role="progressbar"
                         aria-valuenow="{{ $progressItem }}" aria-valuemin="0" aria-valuemax="100"
                         style="width: {{ $progressItem }}%;">
                     </div>
@@ -121,7 +121,7 @@
                 </div>
 
                 <div class="flex w-full h-1.5 bg-default-200 rounded-full overflow-hidden shadow-sm">
-                    <div class="flex flex-col justify-center overflow-hidden rounded-full bg-success" role="progressbar"
+                    <div class="flex flex-col justify-center overflow-hidden rounded-full bg-primary" role="progressbar"
                         aria-valuenow="{{ $progressFFB }}" aria-valuemin="0" aria-valuemax="100"
                         style="width: {{ $progressFFB }}%;">
                     </div>

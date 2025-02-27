@@ -5,17 +5,17 @@ namespace App\Models\WIN;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EMVendor extends Model
+class POInvDT extends Model
 {
     protected $connection = 'sqlsrv2';
     use HasFactory;
-    protected $table = 'EMVendor';
-    protected $primaryKey = 'VendorID';
+    protected $table = 'POInvDT';
+    protected $primaryKey = 'POInvID';
     protected $fillable =[
 
     ];
-    public function poHDs()
+    public function poHD()
     {
-        return $this->hasMany(POInvHD::class, 'VendorID', 'VendorID');
+        return $this->belongsTo(POInvHD::class, 'POInvID', 'POInvID');
     }
 }

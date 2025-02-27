@@ -5,17 +5,13 @@ namespace App\Models\WIN;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EMVendor extends Model
+class ICDocuTypeDT extends Model
 {
     protected $connection = 'sqlsrv2';
     use HasFactory;
-    protected $table = 'EMVendor';
-    protected $primaryKey = 'VendorID';
+    protected $table = 'ICDocuTypeDT';
+    protected $primaryKey = 'DocuType';
     protected $fillable =[
 
     ];
-    public function poHDs()
-    {
-        return $this->hasMany(POInvHD::class, 'VendorID', 'VendorID');
-    }
 }
