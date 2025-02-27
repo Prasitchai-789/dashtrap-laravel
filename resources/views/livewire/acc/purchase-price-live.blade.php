@@ -11,8 +11,9 @@
                 </div>
 
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-3xl font-medium text-default-800"><span class="text-xl font-medium text-green-800">
+                    <h2 class="text-3xl font-medium text-default-800">
                         @if ($ItemOfDate < $totalItemOfDate)
+                        <span class="text-xl font-medium text-green-800">
                         {{ number_format($ItemOfDate, 0, '.', ',') }}</span> <span class="text-3xl font-medium text-default-800">/</span>
                         @endif
                         {{ number_format($totalItemOfDate, 0, '.', ',') }}
