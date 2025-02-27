@@ -85,7 +85,7 @@ Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user-RPO|user-MA
 });
 
 //-------- ACC ------//
-Route::group(['middleware' => ['auth', 'role:developer|admin|GM|admin-ACC|user-ACC']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM|admin-ACC|user-ACC|admin-RPO']], function () {
     Route::get('/purchase-price', [PurchasePriceController::class, 'purchasePrice'])->name('purchase-price');
 });
 
