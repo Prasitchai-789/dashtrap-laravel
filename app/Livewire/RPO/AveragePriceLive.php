@@ -90,6 +90,7 @@ class AveragePriceLive extends Component
                     'price_chaw' => 'nullable',
                 ]
             );
+            $validatedData['created_at'] = $this->created_at;
             AveragePrice::create($validatedData);
 
             $this->dispatch(
@@ -153,6 +154,7 @@ class AveragePriceLive extends Component
             );
 
             $averagePrice = AveragePrice::find($this->updateId);
+            $validatedData['created_at'] = $this->created_at;
             $averagePrice->update($validatedData);
 
             $this->dispatch(

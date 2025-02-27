@@ -24,7 +24,7 @@ var options = {
     dataLabels: {
         enabled: true,
         formatter: function (val) {
-            return val !== null ? val.toLocaleString() + "" : "";
+            return val !== null ? parseFloat(val).toFixed(2).toLocaleString() + "" : "";
         },
         offsetY: -50,
         style: {
