@@ -6,7 +6,7 @@
             <div class="relative card-body">
                 <div class="mb-4">
                     @if ($ItemOfDate > 0)
-                     <span class="absolute -top-2 -right-3 flex items-center justify-center w-6 h-6 text-[10px] font-semibold text-white bg-red-400 rounded-full font-anuphan animate-bounce">{{ $ItemOfDate }}</span>
+                 <span class="absolute -top-2 -right-3 flex items-center justify-center w-6 h-6 text-[10px] font-semibold text-white bg-red-400 rounded-full font-anuphan animate-bounce">{{ $ItemOfDate }}</span>
                     @endif
                     <span class="px-1 py-0.5 text-[10px]/[1.25] font-semibold rounded text-success bg-success/20 float-end">Daily</span>
                     <h5 class="truncate card-title font-prompt">จำนวนรายการ</h5>
@@ -349,9 +349,9 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="VendorCarID" name="VendorCarID" wire:model="VendorCarID" required list="vendorCarList" wire:change="getTypeCarID"/>
-                                <datalist id="vendorCarList">
-                                    @foreach($vendorCarList as $id)
+                                id="VendorCarID" name="VendorCarID" wire:model="VendorCarID" required list="vendorCarIDList"/>
+                                <datalist id="vendorCarIDList">
+                                    @foreach($vendorCarIDs as $id)
                                         <option value="{{ $id }}"></option>
                                     @endforeach
                                 </datalist>
@@ -371,6 +371,7 @@
                             <select type="text"
                                 class="font-semibold text-blue-900 form-select rounded-s-none focus:ring-blue-500 focus:border-blue-500"
                                 id="TypeCarID" name="TypeCarID" wire:model="TypeCarID" required>
+                                <option selected value="">เลือก...</option>
                                 @foreach ($POInvDTCars as $POInvDTCar)
                                 <option value="{{ $POInvDTCar->TypeCarID }}">
                                     {{ $POInvDTCar->TypeCarName }}
