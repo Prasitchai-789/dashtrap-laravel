@@ -46,6 +46,7 @@ channel.bind('form-submit', function(data) {
 
 
 @section('script')
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const GoodOBInput = document.getElementById("GoodOB");
@@ -82,9 +83,5 @@ channel.bind('form-submit', function(data) {
         GoodIBInput.addEventListener("input", handleInput);
     });
 </script>
-
-
-{{-- @vite(['resources/js/pages/dashboard.js']) --}}
-
 
 @endsection

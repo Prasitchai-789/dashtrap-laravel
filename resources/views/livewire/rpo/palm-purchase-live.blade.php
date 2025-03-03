@@ -349,9 +349,9 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="VendorCarID" name="VendorCarID" wire:model="VendorCarID" required list="vendorCarIDList"/>
-                                <datalist id="vendorCarIDList">
-                                    @foreach($vendorCarIDs as $id)
+                                id="VendorCarID" name="VendorCarID" wire:model="VendorCarID" required list="vendorCarList" wire:change="getTypeCarID"/>
+                                <datalist id="vendorCarList">
+                                    @foreach($vendorCarList as $id)
                                         <option value="{{ $id }}"></option>
                                     @endforeach
                                 </datalist>
@@ -371,7 +371,6 @@
                             <select type="text"
                                 class="font-semibold text-blue-900 form-select rounded-s-none focus:ring-blue-500 focus:border-blue-500"
                                 id="TypeCarID" name="TypeCarID" wire:model="TypeCarID" required>
-                                <option selected value="">เลือก...</option>
                                 @foreach ($POInvDTCars as $POInvDTCar)
                                 <option value="{{ $POInvDTCar->TypeCarID }}">
                                     {{ $POInvDTCar->TypeCarName }}

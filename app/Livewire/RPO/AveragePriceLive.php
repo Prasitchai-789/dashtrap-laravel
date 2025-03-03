@@ -2,6 +2,7 @@
 
 namespace App\Livewire\RPO;
 
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\RPO\AveragePrice;
@@ -78,6 +79,7 @@ class AveragePriceLive extends Component
         try {
             $validatedData = $this->validate(
                 [
+                    'created_at' => 'required|date',
                     'price_font' => 'nullable',
                     'price_isp' => 'nullable',
                     'price_ssg_sakon' => 'nullable',

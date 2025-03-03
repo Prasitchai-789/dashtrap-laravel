@@ -66,6 +66,8 @@ class PalmPurchaseLive extends Component
     public $progressAgr = 0;
     public $progressFFB = 0;
     public $vendorCarID;
+    public $vendorCarList = [];
+    public $POInvDTCars = [];
 
     public bool $isLoading = false;
 
@@ -149,7 +151,29 @@ class PalmPurchaseLive extends Component
     {
         $vendor = EMVendor::where('VendorCode', $this->VendorCode)->first();
         $this->VendorName = $vendor ? $vendor->VendorName : null;
+        $this->updatedVendorCode();
     }
+
+    public function updatedVendorCode()
+    {
+        // กรองทะเบียนรถที่ตรงกับรหัสลูกค้า
+        $this->vendorCarList = WebappPOInv::where('VendorCode', $this->VendorCode)
+            ->distinct()
+            ->pluck('VendorCarID')
+            ->toArray();
+        // ล้างค่าทะเบียนรถและประเภทรถเมื่อเปลี่ยนรหัสลูกค้า
+        $this->VendorCarID = null;
+        $this->TypeCarID = null;
+    }
+    public function getTypeCarID()
+    {
+        $car = WebappPOInv::where('VendorCarID', $this->VendorCarID)->first();
+        $this->TypeCarID = $car ? $car->TypeCarID : null;
+        $this->POInvDTCars = POInvDTCar::where('TypeCarID', $this->TypeCarID)->limit(10)->get();
+        $this->TypeCarID = $car ? $car->TypeCarID : null;
+    }
+
+
     public function setDate()
     {
         if (Carbon::parse($this->selectedDate)->greaterThan(Carbon::today())) {
@@ -195,22 +219,21 @@ class PalmPurchaseLive extends Component
         // โหลดข้อมูลที่จำเป็น
         $webappPOInvs = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
             ->orderBy('POInvID', 'desc')
-            ->paginate(10);
+            ->paginate(50);
         $this->vendors = EMVendor::select('VendorCode', 'VendorName')
             ->orderBy('VendorName', 'asc')
             ->distinct() // ป้องกันค่าซ้ำ
             ->get();
 
-        $POInvDTCars = POInvDTCar::limit(10)->get();
+        // $vendorCarIDs = WebappPOInv::distinct()->pluck('VendorCarID');
+
         $setPriceScalers = SetPriceScaler::orderBy('id', 'desc')->paginate(5);
-        $vendorCarIDs = WebappPOInv::distinct()->pluck('VendorCarID');
 
 
         return view('livewire.rpo.palm-purchase-live', [
             'webappPOInvs' => $webappPOInvs,
-            'POInvDTCars' => $POInvDTCars,
             'setPriceScalers' => $setPriceScalers,
-            'vendorCarIDs' => $vendorCarIDs,
+            // 'vendorCarIDs' => $vendorCarIDs,
 
         ]);
     }

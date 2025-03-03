@@ -10,12 +10,12 @@ class POInvDTCar extends Model
     protected $connection = 'sqlsrv2';
     use HasFactory;
     protected $table = 'POInvDTCars';
-    protected $fillable =[
+    protected $fillable = [
         'TypeCarID',
         'TypeCarName',
     ];
-    public $incrementing = true;
+    protected $primaryKey = 'TypeCarID';
+    public $incrementing = false;
     protected $keyType = 'int';
     public $timestamps = false;
 }
-

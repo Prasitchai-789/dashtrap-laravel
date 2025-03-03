@@ -166,7 +166,7 @@ class PurchasePriceLive extends Component
         // โหลดข้อมูลที่จำเป็น
         $webappPOInvs = WebappPOInv::whereDate('DocuDate', $this->selectedDate)
             ->orderBy('POInvID', 'desc')
-            ->paginate(10);
+            ->paginate(50);
 
         $POInvDTCars = POInvDTCar::limit(10)->get();
         $setPriceScalers = SetPriceScaler::orderBy('id', 'desc')->paginate(5);

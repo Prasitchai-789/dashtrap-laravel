@@ -10,6 +10,7 @@ class AveragePrice extends Model
     use HasFactory;
     protected $table = 'average_prices';
     protected $fillable =[
+        'created_at',
         'price_font',
         'price_isp',
         'price_ssg_sakon',
@@ -22,4 +23,6 @@ class AveragePrice extends Model
         'price_chaw',
         'remark',
     ];
+
+    public $timestamps = false;
 }
