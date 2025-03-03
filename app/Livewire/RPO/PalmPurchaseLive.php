@@ -285,7 +285,7 @@ class PalmPurchaseLive extends Component
             $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
             $validatedData['GoodNet'] = $this->calculateWeight();
             $validatedData['Amnt1'] = max(0, (float) $this->GoodNet * (float) $this->Price1);
-            dd($validatedData);
+           
             webappPOInv::create($validatedData);
 
             $this->dispatch(
