@@ -111,6 +111,8 @@ class ReportPalmPurchaseLive extends Component
         $vendor = EMVendor::where('VendorCode', $this->VendorCode)->first();
         $this->VendorName = $vendor ? $vendor->VendorName : null;
     }
+
+
     public function setDate()
     {
         if (Carbon::parse($this->selectedDate)->greaterThan(Carbon::today())) {
