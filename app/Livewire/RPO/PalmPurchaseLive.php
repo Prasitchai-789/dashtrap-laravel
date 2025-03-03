@@ -158,9 +158,9 @@ class PalmPurchaseLive extends Component
     {
         $this->vendorCarList = WebappPOInv::where('VendorCode', $this->VendorCode)
             ->distinct()
-            ->pluck('VendorCarID', 'TypeCarID')
+            ->pluck('VendorCarID')
             ->toArray();
-            $this->firstTypeCarID = array_key_first($this->vendorCarList);
+
         // ล้างค่าทะเบียนรถและประเภทรถเมื่อเปลี่ยนรหัสลูกค้า
         $this->VendorCarID = null;
         $this->TypeCarID = null;
@@ -168,7 +168,7 @@ class PalmPurchaseLive extends Component
 
     public function getVendorCarName()
     {
-        $typeCarID = POInvDTCar::where('TypeCarID',$this->firstTypeCarID)->first();
+        $typeCarID = WebappPOInv::where('VendorCarID',$this->VendorCarID)->first();
         $this->TypeCarID = $typeCarID ? $typeCarID->TypeCarID : null;
     }
     public function setDate()
@@ -285,7 +285,7 @@ class PalmPurchaseLive extends Component
             $validatedData['Price1'] = number_format($this->Price1, 2, '.', '');
             $validatedData['GoodNet'] = $this->calculateWeight();
             $validatedData['Amnt1'] = max(0, (float) $this->GoodNet * (float) $this->Price1);
-           
+
             webappPOInv::create($validatedData);
 
             $this->dispatch(
