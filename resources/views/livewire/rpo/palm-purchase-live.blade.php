@@ -293,7 +293,6 @@
 
                 <div class="grid grid-cols-1 gap-4 m-4 mb-2 md:grid-cols-2 font-anuphan">
 
-                    <!-- 🔹 รหัสลูกค้า (เลือกจาก datalist) -->
                     <div>
                         <label for="VendorCode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
                             รหัสลูกค้า
@@ -315,7 +314,6 @@
                             </datalist>
                         </div>
                     </div>
-
                     <!-- 🔹 ชื่อลูกค้า (อัปเดตอัตโนมัติ) -->
                     <div>
                         <label for="VendorName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
@@ -349,9 +347,9 @@
                             </div>
                             <input type="text" placeholder=""
                                 class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                id="VendorCarID" name="VendorCarID" wire:model="VendorCarID" required list="vendorCarIDList"/>
-                                <datalist id="vendorCarIDList">
-                                    @foreach($vendorCarIDs as $id)
+                                id="VendorCarID" name="VendorCarID" wire:model="VendorCarID" wire:change="getVendorCarName" required list="vendorCarList"/>
+                                <datalist id="vendorCarList">
+                                    @foreach($vendorCarList as $id)
                                         <option value="{{ $id }}"></option>
                                     @endforeach
                                 </datalist>
