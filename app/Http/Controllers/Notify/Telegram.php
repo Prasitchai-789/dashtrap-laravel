@@ -91,4 +91,15 @@ class Telegram extends Controller
             'text' => $message,
         ]);
     }
+
+    public function sendToTelegramPROCount($message)
+    {
+        $telegram = new Api('7980130203:AAHNcVv8mXQf_Po6pndG9Z6CX9-0YfwDiEw');
+        $chatId = -4705495902 ;
+
+        $telegram->sendMessage([
+            'chat_id' => $chatId,
+            'text' => $message,
+        ]);
+    }
 }

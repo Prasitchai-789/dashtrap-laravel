@@ -2,12 +2,14 @@
 
 namespace App\Livewire\PRO;
 
+use DateTime;
 use Carbon\Carbon;
 use Livewire\Component;
-use Livewire\WithPagination;
 
+use Livewire\WithPagination;
 use function PHPSTORM_META\type;
 use App\Models\PRO\FFBCountProduction;
+use App\Http\Controllers\Notify\Telegram;
 
 class FFBCountProductionLive extends Component
 {
@@ -157,7 +159,7 @@ class FFBCountProductionLive extends Component
             ]);
             $validatedData['Amount'] = $this->calculate_str_replace();
 
-            FFBCountProduction::create($validatedData);
+            // FFBCountProduction::create($validatedData);
 
             $this->dispatch(
                 'alert',
@@ -168,7 +170,38 @@ class FFBCountProductionLive extends Component
                 timer: 1500
             );
 
+
+            $date = new DateTime($this->Date);
+        $Date = $date->format('d/m/Y');
+        $Shift = $this->Shift;
+        $StartTime = $this->StartTime;
+        $FinishTime = $this->FinishTime;
+        $Quantity = $this->Quantity;
+        $datePalm1 = new DateTime($this->DatePalm1);
+        $DatePalm1 = $datePalm1->format('d/m/Y');
+        $Contain1 = $this->Contain1;
+        $datePalm2 = new DateTime($this->DatePalm2);
+        $DatePalm2 = $datePalm2->format('d/m/Y');
+        $Contain2 = $this->Contain2;
+        $PikupForward = $this->PikupForward;
+        $Amount = $validatedData['Amount'];
+
+        $message =
+            "\n" . "📆 วันที่: " . $Date .
+            "\n" . "🧑‍🧒‍🧒 ส่วนงาน: " . "กะ " . $Shift .
+            "\n" . "🕖 เริ่มงาน: " . $StartTime . " น." .
+            "\n" . "🕓 เลิกงาน: " . $FinishTime . " น." .
+            "\n" . "จำนวนที่ผลิตได้(กะบะ): " . $Quantity .
+            "\n" . "📆 ผลปาล์มวันที่: " . $DatePalm1 .
+            "\n" . "✅ บรรจุ: " . $Contain1 . " กะบะ" .
+            "\n" . "📆 ผลปาล์มวันที่: " . $DatePalm2 .
+            "\n" . "✅ บรรจุ: " . $Contain2 . " กะบะ" .
+            "\n" . "⤴️ ยอดยกไป: " . $PikupForward . " กะบะ" .
+            "\n" . "ปริมาณ Flow Meter: " . $Amount;
+            $Telegram = new Telegram();
+            $Telegram->sendToTelegramPROCount($message);
             $this->closeModal();
+
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatch(
                 'alert',
