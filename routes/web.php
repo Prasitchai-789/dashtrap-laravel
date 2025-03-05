@@ -113,7 +113,7 @@ Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user']], functio
 });
 
 //-------- Production ------//
-Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user']], function () {
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM|admin-PRO|user-PRO']], function () {
     Route::get('/production', [ProductionController::class, 'Production'])->name('production');
     Route::get('/count-production', [ProductionController::class, 'FFBCountProduction'])->name('count-production');
 });
