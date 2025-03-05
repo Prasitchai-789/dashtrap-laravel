@@ -137,7 +137,7 @@ class ProductionLive extends Component
 
     public function mount()
     {
-        $this->Date = Carbon::now()->subDays(2)->format('Y-m-d');
+        $this->Date = Carbon::now()->subDays(1)->format('Y-m-d');
         $this->changeDate();
     }
     public  function changeDate()
