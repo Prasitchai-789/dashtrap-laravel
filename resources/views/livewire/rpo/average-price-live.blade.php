@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="p-6 bg-white rounded-lg shadow-lg">
 
-                <div class="flex items-center justify-end mb-2">
+                <div class="flex items-center justify-end mb-4">
                     <!-- ส่วนของปุ่มต่างๆ -->
                         <button type="button"
                             class="px-4 py-2 text-sm text-white transition rounded-lg bg-primary hover:bg-blue-500 hover:shadow-lg hover:scale-105"

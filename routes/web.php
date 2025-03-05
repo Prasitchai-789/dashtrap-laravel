@@ -9,6 +9,7 @@ use App\Http\Controllers\HRE\Employee;
 use App\Http\Controllers\CAR\UseCarController;
 use App\Http\Controllers\Dashboard\GraphController;
 use App\Http\Controllers\MAR\SalesPlanController;
+use App\Http\Controllers\PRO\ProductionController;
 use App\Http\Controllers\RPO\AveragePriceController;
 use App\Http\Controllers\RPO\GraphPriceController;
 use App\Http\Controllers\RPO\SalesProductController;
@@ -111,7 +112,11 @@ Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user']], functio
     Route::get('/work-order', [WorkOrderController::class, 'workOrder'])->name('work-order');
 });
 
-
+//-------- Production ------//
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user']], function () {
+    Route::get('/production', [ProductionController::class, 'Production'])->name('production');
+    Route::get('/count-production', [ProductionController::class, 'FFBCountProduction'])->name('count-production');
+});
 
 
 

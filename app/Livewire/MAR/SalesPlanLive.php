@@ -145,7 +145,7 @@ class SalesPlanLive extends Component
     {
         $salesPlans = SalesPlan::whereDate('SOPDate', $this->selectedDate)
             ->orderBy('SOPID', 'desc')
-            ->paginate(10);
+            ->paginate(50);
 
         return view('livewire.mar.sales-plan-live', [
             'salesPlans' => $salesPlans,

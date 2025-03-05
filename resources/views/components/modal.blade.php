@@ -1,4 +1,4 @@
-@props(['id', 'maxWidth', 'title', 'zIndex', 'closeModal'])
+@props(['id', 'maxWidth', 'title', 'zIndex', 'closeModal','bg'])
 
 @php
 $id = $id ?? md5($attributes->wire('model'));
@@ -14,6 +14,7 @@ $maxWidth = [
 
 // z-index
 $zIndex = $zIndex ?? 999;
+$bg = $bg ?? 'bg-primary';
 @endphp
 
 <div x-data="{ show: @entangle($attributes->wire('model')) }"
@@ -43,7 +44,7 @@ $zIndex = $zIndex ?? 999;
             <!-- Modal content -->
             <div class="w-auto {{ $maxWidth }} overflow-hidden bg-white rounded-lg shadow-lg">
                 <!-- Modal header -->
-                <div class="flex items-center justify-between p-3 border-b rounded-t bg-primary md:p-4">
+                <div class="flex items-center justify-between p-3 border-b rounded-t {{$bg}} md:p-4">
                     <h3 class="text-xl font-semibold text-white font-prompt">
                         {{ $title ?? ''}}
                     </h3>
