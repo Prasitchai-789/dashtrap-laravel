@@ -40,13 +40,13 @@
 
                                         @if ( $ffbCountProduction->Shift == "A")
                                         <span
-                                            class="inline-flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-medium bg-pink-100 text-pink-800 min-w-[80px] max-w-[80px] font-bold">
+                                            class="inline-flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-medium bg-pink-100 text-pink-800 min-w-[60px] max-w-[60px] font-bold">
                                             <span class="w-1.5 h-1.5 inline-block bg-pink-400 rounded-full"></span>
                                             กะ A
                                         </span>
                                         @else
                                         <span
-                                            class="inline-flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 min-w-[80px] max-w-[80px] font-bold">
+                                            class="inline-flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 min-w-[60px] max-w-[60px] font-bold">
                                             <span class="w-1.5 h-1.5 inline-block bg-green-400 rounded-full"></span>
                                             กะ B
                                         </span>
@@ -117,12 +117,12 @@
                             </label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-calendar-day dark:text-gray-400"></i>
                                 </span>
 
                                 <input type="date" placeholder=""
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     id="Date" name="Date" wire:model="Date" required />
                             </div>
                         </div>
@@ -136,11 +136,11 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ส่วนงาน</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-clipboard-user dark:text-gray-400"></i>
                                 </span>
                                 <select type="text"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     id="Shift" name="Shift" wire:model="Shift" required>
                                     <option selected value="">เลือก...</option>
                                     <option value="A">กะ A</option>
@@ -158,11 +158,11 @@
                                 (กะบะ)</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="text" id="Quantity" name="Quantity" wire:model="Quantity"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="จำนวนที่ผลิตได้">
                             </div>
                         </div>
@@ -174,11 +174,11 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เริ่มงาน</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="time" id="StartTime" name="StartTime" wire:model="StartTime"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="">
                             </div>
                         </div>
@@ -188,11 +188,11 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เลิกงาน</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="time" id="FinishTime" name="FinishTime" wire:model="FinishTime"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="">
                             </div>
                         </div>
@@ -204,11 +204,11 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ผลปาล์มวันที่</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="date" id="DatePalm1" name="DatePalm1" wire:model="DatePalm1"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="">
                             </div>
                         </div>
@@ -219,11 +219,11 @@
                                 (กะบะ)</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="text" id="Contain1" name="Contain1" wire:model="Contain1"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="กะบะ">
 
                                 <button type="button" wire:click="increment"
@@ -241,12 +241,12 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ผลปาล์มวันที่</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="date" id="DatePalm{{ $i }}" name="DatePalm{{ $i }}"
                                     wire:model.defer="DatePalm{{ $i }}"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="">
                             </div>
                     </div>
@@ -257,11 +257,11 @@
                             (กะบะ)</label>
                         <div class="flex">
                             <span
-                                class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                 <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                             </span>
                             <input type="text" id="Contain{{ $i }}" name="Contain{{ $i }}" wire:model="Contain{{ $i }}"
-                                class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                 placeholder="กะบะ">
 
                             <button type="button" wire:click="decrement"
@@ -281,11 +281,11 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ยอดยกไป</label>
                 <div class="flex">
                     <span
-                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                         <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                     </span>
                     <input type="text" id="PikupForward" name="PikupForward" wire:model="PikupForward"
-                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                         placeholder="กะบะ">
                 </div>
             </div>
@@ -295,11 +295,11 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ปาล์มดิบ</label>
                 <div class="flex">
                     <span
-                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                         <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                     </span>
                     <input type="text" id="RawFFB" name="RawFFB" wire:model="RawFFB"
-                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                         placeholder="กะบะ">
                 </div>
             </div>
@@ -313,11 +313,11 @@
                 <label for="CS1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CS 1</label>
                 <div class="flex">
                     <span
-                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                         <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                     </span>
                     <input type="text" id="CS1" name="CS1" wire:model="CS1"
-                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                         placeholder="cm.">
                 </div>
             </div>
@@ -326,11 +326,11 @@
                 <label for="CS2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CS 2</label>
                 <div class="flex">
                     <span
-                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                         <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                     </span>
                     <input type="text" id="CS2" name="CS2" wire:model="CS2"
-                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                         placeholder="cm.">
                 </div>
             </div>
@@ -343,11 +343,11 @@
                     ก่อน</label>
                 <div class="flex">
                     <span
-                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                         <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                     </span>
                     <input type="text" id="FlowMeterBefore" name="FlowMeterBefore" wire:model.lazy="FlowMeterBefore"
-                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                         placeholder="0.00">
                 </div>
             </div>
@@ -358,11 +358,11 @@
                     หลัง</label>
                 <div class="flex">
                     <span
-                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                         <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                     </span>
                     <input type="text" id="FlowMeterAfter" name="FlowMeterAfter" wire:model.lazy="FlowMeterAfter"
-                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                         placeholder="0.00">
                 </div>
             </div>

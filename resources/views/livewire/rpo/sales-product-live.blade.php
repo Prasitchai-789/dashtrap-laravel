@@ -162,6 +162,7 @@
                                 <th class="p-3 border">ชื่อสินค้า</th>
                                 <th class="p-3 border">ทะเบียนรถ</th>
                                 <th class="p-3 border">ชื่อคู่ค้า</th>
+                                <th class="p-3 border">ชื่อผู้ขับ</th>
                                 <th class="p-3 border">แผนการโหลด (kg.)</th>
                                 <th class="p-3 border">นน.สุทธิ (kg.)</th>
                                 <th class="p-3 border">สถานะ</th>
@@ -175,19 +176,22 @@
                                     {{ $salesPlan->GoodName }}
                                 </td>
 
-                                <td class="p-2 pl-4 border min-w-[80px] max-w-[80px] truncate">
+                                <td class="p-2 pl-4 border min-w-[120px] max-w-[120px] truncate">
                                     {{ $salesPlan->NumberCar }}
                                 </td>
 
                                 <td class="p-2 pl-4 border min-w-[60px] max-w-[150px] truncate">
                                     {{ $salesPlan->emCust->CustName }}
                                 </td>
+                                <td class="p-2 pl-4 border min-w-[80px] max-w-[150px] truncate">
+                                    {{ $salesPlan->DriverName }}
+                                </td>
 
-                                <td class="p-2 pr-4 mr-4 font-bold border text-end">
+                                <td class="p-2 pr-4 mr-4 font-bold border text-end min-w-[80px] max-w-[80px]">
                                     {{ isset($salesPlan->AmntLoad) ? number_format($salesPlan->AmntLoad, 0, '.', ',') :
                                     '-' }}
                                 </td>
-                                <td class="p-2 pr-4 mr-4 font-bold border text-end">
+                                <td class="p-2 pr-4 mr-4 font-bold border text-end min-w-[80px] max-w-[80px]">
                                     {{ isset($salesPlan->NetWei) ? number_format($salesPlan->NetWei, 0, '.', ',') :
                                     '-' }}
                                 </td>

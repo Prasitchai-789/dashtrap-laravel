@@ -146,12 +146,12 @@
                             </label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-calendar-day dark:text-gray-400"></i>
                                 </span>
 
                                 <input type="date" placeholder=""
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     id="Date" name="Date" wire:model="Date" wire:change='changeDate' required />
                             </div>
                         </div>
@@ -174,11 +174,11 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ยอดยกมา</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-regular fa-share-from-square"></i>
                                 </span>
                                 <input type="text" id="FFBForward" name="FFBForward" wire:model="FFBForward"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="ยอดยกมา">
                             </div>
                             @if ($errors->has('FFBForward'))
@@ -191,11 +191,11 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ยอดรับเข้า</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-cart-shopping"></i>
                                 </span>
                                 <input type="text" id="FFBPurchase" name="FFBPurchase" wire:model="FFBPurchase"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="ยอดรับเข้า">
                             </div>
                         </div>
@@ -210,11 +210,11 @@
                             <label for="ShiftA" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">กะ A</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="text" id="ShiftA" name="ShiftA" wire:model="ShiftA" wire:change="sumFFBGoodQty"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="กะบะ">
                             </div>
                         </div>
@@ -223,11 +223,11 @@
                             <label for="ShiftB" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">กะ B</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="text" id="ShiftB" name="ShiftB" wire:model="ShiftB" wire:change="sumFFBGoodQty"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="กะบะ">
                             </div>
                         </div>
@@ -235,11 +235,11 @@
                             <label for="Shift3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">กะ 3</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="text" id="Shift3" name="Shift3" wire:model="Shift3" wire:change="sumFFBGoodQty"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.500"
                                     placeholder="กะบะ">
                             </div>
                         </div>
@@ -252,11 +252,11 @@
                             <label for="PikupRemain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ค้างกะบะ</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-inbox"></i>
                                 </span>
                                 <input type="text" id="PikupRemain" name="PikupRemain" wire:model="PikupRemain" wire:change="sumFFBGoodQty"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="กะบะ">
                             </div>
                         </div>
@@ -265,11 +265,11 @@
                             <label for="RamRemain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">คาดการณ์บนลาน</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-circle-user"></i>
                                 </span>
                                 <input type="text" id="RamRemain" name="RamRemain" wire:model="RamRemain" wire:change="sumFFBGoodQty"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="กะบะ">
                             </div>
                         </div>
@@ -280,11 +280,11 @@
                             <label for="AvgPikup" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ค่าเฉลี่ย/กะบะ (ตัน)</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-gauge"></i>
                                 </span>
                                 <input type="text" id="AvgPikup" name="AvgPikup" wire:model="AvgPikup"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-blue-600 font-bold focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-blue-600 font-bold focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="" readonly>
                             </div>
                         </div>
@@ -293,11 +293,11 @@
                             <label for="FFBGoodQty" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ปริมาณการผลิต (ตัน)</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-industry"></i>
                                 </span>
                                 <input type="text" id="FFBGoodQty" name="FFBGoodQty" wire:model="FFBGoodQty"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-blue-600 font-bold focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-blue-600 font-bold focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="" readonly>
                             </div>
                         </div>
@@ -307,11 +307,11 @@
                             <label for="Steam" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">อบ</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-teeth-open"></i>
                                 </span>
                                 <input type="text" id="Steam" name="Steam" wire:model="Steam" wire:change="sumFFBRemain"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="กะบะ">
                             </div>
                         </div>
@@ -320,11 +320,11 @@
                             <label for="StuckIn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">บรรจุ</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-inbox"></i>
                                 </span>
                                 <input type="text" id="StuckIn" name="StuckIn" wire:model="StuckIn" wire:change="sumFFBRemain"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="กะบะ">
                             </div>
                         </div>
@@ -334,11 +334,11 @@
                             <label for="RawFFB" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ปาล์มดิบ</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-hand"></i>
                                 </span>
                                 <input type="text" id="RawFFB" name="RawFFB" wire:model="RawFFB"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="ตัน">
                             </div>
                         </div>
@@ -347,11 +347,11 @@
                             <label for="FFBRemain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ปาล์มคงค้าง</label>
                             <div class="flex">
                                 <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-e-0 border-e-0 rounded-s-md">
                                     <i class="w-4 h-4 text-gray-500 fa-solid fa-layer-group"></i>
                                 </span>
                                 <input type="text" id="FFBRemain" name="FFBRemain" wire:model="FFBRemain"
-                                    class="rounded-s-none rounded-md bg-gray-50 border text-blue-600 font-bold focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-100 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="rounded-s-none rounded-md bg-gray-50 border text-blue-600 font-bold focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
                                     placeholder="" readonly>
                             </div>
                         </div>
