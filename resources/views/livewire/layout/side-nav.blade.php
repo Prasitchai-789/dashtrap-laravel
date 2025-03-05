@@ -155,7 +155,7 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
             <li class="menu-item hs-accordion font-prompt">
                 <a href="javascript:void(0)"
                     class="hs-accordion-toggle group flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5 hs-accordion-active:bg-default-100/5 hs-accordion-active:text-default-100">
-                    <span class="text-2xl fa-solid fa-table-columns"></span>
+                    <span class="text-2xl fa-solid fa-industry"></span>
                     <span class="menu-text"> ฝ่ายผลิตและวิศวกรรม </span>
                     <span class="menu-arrow"></span>
                 </a>
