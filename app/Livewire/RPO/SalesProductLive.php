@@ -214,9 +214,9 @@ class SalesProductLive extends Component
         //     : 0;
         $this->progressPKN = (isset($sumOfDateData[2152]) && ($sumOfDateData[2152]->totalCount ?? 0) > 0)
             ? (
-                (($sumOfDateData[2147]->totalCount ?? 0)
-                    - ($sumOfDateData[2147]->countP ?? 0)
-                    - ($sumOfDateData[2147]->countW ?? 0))
+                (($sumOfDateData[2152]->totalCount ?? 0)
+                    - ($sumOfDateData[2152]->countP ?? 0)
+                    - ($sumOfDateData[2152]->countW ?? 0))
                 / ($sumOfDateData[2152]->totalCount ?? 1)
             ) * 100
             : 0;

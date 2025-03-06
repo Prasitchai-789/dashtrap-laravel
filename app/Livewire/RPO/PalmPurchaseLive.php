@@ -302,7 +302,7 @@ class PalmPurchaseLive extends Component
             $newOrder = $countPOInvs++;
 
             $sumPalm = $this->totalPalmOfDate + max(0, (float) $this->calculateWeight());
-            $message = ": " . number_format($sumPalm, 0, '.', ',') . " kg." .
+            $message = "" . number_format($sumPalm, 0, '.', ',') . " kg." .
                 "\n" . "📆 วันที่: "  . \Carbon\Carbon::parse($this->DocuDate)->locale('th')->translatedFormat('d F Y') .
                 "\n" . "✅ รายการที่: "  . $newOrder .
                 "\n" . "📋 เลขที่เอกสาร: "  . $this->BillID .
