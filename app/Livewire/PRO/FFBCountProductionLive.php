@@ -159,7 +159,7 @@ class FFBCountProductionLive extends Component
             ]);
             $validatedData['Amount'] = $this->calculate_str_replace();
 
-            // FFBCountProduction::create($validatedData);
+            FFBCountProduction::create($validatedData);
 
             $this->dispatch(
                 'alert',
