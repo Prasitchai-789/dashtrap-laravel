@@ -197,8 +197,8 @@ class FFBCountProductionLive extends Component
             "\n" . "✅ บรรจุ: " . $Contain2 . " กะบะ" .
             "\n" . "⤴️ ยอดยกไป: " . $PikupForward . " กะบะ" .
             "\n" . "ปริมาณ Flow Meter: " . number_format($Amount, 2) ;
-            // $Telegram = new Telegram();
-            // $Telegram->sendToTelegramPROCount($message);
+            $Telegram = new Telegram();
+            $Telegram->sendToTelegramPROCount($message);
             $this->closeModal();
 
         } catch (\Illuminate\Validation\ValidationException $e) {
