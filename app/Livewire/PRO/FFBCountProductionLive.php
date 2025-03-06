@@ -159,6 +159,7 @@ class FFBCountProductionLive extends Component
             $validatedData['FlowMeterBefore'] = (float) str_replace(',', '', $this->FlowMeterBefore);
             $validatedData['FlowMeterAfter'] =  (float) str_replace(',', '', $this->FlowMeterAfter);
             $validatedData['Amount'] = $this->calculate_str_replace();
+            
             FFBCountProduction::create($validatedData);
 
             $this->dispatch(
@@ -281,6 +282,7 @@ class FFBCountProductionLive extends Component
             $validatedData['FlowMeterBefore'] = (float) str_replace(',', '', $this->FlowMeterBefore);
             $validatedData['FlowMeterAfter'] = (float) str_replace(',', '', $this->FlowMeterAfter);
             $validatedData['Amount'] = $this->calculate_str_replace();
+
             $ffbCountProduction->update($validatedData);
 
             $this->dispatch(

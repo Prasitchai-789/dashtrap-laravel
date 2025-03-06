@@ -266,7 +266,7 @@ class ProductionLive extends Component
         $this->FFBGoodQty = number_format($this->production->FFBGoodQty, 2, '.', ',');
         $this->StuckIn = $this->production->StuckIn;
         $this->Steam = $this->production->Steam;
-        $this->RawFFB = $this->production->RawFFB;
+        $this->RawFFB = number_format($this->production->RawFFB, 2, '.', ',');
         $this->FFBRemain = number_format($this->production->FFBRemain, 2, '.', ',');
     }
 
@@ -297,7 +297,7 @@ class ProductionLive extends Component
             $validatedData['FFBGoodQty'] = str_replace(',', '', number_format($this->sumFFBGoodQty(), 2));
             $validatedData['FFBRemain'] = str_replace(',', '', $this->sumFFBRemain());
             $validatedData['RamRemain2'] = $this->sumRamRemain();
-dd($validatedData);
+
             $production->update($validatedData);
 
             $this->dispatch(

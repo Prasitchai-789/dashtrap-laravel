@@ -2,6 +2,7 @@
 
 namespace App\Livewire\PRO;
 
+use App\Models\PRO\FFBCountProduction;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\PRO\Production;
@@ -27,6 +28,8 @@ class ReportProLive extends Component
     public $FFBRemain;
     public $CS1;
     public $CS2;
+    public $tonCS1;
+    public $tonCS2;
     public $sumPikUpRemain;
     public $sumShiftPikUp;
     public $tonShiftA;
@@ -54,11 +57,10 @@ class ReportProLive extends Component
     }
     public function sumFFB()
     {
-        $ffbPurchase = is_numeric($this->FFBPurchase) ?  str_replace(',', '', $this->FFBPurchase) : 0;
-        $ffbForward = str_replace(',', '', $this->FFBForward) ?? 0;
+        $ffbPurchase = is_numeric($this->FFBPurchase) ? (float) str_replace(',', '', $this->FFBPurchase) : 0;
+        $ffbForward = is_numeric($this->FFBForward) ? (float) str_replace(',', '', $this->FFBForward) : 0;
 
-        $this->TotalFFB = $ffbPurchase + $ffbForward;
-        return $this->TotalFFB;
+        return $ffbPurchase + $ffbForward;
     }
     public function sumFFBGoodQty()
     {
@@ -108,9 +110,8 @@ class ReportProLive extends Component
     {
         $ffbRemain = (float) ($this->sumFFBRemain() ?? 0);
         $pikUpRemain = (float) ($this->sumPikUpRemain() ?? 0);
-        $this->RamRemain2 = number_format($ffbRemain - $pikUpRemain, 2);
 
-        return $this->RamRemain2;
+        return number_format($ffbRemain - $pikUpRemain, 2, '.', ',');
     }
     public function mount()
     {
@@ -124,18 +125,18 @@ class ReportProLive extends Component
     public function render()
     {
         $production = Production::whereDate('Date', Carbon::parse($this->Date)->format('Y-m-d'))->first();
+        $cs = FFBCountProduction::whereDate('Date', Carbon::parse($this->Date)->format('Y-m-d'))->first();
 
         if ($this->selectedDate > Carbon::now()->subDays(1)) {
             $this->dispatch(
                 'alertwarning',
-
                 position: 'center',
                 icon: 'warning',
                 title: 'ไม่พบข้อมูลในวันที่ดังกล่าว',
                 showConfirmButton: false,
                 timer: 1800,
             );
-        } else {
+            return view('livewire.pro.report-pro-live');
         }
 
 
@@ -145,31 +146,36 @@ class ReportProLive extends Component
             $this->ShiftA = $production->ShiftA   > 0 ? $production->ShiftA : '-';
             $this->ShiftB = $production->ShiftB > 0 ? $production->ShiftB : '-';
             $this->Shift3 = $production->Shift3 > 0 ? $production->Shift3 : '-';
-            $this->PikupRemain = $production->PikupRemain;
-            $this->RamRemain = $production->RamRemain;
+
             $this->FFBGoodQty = ($production->FFBGoodQty == 0) ? '-' : number_format($production->FFBGoodQty, 2, '.', ',');
             $this->AvgPikup = number_format($production->AvgPikup, 2);
-            $tonShiftA = ($production->ShiftA ?? 0) * ($production->AvgPikup ?? 0);
-            $this->tonShiftA = ($tonShiftA == 0) ? '-' : number_format($tonShiftA, 2);
 
+            $avgPikup = is_numeric($production->AvgPikup) ? (float) $production->AvgPikup : 0;
 
-            $tonShift3 = ($production->Shift3 ?? 0) * ($production->AvgPikup ?? 0);
-            $this->tonShift3 = ($tonShift3 == 0) ? '-' : number_format($tonShift3, 2);
+            $this->tonShiftA = ($production->ShiftA > 0) ? number_format($production->ShiftA * $avgPikup, 2) : '-';
+            $this->tonShift3 = ($production->Shift3 > 0) ? number_format($production->Shift3 * $avgPikup, 2) : '-';
 
-            $tonShiftB = $production->FFBGoodQty - $tonShiftA - $tonShift3;
-            $this->tonShiftB = ($tonShiftB == 0) ? '-' : number_format($tonShiftB, 2);
+            $tonShiftB = $production->FFBGoodQty - ($production->ShiftA * $avgPikup) - ($production->Shift3 * $avgPikup);
+            $this->tonShiftB = ($tonShiftB > 0) ? number_format($tonShiftB, 2) : '-';
 
             $this->StuckIn = $production->StuckIn > 0 ? $production->StuckIn : '-';
             $this->Steam = $production->Steam > 0 ? $production->Steam : '-';
             $this->RawFFB = $production->RawFFB > 0 ? $production->RawFFB : '-';
             $this->FFBRemain = number_format($production->FFBRemain, 2, '.', ',');
-            $this->CS1 = $production->CS1;
-            $this->CS2 = $production->CS2;
+            $this->CS1 = optional($cs)->CS1 ?? '-';
+            $this->tonCS1 = is_numeric(optional($cs)->CS1) ? number_format(optional($cs)->CS1 * 0.1689, 2) : '-';
+            $this->CS2 = optional($cs)->CS2 ?? '-';
+            $this->tonCS2 = is_numeric(optional($cs)->CS2) ? number_format(optional($cs)->CS2 * 0.1689, 2) : '-';
+
+            $this->PikupRemain = $production->PikupRemain;
+            $this->RamRemain = $production->RamRemain;
             $this->sumPikUpRemain = $this->sumPikUpRemain();
             $this->sumShiftPikUp = $this->sumShiftPikUp() > 0 ? $this->sumShiftPikUp() : '-';
+
             $RamRemain2 = $production->FFBRemain - $this->sumPikUpRemain;
-            $this->RamRemain2 = ($RamRemain2 == 0.00) ? '-' : number_format($RamRemain2, 2);
-            $this->TotalFFB = number_format($production->TotalFFB, 2, '.', ',');
+            $this->RamRemain2 = ($RamRemain2 > 0) ? number_format($RamRemain2, 2) : '-';
+
+            $this->TotalFFB = number_format($production->TotalFFB ?? 0, 2, '.', ',');
         } else {
             $this->tonShiftA = '';
             $this->tonShift3 = '';
