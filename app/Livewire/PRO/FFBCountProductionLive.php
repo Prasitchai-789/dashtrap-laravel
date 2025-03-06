@@ -102,7 +102,7 @@ class FFBCountProductionLive extends Component
     }
     public function render()
     {
-        $ffbCountProductions = FFBCountProduction::orderBy('Date', 'desc')->paginate(10);
+        $ffbCountProductions = FFBCountProduction::orderBy('id', 'desc')->paginate(10);
         return view('livewire.pro.FFB-count-production-live', [
             'ffbCountProductions' => $ffbCountProductions
         ]);
