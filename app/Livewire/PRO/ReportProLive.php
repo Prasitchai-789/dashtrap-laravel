@@ -160,8 +160,9 @@ class ReportProLive extends Component
 
             $this->StuckIn = $production->StuckIn > 0 ? $production->StuckIn : '-';
             $this->Steam = $production->Steam > 0 ? $production->Steam : '-';
-            $this->RawFFB = $production->RawFFB > 0 ? $production->RawFFB : '-';
+            $this->RawFFB = $production->RawFFB > 0 ? number_format($production->RawFFB, 2) : '-';
             $this->FFBRemain = number_format($production->FFBRemain, 2, '.', ',');
+
             $this->CS1 = optional($cs)->CS1 ?? '-';
             $this->tonCS1 = is_numeric(optional($cs)->CS1) ? number_format(optional($cs)->CS1 * 0.1689, 2) : '-';
             $this->CS2 = optional($cs)->CS2 ?? '-';
