@@ -5,18 +5,20 @@
 
         <!-- Card 1 -->
         <div class="flex justify-center">
-            <label for="selectedDate"
-                class="items-center inline-block mt-2 text-sm font-medium text-default-800 me-2 font-anuphan">เลือกวันที่</label>
-            <div class="md:col-span-3">
-                <input
-                    class="font-semibold text-blue-900 rounded-lg form-input focus:ring-blue-500 focus:border-blue-500"
-                    type="date" id="selectedDate" wire:model="selectedDate" wire:change="changeDate">
-            </div>
+
         </div>
 
         <!-- Card 2 -->
         <div class="w-full p-1 mx-auto overflow-hidden card">
-
+            <div class="flex items-center justify-center py-3 mb-2">
+                <label for="selectedDate"
+                    class="items-center justify-center inline-block text-sm font-medium text-center text-default-800 me-2 font-anuphan">เลือกวันที่</label>
+                <div class="md:col-span-3">
+                    <input
+                        class="font-semibold text-blue-900 rounded-lg form-input focus:ring-blue-500 focus:border-blue-500"
+                        type="date" id="selectedDate" wire:model="selectedDate" wire:change="changeDate">
+                </div>
+            </div>
 
             <div class="text-center">
 
@@ -85,7 +87,8 @@
                         </tr>
                         <tr class="bg-yellow-100 border-gray-200 border-y">
                             <th class="p-1.5 text-center text-default-800 font-prompt">ผลปาล์มคงค้าง</th>
-                            <th class="p-1.5 font-bold text-center text-red-600 font-prompt" colspan="4">(ค่าเฉลี่ย {{$AvgPikup}}
+                            <th class="p-1.5 font-bold text-center text-red-600 font-prompt" colspan="4">(ค่าเฉลี่ย
+                                {{$AvgPikup}}
                                 ตัน/กะบะ)</th>
                         </tr>
                         <tr class="bg-yellow-100 border-gray-200 border-y">
