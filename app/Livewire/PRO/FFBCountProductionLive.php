@@ -157,7 +157,7 @@ class FFBCountProductionLive extends Component
                 'FlowMeterAfter' => 'required',
             ]);
             $validatedData['Amount'] = $this->calculate_str_replace();
-dd($validatedData);
+
             FFBCountProduction::create($validatedData);
 
             $this->dispatch(
