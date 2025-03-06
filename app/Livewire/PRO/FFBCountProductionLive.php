@@ -112,7 +112,7 @@ class FFBCountProductionLive extends Component
     {
         $FlowMeterAfter = (float) str_replace(',', '', $this->FlowMeterAfter);
         $FlowMeterBefore = (float) str_replace(',', '', $this->FlowMeterBefore);
-        return (float) ($FlowMeterAfter - $FlowMeterBefore);
+        return round($FlowMeterAfter - $FlowMeterBefore, 2);
     }
 
     public function resetInputFields()
@@ -156,8 +156,9 @@ class FFBCountProductionLive extends Component
                 'FlowMeterBefore' => 'required',
                 'FlowMeterAfter' => 'required',
             ]);
+            $validatedData['FlowMeterBefore'] = (float) str_replace(',', '', $this->FlowMeterBefore);
+            $validatedData['FlowMeterAfter'] =  (float) str_replace(',', '', $this->FlowMeterAfter);
             $validatedData['Amount'] = $this->calculate_str_replace();
-
             FFBCountProduction::create($validatedData);
 
             $this->dispatch(
