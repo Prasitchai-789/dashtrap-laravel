@@ -196,7 +196,7 @@ dd($validatedData);
             "\n" . "📆 ผลปาล์มวันที่: " . $DatePalm2 .
             "\n" . "✅ บรรจุ: " . $Contain2 . " กะบะ" .
             "\n" . "⤴️ ยอดยกไป: " . $PikupForward . " กะบะ" .
-            "\n" . "ปริมาณ Flow Meter: " . $Amount;
+            "\n" . "ปริมาณ Flow Meter: " . number_format($Amount, 2) ;
             $Telegram = new Telegram();
             $Telegram->sendToTelegramPROCount($message);
             $this->closeModal();
