@@ -18,5 +18,9 @@ class ProductionController extends Controller
         return view('pro.FFB-count-production-index');
     }
 
+    public function reportPro()
+    {
+        return view('pro.report-pro-index');
+    }
 
 }

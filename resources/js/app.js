@@ -366,3 +366,17 @@ window.addEventListener('changeStatus', function () {
             });
     });
 
+    window.addEventListener("alertwarning", (event) => {
+        let data = event.detail;
+        Swal.fire({
+            position: data.position,
+            icon: data.icon,
+            title: data.title,
+            showConfirmButton: data.showConfirmButton,
+            timer: data.timer,
+            customClass: {
+                title: "font-prompt text-2xl",
+                htmlContainer: "font-prompt text-lg",
+            },
+        });
+    });
