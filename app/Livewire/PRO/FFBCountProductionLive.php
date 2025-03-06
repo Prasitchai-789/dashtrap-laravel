@@ -97,12 +97,11 @@ class FFBCountProductionLive extends Component
     }
     public function mount()
     {
-        $this->resetInputFields();
+        $this->Date = Carbon::now()->subDays(1)->format('Y-m-d');
         $this->DatePalm1 = Carbon::now()->subDays(1)->format('Y-m-d');
     }
     public function render()
     {
-        $this->Date = date('Y-m-d');
         $ffbCountProductions = FFBCountProduction::orderBy('id', 'desc')->paginate(10);
         return view('livewire.pro.FFB-count-production-live', [
             'ffbCountProductions' => $ffbCountProductions
@@ -158,7 +157,7 @@ class FFBCountProductionLive extends Component
                 'FlowMeterAfter' => 'required',
             ]);
             $validatedData['Amount'] = $this->calculate_str_replace();
-
+dd($validatedData);
             FFBCountProduction::create($validatedData);
 
             $this->dispatch(
