@@ -416,7 +416,7 @@ class CarReportLive extends Component
                 'car_insurance' => 'nullable|date',
                 // 'car_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
                 'car_status' => 'boolean',
-                'car_card' => 'boolean',
+                // 'car_card' => 'boolean',
                 'car_details' => 'nullable|string',
                 'car_department' => 'nullable',
             ]);
