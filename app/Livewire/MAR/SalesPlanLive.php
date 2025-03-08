@@ -48,6 +48,7 @@ class SalesPlanLive extends Component
     public $sumOfDateCPO;
     public $sumOfDatePKN;
     public $sumOfDateShell;
+    public $CustName;
     public $sumOfDateEFB;
     public $progressCPO = 0;
     public $progressPKN = 0;
@@ -84,9 +85,21 @@ class SalesPlanLive extends Component
 
         $this->driveNames = SalesPlan::select('DriverName')->distinct()->pluck('DriverName')->toArray();
         $this->recipients = SalesPlan::select('Recipient')->distinct()->pluck('Recipient')->toArray();
-        $this->emCusts = EMCust::orderBy('CustCode', 'asc')->get();
+        $this->emCusts = EMCust::select('CustID', 'CustName')
+        ->orderBy('CustName', 'asc')
+        ->distinct() // ป้องกันค่าซ้ำ
+        ->get();
+        // $this->emCusts = EMCust::orderBy('CustCode', 'asc')->get();
         $this->SelectedDate();
     }
+    public function getCustName($value)
+    {
+        $emCust = EMCust::where('CustCode', $value)->first();
+        $this->CustName = $emCust ? $emCust->CustName : null;
+        $this->CustID = $emCust ? $emCust->CustID : null;
+    }
+
+
     public function SelectedDate()
     {
         if (Carbon::parse($this->selectedDate)->greaterThan(Carbon::today())) {
@@ -175,7 +188,6 @@ class SalesPlanLive extends Component
             $validatedData = $this->validate([
                 'SOPDate' => 'required|date',
                 'GoodID' => 'required',
-                'CustID' => 'required',
                 'Recipient' => 'nullable|string',
                 'AmntLoad' => 'nullable|numeric',
                 'Remarks' => 'nullable|string',
@@ -188,6 +200,7 @@ class SalesPlanLive extends Component
             // ✅ ดึงชื่อสินค้า
             $good = EMGood::where('GoodID', $validatedData['GoodID'])->first();
             $validatedData['GoodName'] = $good ? $good->GoodName1 : null;
+            $validatedData['CustID'] = $this->CustID;
 
             // ✅ สร้าง SalesPlan
             foreach ($validatedData['drivers'] as $driver) {
@@ -325,7 +338,6 @@ class SalesPlanLive extends Component
             $validatedData = $this->validate([
                 'SOPDate' => 'required|date',
                 'GoodID' => 'required',
-                'CustID' => 'required',
                 'Recipient' => 'nullable|string',
                 'AmntLoad' => 'nullable|numeric',
                 'Remarks' => 'nullable|string',
@@ -339,6 +351,7 @@ class SalesPlanLive extends Component
             // ✅ ดึงชื่อสินค้า
             $good = EMGood::where('GoodID', $validatedData['GoodID'])->first();
             $validatedData['GoodName'] = $good ? $good->GoodName1 : null;
+            $validatedData['CustID'] = $this->CustID;
 
             $salesPlan->update($validatedData);
 

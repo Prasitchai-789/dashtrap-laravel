@@ -200,13 +200,18 @@
 
                                     <td class="p-2 text-center border">
                                         @if($salesPlan->Status == 'F')
-                                        <span  class="px-3 py-1 text-white rounded-full btn bg-success min-w-[100px] max-w-[100px]">Finish</span>
+                                        <span
+                                            class="px-3 py-1 text-white rounded-full btn bg-success min-w-[100px] max-w-[100px]">Finish</span>
                                         @elseif($salesPlan->Status == 'W')
-                                        <button type="button" class="px-3 py-1 border rounded-full btn border-warning text-warning hover:bg-warning hover:text-white min-w-[100px] max-w-[100px]" wire:click='cancel({{ $salesPlan->SOPID }})'>Warning</button>
+                                        <button type="button"
+                                            class="px-3 py-1 border rounded-full btn border-warning text-warning hover:bg-warning hover:text-white min-w-[100px] max-w-[100px]"
+                                            wire:click='cancel({{ $salesPlan->SOPID }})'>Warning</button>
                                         @elseif($salesPlan->Status == 'P')
-                                        <span  class="px-3 py-1 text-white rounded-full btn bg-blue-400 min-w-[100px] max-w-[100px]">Processing</span>
+                                        <span
+                                            class="px-3 py-1 text-white rounded-full btn bg-blue-400 min-w-[100px] max-w-[100px]">Processing</span>
                                         @elseif($salesPlan->Status == 'C')
-                                        <span  class="px-3 py-1 text-white rounded-full btn bg-danger min-w-[100px] max-w-[100px]" >Cancel</span>
+                                        <span
+                                            class="px-3 py-1 text-white rounded-full btn bg-danger min-w-[100px] max-w-[100px]">Cancel</span>
                                         @endif
                                     </td>
 
@@ -304,33 +309,56 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
+                    <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-2 font-anuphan">
                         <div class="">
                             <label for="CustID"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
-                                ชื่อคู่ค้า
+                                รหัสคู่ค้า
                             </label>
                             <div class="flex">
                                 <div
                                     class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
                                     <i class="fa-solid fa-clipboard-user"></i>
                                 </div>
-                                <select type="text"
-                                    class="font-semibold text-blue-900 form-select rounded-s-none focus:ring-blue-500 focus:border-blue-500"
-                                    id="CustID" name="CustID" wire:model="CustID" required>
-                                    <option selected value="">เลือก...</option>
+                                <input type="text" id="CustCode" name="CustCode" wire:model="CustCode"
+                                    list="CustCodes" wire:change="getCustName($event.target.value)"
+                                    class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
+                                    required placeholder="เลือก...">
+
+                                <datalist id="CustCodes">
                                     @foreach ($emCusts as $emCust)
-                                    <option value="{{$emCust->CustID}}">{{$emCust->CustName}}
-                                    </option>
+                                    <option value="{{ $emCust->CustCode }}">{{ $emCust->CustName }}</option>
                                     @endforeach
-                                </select>
+                                </datalist>
                             </div>
-                            @if ($errors->has('CustID'))
-                            <span class="text-sm text-red-500">{{ $errors->first('CustID') }}</span>
+                            @if ($errors->has('CustCode'))
+                            <span class="text-sm text-red-500">{{ $errors->first('CustCode') }}</span>
                             @endif
                         </div>
+
+
                     </div>
 
+                    <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
+
+
+                        <div class="">
+                            <label for="CustName"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-prompt">
+                                ชื่อคู่ค้า
+                            </label>
+                            <div class="flex">
+                                <div
+                                    class="flex items-center justify-center px-3 font-semibold border border-default-200 bg-default-100 rounded-s-md border-e-0">
+                                    <i class="fa-solid fa-user-tag"></i>
+                                </div>
+                                <input type="text" placeholder=""
+                                    class="font-semibold text-blue-900 form-input rounded-s-none focus:ring-blue-500 focus:border-blue-500"
+                                    id="CustName" name="CustName" wire:model="CustName" readonly/>
+                            </div>
+                        </div>
+
+                    </div>
 
                     <div class="grid grid-cols-1 gap-4 m-4 mb-3 md:grid-cols-1 font-anuphan">
                         <div class="">
