@@ -235,7 +235,7 @@ class SalesProductLive extends Component
         $salesPlans = SalesPlan::whereDate('SOPDate', $this->selectedDate)
             ->where('Status', '!=', 'C')
             ->orderBy('SOPID', 'desc')
-            ->paginate(10);
+            ->paginate(20);
         return view('livewire.rpo.sales-product-live', [
             'salesPlans' => $salesPlans,
         ]);
