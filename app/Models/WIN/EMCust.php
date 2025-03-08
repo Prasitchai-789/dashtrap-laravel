@@ -10,8 +10,13 @@ class EMCust extends Model
     protected $connection = 'sqlsrv2';
     use HasFactory;
     protected $table = 'EMCust';
-    protected $primaryKey = 'CustID'; // ระบุชื่อคอลัมน์ที่เป็น Primary Key ของตาราง
+    protected $primaryKey = 'CustID';
+    public $timestamps = false;
     protected $fillable =[
 
     ];
+    public function invoices()
+    {
+        return $this->hasMany(SOInvHD::class, 'CustID', 'CustID');
+    }
 }

@@ -365,6 +365,7 @@ class ReportPOInvLive extends Component
         $this->sumAgrOfDate = $this->totalPalmOfDate - $this->sumRamOfDate;
         $this->progressFFB = ($palmPlan > 0) ? ($this->totalPalmOfDate / $palmPlan) * 100 : 0;
         $this->progressMaxPrice2 = ($this->AvgPrice > 0) ? ($this->AvgPrice / $avgPrice1) * 100 : 0;
+        // $this->progressMaxPrice2 = ($this->AvgPrice > 0) ? (($this->AvgPrice - $avgPrice1) / $avgPrice1) * 100 : 0;
         $this->progressAvg = ($this->progressMaxPrice2 > 0) ? (100 - $this->progressMaxPrice2) : 0;
         $this->progressItem = ($listPlan > 0) ? ($this->countRamOfDate / $listPlan) * 100 : 0;
         // โหลดข้อมูลที่จำเป็น

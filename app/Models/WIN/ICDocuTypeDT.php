@@ -11,7 +11,12 @@ class ICDocuTypeDT extends Model
     use HasFactory;
     protected $table = 'ICDocuTypeDT';
     protected $primaryKey = 'DocuType';
+    public $timestamps = false;
     protected $fillable =[
 
     ];
+    public function details()
+    {
+        return $this->hasMany(SOInvDT::class, 'Docutype', 'DocuType');
+    }
 }

@@ -10,7 +10,12 @@ class EMGoodUnit extends Model
     protected $connection = 'sqlsrv2';
     use HasFactory;
     protected $table = 'EMGoodUnit';
+    public $timestamps = false;
     protected $fillable =[
 
     ];
+    public function details()
+    {
+        return $this->hasMany(SOInvDT::class, 'GoodUnitID2', 'GoodUnitID');
+    }
 }

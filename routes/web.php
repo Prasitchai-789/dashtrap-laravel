@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\TableTotalPalmController;
 use App\Http\Controllers\HRE\Employee;
 use App\Http\Controllers\CAR\UseCarController;
 use App\Http\Controllers\Dashboard\GraphController;
+use App\Http\Controllers\MAR\SaleInvoiceController;
 use App\Http\Controllers\MAR\SalesPlanController;
 use App\Http\Controllers\PRO\ProductionController;
 use App\Http\Controllers\RPO\AveragePriceController;
@@ -85,6 +86,7 @@ Route::group(['middleware' => ['auth', 'role:developer|admin|GM']], function () 
 //-------- MAR ------//
 Route::group(['middleware' => ['auth', 'role:developer|admin|GM|user-RPO|user-MAR']], function () {
     Route::get('/sales-plan', [SalesPlanController::class, 'salesPlan'])->name('sales-plan');
+    Route::get('/sales-invoice', [SaleInvoiceController::class, 'saleInvoice'])->name('sales-invoice');
 });
 
 //-------- ACC ------//
