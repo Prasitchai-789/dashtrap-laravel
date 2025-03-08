@@ -1,15 +1,19 @@
 @extends('layouts.root')
 
 @section('css')
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
 @endsection
 
 @section('content')
 
-<livewire:mar.sale-invoice-live/>
+<livewire:pur.scan-barcode-live/>
 
 @endsection
 
+
 @section('script')
+
+
 
 @endsection

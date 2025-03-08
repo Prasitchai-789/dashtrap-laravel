@@ -64,6 +64,13 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                                 <span class="menu-text">รายงานการขายสินค้า</span>
                             </a>
                         </li>
+                        <li class="menu-item">
+                            <a href="{{ route('scan-barcode') }}"
+                                class="flex items-center gap-x-3.5 rounded-md px-3 py-1.5 text-sm font-medium text-default-100 transition-all hover:bg-default-100/5">
+                                <i class="menu-dot"></i>
+                                <span class="menu-text">สแกนบาร์โค้ด</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

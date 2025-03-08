@@ -182,6 +182,7 @@ class SaleInvoiceLive extends Component
         $this->productName = $this->getProductNameByCode($this->goodCode);
         $this->monthlySummary = $this->getMonthlySummaryWithInvoices($this->goodCode, $this->startDate, $this->endDate,[107, 108]);
         $this->yearlySummary = $this->getYearlySummaryWithInvoices($this->goodCode, $this->startDate, $this->endDate,[107, 108]);
+        // sleep(1);
         $this->isLoading = false;
     }
 

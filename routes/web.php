@@ -17,6 +17,7 @@ use App\Http\Controllers\RPO\SalesProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PUR\ScanBarcodeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RPO\PalmPurchase;
 use App\Http\Controllers\RPO\ReportRPOController;
@@ -119,6 +120,11 @@ Route::group(['middleware' => ['auth', 'role:developer|admin|GM|admin-PRO|user-P
     Route::get('/production', [ProductionController::class, 'Production'])->name('production');
     Route::get('/count-production', [ProductionController::class, 'FFBCountProduction'])->name('count-production');
     Route::get('/report-production', [ProductionController::class, 'reportPro'])->name('report-production');
+});
+
+//-------- Production ------//
+Route::group(['middleware' => ['auth', 'role:developer|admin|GM']], function () {
+    Route::get('/scan-barcode', [ScanBarcodeController::class, 'scanBarcode'])->name('scan-barcode');
 });
 
 
