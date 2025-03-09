@@ -29,7 +29,7 @@ var options = {
         offsetY: -50,
         style: {
             fontSize: '30px',
-            fontFamily: " Prompt, sans-serif ",
+            fontFamily: " Anuphan, sans-serif ",
             colors: ["#304758"]
         }
     },
@@ -48,7 +48,7 @@ var options = {
         labels: {
             offsetY: 0,
             style: {
-                fontFamily: " Prompt, sans-serif ",
+                fontFamily: " Anuphan, sans-serif ",
                 fontSize: '14px', // ขนาดฟอนต์
                 fontWeight: 'normal', // ความหนาของฟอนต์
                 color: '#333' // สีฟอนต์
