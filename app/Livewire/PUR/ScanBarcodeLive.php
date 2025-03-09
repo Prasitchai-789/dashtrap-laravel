@@ -22,6 +22,12 @@ dd($this->scannedCode);
             session()->flash('error', 'ไม่พบรหัสที่สแกน');
         }
     }
+
+    public function onScanSuccess($code)
+    {
+        $this->scannedCode = $code;
+        // คุณสามารถทำการประมวลผลข้อมูลเพิ่มเติมที่นี่
+    }
     public function render()
     {
         return view('livewire.pur.scan-barcode-live');
