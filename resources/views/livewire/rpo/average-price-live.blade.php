@@ -14,7 +14,7 @@
                         </button>
                 </div>
                 <div class="flex items-center justify-center mb-2">
-                    <h1 class="text-2xl font-bold font-anuphan">ราคารับซื้อรายวัน สินค้าผลปาล์มน้ำมันทั้งทะลาย น้ำหนักมากกว่า 15 กก. ขึ้นไป </h1>
+                    <h1 class="text-2xl font-bold font-anuphan text-default-700">ราคารับซื้อรายวัน สินค้าผลปาล์มน้ำมันทั้งทะลาย น้ำหนักมากกว่า 15 กก. ขึ้นไป </h1>
                  </div>
 
 

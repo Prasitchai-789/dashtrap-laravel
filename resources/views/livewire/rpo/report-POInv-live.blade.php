@@ -14,7 +14,7 @@
             </div>
 
             <!-- ส่วนแสดงวันที่ -->
-            <h5 class="text-2xl text-center card-title font-prompt">
+            <h5 class="text-2xl text-center card-title font-anuphan text-default-700">
                 ข้อมูลการรับซื้อผลปาล์ม <br class="sm:hidden">
                 <span class="text-blue-500">
                     {{ \Carbon\Carbon::parse($selectedDate)->locale('th')->translatedFormat('d F Y') }}

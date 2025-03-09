@@ -4,7 +4,7 @@
     <div class="mt-2 card">
         <div class="card">
             <div class="p-6">
-                <h4 class="flex justify-center mb-4 text-2xl text-blue-700 card-title font-prompt">ราคารับซื้อผลปาล์ม วันที่  {{
+                <h4 class="flex justify-center mb-4 text-2xl text-blue-700 card-title font-anuphan">ราคารับซื้อผลปาล์ม วันที่  {{
                     \Carbon\Carbon::parse($averagePrices->created_at)->locale('th')->translatedFormat('d F Y')
                     }}</h4>
 
