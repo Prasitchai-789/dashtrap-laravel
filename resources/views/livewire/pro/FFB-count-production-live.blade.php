@@ -94,7 +94,7 @@
                             </tbody>
                         </table>
                         <div class="flex mt-4">
-                            {{ $ffbCountProductions->links('pagination::tailwind') }}
+                            {{ $ffbCountProductions->links('vendor.livewire.custom-pagination') }}
                         </div>
                     </div>
                 </div>

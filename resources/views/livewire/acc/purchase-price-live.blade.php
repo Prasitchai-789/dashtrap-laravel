@@ -231,7 +231,7 @@
                 </div>
                 <!-- End Table -->
                 <div class="flex mt-4">
-                    {{ $webappPOInvs->links('pagination::tailwind') ?? '' }}
+                    {{ $webappPOInvs->links('vendor.livewire.custom-pagination') ?? '' }}
                 </div>
 
             </div>

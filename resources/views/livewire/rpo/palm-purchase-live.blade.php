@@ -229,7 +229,7 @@
                         </tbody>
                     </table>
                     <div class="flex mt-4">
-                        {{ $webappPOInvs->links('pagination::tailwind') ?? '' }}
+                        {{ $webappPOInvs->links('vendor.livewire.custom-pagination') ?? '' }}
                     </div>
                 </div>
             </div>
@@ -613,7 +613,7 @@
                         </tbody>
                     </table>
                     <div class="flex mt-4">
-                        {{ $setPriceScalers->links() ?? '' }}
+                        {{ $setPriceScalers->links('vendor.livewire.custom-pagination') ?? '' }}
                     </div>
                 </div>
             </div>

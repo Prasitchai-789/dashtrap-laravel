@@ -170,7 +170,7 @@
             <!-- End Table -->
              <!-- ตัวแบ่งหน้า -->
              <div class="flex mt-4">
-                {{ $carReports->links('pagination::tailwind') ?? '' }}
+                {{ $carReports->links('vendor.livewire.custom-pagination') ?? '' }}
             </div>
         </div>
 

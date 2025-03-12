@@ -236,7 +236,7 @@
                             </tbody>
                         </table>
                         <div class="flex mt-4">
-                            {{ $salesPlans->links('pagination::tailwind') ?? '' }}
+                            {{ $salesPlans->links('vendor.livewire.custom-pagination') ?? '' }}
                         </div>
                     </div>
                 </div>

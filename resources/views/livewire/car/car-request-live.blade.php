@@ -116,7 +116,7 @@
                     </table>
                     <!-- ตัวแบ่งหน้า -->
                     <div class="flex mt-4">
-                        {{ $carRequests->links('pagination::tailwind') ?? '' }}
+                        {{ $carRequests->links('vendor.livewire.custom-pagination') ?? '' }}
                     </div>
                 </div>
             </div>

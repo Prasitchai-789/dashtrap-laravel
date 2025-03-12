@@ -228,7 +228,7 @@
                             </tbody>
                         </table>
                         <div class="flex mt-4">
-                            {{ $workOrders->links('pagination::tailwind') ?? '' }}
+                            {{ $workOrders->links('vendor.livewire.custom-pagination') ?? '' }}
                         </div>
                     </div>
                 </div>

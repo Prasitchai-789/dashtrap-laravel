@@ -92,7 +92,7 @@
                             </tbody>
                         </table>
                         <div class="flex mt-4">
-                            {{ $averagePrices->links('pagination::tailwind') ?? '' }}
+                            {{ $averagePrices->links('vendor.livewire.custom-pagination') ?? '' }}
                         </div>
                     </div>
                 </div>

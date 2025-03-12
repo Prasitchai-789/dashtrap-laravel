@@ -8,7 +8,6 @@
 @endsection
 
 @section('content')
-
 <livewire:pur.scan-barcode-live/>
 
 @endsection

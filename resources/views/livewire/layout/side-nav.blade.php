@@ -200,7 +200,6 @@ class="hs-overlay fixed inset-y-0 start-0 z-60 hidden w-sidenav min-w-sidenav bg
                             </a>
                         </li>
 
-                        </li>
                     </ul>
                 </div>
             </li>

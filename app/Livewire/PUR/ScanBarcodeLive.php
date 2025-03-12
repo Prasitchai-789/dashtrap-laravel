@@ -2,17 +2,19 @@
 
 namespace App\Livewire\PUR;
 
-use App\Models\MAR\SalesPlan;
+use App\Models\User;
 use Livewire\Component;
+use App\Models\MAR\SalesPlan;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class ScanBarcodeLive extends Component
 {
     public $scannedCode;
 
+
     public function updateRecord()
     {
         if (!$this->scannedCode) return;
-dd($this->scannedCode);
         $record = SalesPlan::where('barcode', $this->scannedCode)->first();
 
         if ($record) {

@@ -123,7 +123,7 @@
                             </tbody>
                         </table>
                         <div class="flex mt-4">
-                            {{ $productions->links('pagination::tailwind') }}
+                            {{ $productions->links('vendor.livewire.custom-pagination') }}
                         </div>
                     </div>
                 </div>

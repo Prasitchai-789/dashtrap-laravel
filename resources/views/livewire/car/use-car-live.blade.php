@@ -189,7 +189,7 @@
             </div>
             <!-- ตัวแบ่งหน้า -->
             <div class="flex mt-4 mb-2">
-                {{ $useCars->links('pagination::tailwind') ?? '' }}
+                {{ $useCars->links('vendor.livewire.custom-pagination') ?? '' }}
             </div>
         </div>
 

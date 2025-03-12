@@ -70,7 +70,7 @@
                         </tbody>
                     </table>
                     <div class="flex mt-4">
-                        {{ $employees->links('pagination::tailwind') ?? '' }}
+                        {{ $employees->links('vendor.livewire.custom-pagination') ?? '' }}
                     </div>
                 </div>
             </div>
